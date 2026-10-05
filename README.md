@@ -1,2 +1,2 @@
-# abogonie.GAMT.github.io
+# abogonie.github.io
 GAMT website
