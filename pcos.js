@@ -12,7 +12,7 @@
     function colors() { col = G.map(function (g) { return css(g[1], "#2563eb"); }); fg = css("--fg", "#111"); }
     function centers() { var m = W < 680; return G.map(function (g, i) { return m ? [W * (i % 2 ? .73 : .27), H * (i < 2 ? .25 : .72)] : [W * (.14 + i * .24), H * .46]; }); }
     function build() {
-      var r = cv.getBoundingClientRect(); W = r.width; H = r.height; dpr = Math.min(2, window.devicePixelRatio || 1);
+      W = cv.clientWidth; H = cv.clientHeight; dpr = Math.min(2, window.devicePixelRatio || 1);
       cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); colors();
       var C = centers(), R = Math.min(W < 680 ? 62 : 76, W / (W < 680 ? 5.2 : 9)); dots = [];
       G.forEach(function (g, gi) { for (var i = 0; i < 64; i++) { var a = Math.random() * 6.283, d = Math.sqrt(Math.random()) * R; dots.push({ g: gi, tx: C[gi][0] + Math.cos(a) * d, ty: C[gi][1] + Math.sin(a) * d - 8, x: Math.random() * W, y: Math.random() * H, ph: Math.random() * 6.283, case_: Math.random() < 0.14 }); } });
@@ -32,7 +32,7 @@
     build();
     if (reduce) { started = true; t0 = -9999; draw(0); } else { draw(0); }
     vis(cv, function () { started = true; t0 = performance.now(); go(); });
-    window.addEventListener("resize", function () { build(); if (reduce) draw(0); });
+    if ("ResizeObserver" in window) new ResizeObserver(function () { if (cv.clientWidth !== W || cv.clientHeight !== H) { build(); if (reduce) draw(0); } }).observe(cv); else window.addEventListener("resize", function () { build(); if (reduce) draw(0); });
     if ("IntersectionObserver" in window) new IntersectionObserver(function (es) { visible = es[0].isIntersecting; if (visible) go(); }).observe(cv);
     new MutationObserver(function () { colors(); if (reduce) draw(0); }).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
   })();
