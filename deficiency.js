@@ -33,7 +33,7 @@
     var badges = {};
     Object.keys(sc.lvl).forEach(function (k) { var b = document.createElement("span"); b.className = "lvl " + sc.lvl[k]; b.textContent = LVL[sc.lvl[k]]; nodes[k].appendChild(b); badges[k] = b; });
 
-    var vacuuming = false, vacT = 0, NZ = [0, 0], deficient = true, parts = [], pileN = 0, pileList = [], acc = 0, tConv = 0, W = 0, H = 0, dpr = 1, C = [], vertical = false, visible = true, last = 0, raf = 0;
+    var vacuuming = false, phase = 0, ph = 0, vacT = 0, NZ = [0, 0], deficient = true, parts = [], pileN = 0, pileList = [], acc = 0, tConv = 0, W = 0, H = 0, dpr = 1, C = [], vertical = false, visible = true, last = 0, raf = 0;
     var col = {};
     function colors() { col = { sub: css("--muted") || "#667", gaa: css("--warn") || "#c60", cr: css("--accent") || "#25c", crn: css("--fold") || "#0a8" }; }
     function layout() {
@@ -51,19 +51,20 @@
       NZ = [left + 3 * k, top + 82 * k];
     }
     function startVac() {
-      if (vacuuming || !pileList.length) return; vacuuming = true; vacT = 0;
+      if (vacuuming || !pileList.length) return; vacuuming = true; phase = 2; vacT = 0;
       pileList.sort(function (a, b) { var A = pos(a), B = pos(b); return Math.hypot(A[0] - NZ[0], A[1] - NZ[1]) - Math.hypot(B[0] - NZ[0], B[1] - NZ[1]); });
       pileList.forEach(function (p, i) { var s = pos(p); p.fx = s[0]; p.fy = s[1]; p.st = "suck"; p.u = -(i / pileList.length) * 2.6 - 0.2; });
       pileList = []; pileN = 0; mon.classList.add("on");
     }
-    mon.addEventListener("click", function () { if (!reduce) startVac(); });
+    function callVac() { if (phase || !pileList.length || reduce) return; phase = 1; ph = 0; mon.classList.add("here"); }
+    mon.addEventListener("click", callVac);
     function slot(i) {
       var c = C[sc.pile], a = i * 2.39996, rr = (vertical ? 4.6 : 6.4) * Math.sqrt(i + 1);
       var cx = vertical ? C[sc.pile].right + 78 : c.x, cy = vertical ? c.y : c.top - 98;
       return [cx + Math.cos(a) * rr, cy + Math.sin(a) * rr];
     }
     function reset() {
-      parts = []; pileN = 0; pileList = []; acc = 0; tConv = 0; vacuuming = false; vacT = 0; mon.classList.remove("on"); mon.style.display = deficient ? "" : "none";
+      parts = []; pileN = 0; pileList = []; acc = 0; tConv = 0; vacuuming = false; phase = 0; ph = 0; vacT = 0; mon.classList.remove("on"); mon.classList.toggle("here", reduce); mon.style.display = deficient ? "" : "none";
       nodes.forEach(function (n, i) { if (i % 2) { n.classList.toggle("blocked", deficient && i === sc.blocked); } });
       Object.keys(badges).forEach(function (k) { badges[k].style.display = deficient ? "" : "none"; });
       cap.textContent = deficient ? sc.def : HEALTHY;
@@ -71,10 +72,11 @@
     }
     function typeAt(k) { return k < 2 ? "sub" : k < 4 ? "gaa" : "cr"; }
     function step(dt) {
-      acc += dt;
+      var run = phase === 0; if (run) acc += dt;
       if (acc > (deficient ? 0.22 : 0.5)) { acc = 0; parts.push({ k: 0, t: 0, type: "sub", st: "move", a: 1, j: Math.random() * 6.28, ln: (Math.random() - 0.5) * 2, w2: Math.random() * 6.28 }); }
       parts.forEach(function (p) {
         if (p.st === "move") {
+          if (!run) return;
           p.t += dt * 0.36;
           if (p.t >= 1) {
             p.k += 1; p.t = 0;
@@ -92,7 +94,12 @@
         tConv += dt; if (tConv > 0.8) { tConv = 0; var q = pileList[Math.floor(Math.random() * pileList.length)]; if (q.type === "cr") q.type = "crn"; }
       }
       parts = parts.filter(function (p) { return p.a > 0; });
-      if (deficient && !reduce) { if (!vacuuming) { vacT += dt; if (vacT > 50 && pileN > 8) startVac(); } else if (!parts.some(function (p) { return p.st === "suck"; })) { vacuuming = false; mon.classList.remove("on"); } }
+      if (deficient && !reduce) {
+        if (phase === 0) { if (pileN >= sc.cap) callVac(); }
+        else if (phase === 1) { ph += dt; if (ph > 1.0) startVac(); }
+        else if (phase === 2) { if (!parts.some(function (p) { return p.st === "suck"; })) { vacuuming = false; mon.classList.remove("on"); phase = 3; ph = 0; } }
+        else if (phase === 3) { ph += dt; if (ph > 0.9) { phase = 0; mon.classList.remove("here"); } }
+      }
     }
     function pos(p) {
       if (p.st === "pile") { var s = slot(p.i), g = Math.min(1, p.g || 0), e = 1 - Math.pow(1 - g, 3); return [p.sx + (s[0] - p.sx) * e, p.sy + (s[1] - p.sy) * e]; }

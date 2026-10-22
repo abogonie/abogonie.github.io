@@ -7,7 +7,7 @@
   /* ---------- diverse cohort: four groups of people-dots ---------- */
   var cv = document.getElementById("cohort");
   if (cv) (function () {
-    var ctx = cv.getContext("2d"), W = 0, H = 0, dpr = 1, dots = [], t0 = 0, started = false, raf = 0, visible = true, col = [], fg = "#111";
+    var ctx = cv.getContext("2d"), W = 0, H = 0, dpr = 1, dots = [], t0 = 0, started = false, sepT = 0, sepC = 0, lastNow = 0, btn = null, raf = 0, visible = true, col = [], fg = "#111";
     var G = [["African", "--accent"], ["Latino / Admixed American", "--warn"], ["East Asian", "--fold"], ["European", "--mouse"]];
     function colors() { col = G.map(function (g) { return css(g[1], "#2563eb"); }); fg = css("--fg", "#111"); }
     function centers() { var m = W < 680; return G.map(function (g, i) { return m ? [W * (i % 2 ? .73 : .27), H * (i < 2 ? .25 : .72)] : [W * (.14 + i * .24), H * .46]; }); }
@@ -15,21 +15,24 @@
       W = cv.clientWidth; H = cv.clientHeight; dpr = Math.min(2, window.devicePixelRatio || 1);
       cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); colors();
       var C = centers(), R = Math.min(W < 680 ? 62 : 76, W / (W < 680 ? 5.2 : 9)); dots = [];
-      G.forEach(function (g, gi) { for (var i = 0; i < 64; i++) { var a = Math.random() * 6.283, d = Math.sqrt(Math.random()) * R; dots.push({ g: gi, tx: C[gi][0] + Math.cos(a) * d, ty: C[gi][1] + Math.sin(a) * d - 8, x: Math.random() * W, y: Math.random() * H, ph: Math.random() * 6.283, case_: Math.random() < 0.14 }); } });
+      G.forEach(function (g, gi) { for (var i = 0; i < 64; i++) { var a = Math.random() * 6.283, d = Math.sqrt(Math.random()) * R; dots.push({ g: gi, bx: W / 2 + Math.cos(a + 1.7) * Math.sqrt(Math.random()) * Math.min(W * .2, 120), by: H * .46 + Math.sin(a + 1.7) * Math.sqrt(Math.random()) * Math.min(H * .3, 105), tx: C[gi][0] + Math.cos(a) * d, ty: C[gi][1] + Math.sin(a) * d - 8, x: Math.random() * W, y: Math.random() * H, ph: Math.random() * 6.283, case_: Math.random() < 0.14 }); } });
     }
     function draw(now) {
-      ctx.clearRect(0, 0, W, H); var k = started ? Math.min(1, (now - t0) / 1800) : 0, e = 1 - Math.pow(1 - k, 3), C = centers(), R0 = Math.min(W < 680 ? 62 : 76, W / (W < 680 ? 5.2 : 9));
+      ctx.clearRect(0, 0, W, H); var k = started ? Math.min(1, (now - t0) / 1600) : 0, g = 1 - Math.pow(1 - k, 3), dtt = lastNow ? Math.min(.05, (now - lastNow) / 1000) : 0; lastNow = now; sepC += (sepT - sepC) * Math.min(1, dtt * 2.4); if (Math.abs(sepT - sepC) < .002) sepC = sepT; var e = sepC * sepC * (3 - 2 * sepC), C = centers(), R0 = Math.min(W < 680 ? 62 : 76, W / (W < 680 ? 5.2 : 9));
       dots.forEach(function (d) {
-        var x = d.x + (d.tx - d.x) * e + Math.sin(now / 1300 + d.ph) * 2 * e, y = d.y + (d.ty - d.y) * e + Math.cos(now / 1500 + d.ph) * 2 * e;
+        var gx = d.x + (d.bx - d.x) * g, gy = d.y + (d.by - d.y) * g, x = gx + (d.tx - gx) * e + Math.sin(now / 1300 + d.ph) * 2 * g, y = gy + (d.ty - gy) * e + Math.cos(now / 1500 + d.ph) * 2 * g;
         ctx.fillStyle = col[d.g]; ctx.globalAlpha = 0.85; ctx.beginPath(); ctx.arc(x, y, 3.2, 0, 6.283); ctx.fill();
-        if (d.case_ && e > 0.95) { var p = (Math.sin(now / 700 + d.ph) + 1) / 2; ctx.globalAlpha = 0.25 + 0.55 * p; ctx.strokeStyle = col[d.g]; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.arc(x, y, 5 + 4 * p, 0, 6.283); ctx.stroke(); }
+        if (d.case_ && e > 0.9) { var p = (Math.sin(now / 700 + d.ph) + 1) / 2; ctx.globalAlpha = 0.25 + 0.55 * p; ctx.strokeStyle = col[d.g]; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.arc(x, y, 5 + 4 * p, 0, 6.283); ctx.stroke(); }
       });
       ctx.globalAlpha = 1; ctx.fillStyle = fg; ctx.font = "600 12px 'Open Sans', Arial, sans-serif"; ctx.textAlign = "center";
-      G.forEach(function (g, i) { ctx.globalAlpha = e; ctx.fillText(g[0], C[i][0], C[i][1] + R0 + 22); }); ctx.globalAlpha = 1;
+      G.forEach(function (g, i) { ctx.globalAlpha = Math.max(0, e * 1.4 - .4); ctx.fillText(g[0], C[i][0], C[i][1] + R0 + 22); }); ctx.globalAlpha = 1;
     }
-    function loop(now) { raf = 0; if (!visible || document.hidden) return; draw(now); raf = requestAnimationFrame(loop); }
+    function loop(now) { raf = 0; if (!visible || document.hidden) { lastNow = 0; return; } draw(now); raf = requestAnimationFrame(loop); }
     function go() { if (!reduce && !raf) raf = requestAnimationFrame(loop); }
     build();
+    btn = document.createElement("button"); btn.type = "button"; btn.className = "btn"; btn.textContent = "Separate by ancestry"; btn.setAttribute("aria-pressed", "false");
+    cv.parentNode.appendChild(btn);
+    btn.addEventListener("click", function () { sepT = sepT ? 0 : 1; btn.textContent = sepT ? "Overlap everyone" : "Separate by ancestry"; btn.setAttribute("aria-pressed", String(!!sepT)); if (reduce) { sepC = sepT; draw(0); } else go(); });
     if (reduce) { started = true; t0 = -9999; draw(0); } else { draw(0); }
     vis(cv, function () { started = true; t0 = performance.now(); go(); });
     if ("ResizeObserver" in window) new ResizeObserver(function () { if (cv.clientWidth !== W || cv.clientHeight !== H) { build(); if (reduce) draw(0); } }).observe(cv); else window.addEventListener("resize", function () { build(); if (reduce) draw(0); });
