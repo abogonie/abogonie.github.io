@@ -78,6 +78,11 @@
       <a class="btn" href="https://scholar.google.com/citations?user=MNiEL0IAAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar</a>
     </div>
 
+    <div class="hero-art" aria-hidden="false">
+      <figure><img src="img/neurons.jpg" width="620" height="360" alt="iPSC-derived neurons at day 21, stained for nuclei and NeuN"><figcaption>iPSC-derived neurons</figcaption></figure>
+      <figure><img src="img/organoid.jpg" width="784" height="388" alt="Cerebral organoid at day 150, immunostained"><figcaption>Cerebral organoid</figcaption></figure>
+    </div>
+
     <div class="demo" id="demo">
       <div class="demo-head">
         <h2>Creatine biosynthesis: GATM and GAMT</h2>
@@ -138,7 +143,7 @@
     </div>
   </div>
 
-  <section id="projects">
+  <section id="projects" data-nav="Projects">
     <div class="sec-head rv">
       <p class="label">Projects</p>
       <h2>One question, approached from three directions</h2>
@@ -159,7 +164,7 @@
     </div>
   </section>
 
-  <section id="research">
+  <section id="research" data-nav="Models">
     <div class="sec-head rv">
       <p class="label">Research</p>
       <h2>Human models of GAMT deficiency</h2>
@@ -196,7 +201,7 @@
     </div>
   </section>
 
-  <section id="method">
+  <section id="method" data-nav="Method">
     <div class="sec-head rv">
       <p class="label">Method</p>
       <h2>From a stem cell to a readout</h2>
@@ -209,7 +214,7 @@
     </div>
   </section>
 
-  <section id="automation">
+  <section id="automation" data-nav="Automation">
     <div class="sec-head rv">
       <p class="label">Automation</p>
       <h2>Robots feed the cells, software reads the images</h2>
@@ -224,7 +229,7 @@
     <p class="pipe-note rv">Automation is what makes the maturation question quantifiable. Thousands of images across many days and conditions are processed identically, so a developmental delay appears as a pattern in the numbers.</p>
   </section>
 
-  <section id="population">
+  <section id="population" data-nav="Population genetics">
     <div class="sec-head rv">
       <p class="label">Population genetics</p>
       <h2>How common are the cerebral creatine deficiency syndromes?</h2>
@@ -243,7 +248,7 @@
     </div>
   </section>
 
-  <section id="talks">
+  <section id="talks" data-nav="Talks">
     <div class="sec-head rv">
       <p class="label">Talks</p>
       <h2>Presenting creatine deficiency research</h2>
@@ -274,7 +279,7 @@
     </div>
   </section>
 
-  <section id="publications">
+  <section id="publications" data-nav="Papers">
     <div class="sec-head rv">
       <p class="label">Publications</p>
       <h2>Papers, talks and citations</h2>
@@ -288,7 +293,7 @@
     </a>
   </section>
 
-  <section id="contact" style="padding-top:0">
+  <section id="contact" data-nav="Contact" style="padding-top:0">
     <div class="contact rv">
       <p class="label" style="color:inherit;opacity:.8">Contact</p>
       <h2>Working on creatine disorders? Let’s talk.</h2>
@@ -297,13 +302,14 @@
       <button class="btn" id="copy" type="button">Copy address</button>
     </div>
     <footer>
-      <span>© 2026 Aleksander Bogoniewski</span>
+      <span>© 2026 Aleksander Bogoniewski · <a href="index.html">Home</a> · <a href="agat.html">AGAT</a> · <a href="gamt.html">GAMT</a> · <a href="slc6a8.html">SLC6A8</a> · <a href="pcos.html">PCOS</a></span>
       <span>For education only. This site is not medical advice.</span>
     </footer>
   </section>
 </main>
 
 <script src="site.js" defer></script>
+<script src="subnav.js" defer></script>
 <script src="popgen.js" defer></script>
 <script>
 (function () {
