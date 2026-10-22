@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="AGAT: initial analysis by Aleksander Bogoniewski.">
+<meta name="description" content="AGAT (GATM) deficiency: population carrier frequency, serum creatinine and variant map from All of Us and gnomAD.">
 <meta name="theme-color" content="#1d5bd8">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='9' fill='%231d5bd8'/%3E%3C/svg%3E">
 <style>html{color-scheme:light}body{margin:0}img{max-width:100%}</style>
@@ -34,38 +34,75 @@
 <main class="wrap" id="top">
   <div class="page-hero">
     <p class="label">Step one of creatine synthesis</p>
-    <h1>AGAT (GATM)</h1>
-    <p class="lede rv">AGAT, encoded by <em class="gene">GATM</em>, catalyzes the first step of creatine biosynthesis: transfer of an amidino group from arginine to glycine, producing guanidinoacetate (GAA) and ornithine.</p>
+    <h1>AGAT deficiency is the rarest creatine disorder. Carriers are not.</h1>
+    <p class="lede">Arginine:glycine amidinotransferase (AGAT, encoded by <em class="gene">GATM</em>) makes guanidinoacetate from arginine and glycine. When both copies fail, the brain lacks creatine, but the condition responds to creatine supplementation if it is found early.</p>
   </div>
+  <div class="strip rv" role="group" aria-label="Creatine pathway with this page highlighted"><span class="met">Arginine + glycine</span><i class="flow" style="--d:0s" aria-hidden="true"></i><a class="enz on" href="agat.html">AGAT<small>GATM</small></a><i class="flow" style="--d:0.5s" aria-hidden="true"></i><span class="met">Guanidinoacetate<small>GAA</small></span><i class="flow" style="--d:1s" aria-hidden="true"></i><a class="enz" href="gamt.html">GAMT<small>GAMT</small></a><i class="flow" style="--d:1.5s" aria-hidden="true"></i><span class="met">Creatine</span><i class="flow" style="--d:2s" aria-hidden="true"></i><a class="enz" href="slc6a8.html">SLC6A8<small>transporter</small></a><i class="flow" style="--d:2.5s" aria-hidden="true"></i><span class="met">Neuron</span></div>
+
+  <section>
+    <div class="rv" style="display:grid;gap:18px"><div class="notice rv" role="note"><span aria-hidden="true">●</span><span><b>Preliminary.</b> These results come from a manuscript in preparation. They have not been peer reviewed or published, and the numbers may change.</span></div></div>
+    <div style="height:24px"></div>
+<div class="stats rv"><div class="stat"><span class="num"><span data-count="535662">535,662</span></span><p>All of Us whole genomes, with 807,162 gnomAD v4 exomes and genomes for comparison.</p></div><div class="stat"><span class="num">1 in 5,600 to 1 in 20,600</span><p>Carrier frequency of qualifying <span class="gene">GATM</span> variants, depending on how strictly variants are classified.</p></div><div class="stat"><span class="num">−9.6%</span><p>Lower serum creatinine in carriers of <span class="gene">GATM</span> loss-of-function variants (n = 34; p = 0.004).</p></div><div class="stat"><span class="num">0</span><p>Participants carrying two qualifying <span class="gene">GATM</span> alleles, as expected for a disease this rare.</p></div></div>
+  </section>
 
   <section>
     <div class="sec-head rv">
-      <p class="label">At a glance</p>
-      <h2>L-arginine:glycine amidinotransferase</h2>
+      <p class="label">Background</p>
+      <h2>What is known</h2>
     </div>
-    <div class="facts rv">
-        <div><span>Gene</span><span>GATM</span></div>
-        <div><span>Enzyme</span><span>L-arginine:glycine amidinotransferase</span></div>
-        <div><span>Reaction</span><span>Arginine + glycine → GAA + ornithine</span></div>
-        <div><span>Position in pathway</span><span>Step 1 of 2 (precedes GAMT)</span></div>
+    <div class="prose rv">
+      <p>AGAT deficiency is autosomal recessive. In the largest published series there are only 16 patients from 8 families. Because the block is upstream of guanidinoacetate, levels of that metabolite are low rather than high, and creatine supplementation is the main treatment. As in the other creatine disorders, damage that has already occurred cannot be reversed.</p>
+      <p class="m">A different, dominant condition also involves <span class="gene">GATM</span>: a small number of heterozygous missense variants cause a kidney disease (renal Fanconi syndrome) through aggregation of the mutant enzyme in mitochondria of the proximal tubule. None of those 14 published variants were found in either cohort.</p>
     </div>
   </section>
 
   <section>
     <div class="sec-head rv">
-      <p class="label">Initial analysis</p>
-      <h2>Results and figures</h2>
+      <p class="label">Carrier frequency</p>
+      <h2>How common are pathogenic GATM variants?</h2>
     </div>
-    <div class="placeholder rv">
-      <strong>Analysis to be added.</strong>
-      <p>Figures, methods and interpretation for AGAT will go here.</p>
+    <div class="panel rv">
+      <h3>Carriers by variant tier</h3>
+      <p class="sub">Tier 1 is established pathogenic. Tier 2 adds predicted loss-of-function. Tier 3 adds predicted damaging missense and splice variants.</p>
+      <div data-chart="agat-tiers"></div>
     </div>
+    <p class="fine rv" style="margin-top:14px">All of Us and gnomAD v4 agree closely at every tier (p ≥ 0.68), and no single GATM variant was carried by 20 or more All of Us participants.</p>
+  </section>
+
+  <section>
+    <div class="sec-head rv">
+      <p class="label">A measurable effect</p>
+      <h2>Loss-of-function carriers have lower serum creatinine</h2>
+    </div>
+    <div class="two">
+      <div class="prose rv">
+        <p>Creatinine is a breakdown product of creatine, so a gene that makes creatine could plausibly change it. Among 270,383 participants without chronic kidney disease, heterozygous carriers of <span class="gene">GATM</span> loss-of-function variants had serum creatinine 9.6% lower than non-carriers (95% CI −15.6% to −3.2%; p = 0.004).</p>
+        <p class="m">GAMT carriers, who are heterozygous for a defect further down the same pathway, showed no difference. Carriers of rare GATM missense variants had normal rates of chronic kidney disease (10.7% vs 11.1%) and proteinuria (3.4% vs 4.0%).</p>
+      </div>
+      <div class="panel rv"><h3>Serum creatinine, carriers vs non-carriers</h3><div data-chart="forest"></div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head rv">
+      <p class="label">Where the variants are</p>
+      <h2>Variant map for GATM</h2>
+    </div>
+    <div class="placeholder rv"><strong>Figure coming soon.</strong><p>The variant map will be added when the manuscript is submitted.</p></div>
+  </section>
+
+  <section>
+    <div class="sec-head rv">
+      <p class="label">Related</p>
+      <h2>Keep exploring</h2>
+    </div>
+    <div class="nextlinks rv"><a class="btn" href="gamt.html">Next step in the pathway: GAMT</a><a class="btn" href="slc6a8.html">Creatine transport: SLC6A8</a><a class="btn" href="index.html#top">Back to the overview</a></div>
   </section>
 
   <section id="contact" style="padding-top:0">
     <div class="contact rv">
       <p class="label" style="color:inherit;opacity:.8">Contact</p>
-      <h2>Questions or ideas? Let’s talk.</h2>
+      <h2>Questions, corrections or ideas? Let’s talk.</h2>
       <p class="addr">abogonie@g.UCLA.edu</p>
     </div>
     <footer>
@@ -75,5 +112,6 @@
   </section>
 </main>
 <script src="site.js" defer></script>
+<script src="popgen.js" defer></script>
 </body>
 </html>

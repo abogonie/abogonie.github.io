@@ -67,13 +67,14 @@
   <div class="hero">
     <p class="label">iPSCs · NGN2 neurons · Cerebral organoids · Creatine metabolism</p>
     <h1>Modeling creatine deficiency in the developing <em>human</em> brain.</h1>
-    <p class="lede">Guanidinoacetate N-methyltransferase (GAMT) catalyzes the final step of creatine biosynthesis. Loss-of-function variants cause a neurodevelopmental disorder marked by intellectual disability, epilepsy and developmental delay. I use patient-derived and CRISPR-edited iPSCs, cortical neurons and cerebral organoids to define how creatine deficiency alters human brain development.</p>
+    <p class="lede">Guanidinoacetate N-methyltransferase (GAMT) catalyzes the final step of creatine biosynthesis. Loss-of-function variants cause a neurodevelopmental disorder marked by intellectual disability, epilepsy and developmental delay, and the same pathway includes AGAT and the creatine transporter SLC6A8. I use patient-derived and CRISPR-edited iPSCs, cortical neurons and cerebral organoids to define how creatine deficiency alters human brain development.</p>
     <div class="first">
       <span class="label">First of its kind</span>
       <p>To our knowledge, the first human iPSC-derived neuron model of GAMT deficiency.</p>
     </div>
     <div class="cta-row">
-      <a class="btn primary" href="#research">See the research</a>
+      <a class="btn primary" href="#projects">See the projects</a>
+      <a class="btn" href="#research">Lab research</a>
       <a class="btn" href="https://scholar.google.com/citations?user=MNiEL0IAAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar</a>
     </div>
 
@@ -137,10 +138,31 @@
     </div>
   </div>
 
+  <section id="projects">
+    <div class="sec-head rv">
+      <p class="label">Projects</p>
+      <h2>One question, approached from three directions</h2>
+      <p>My research in neuroscience asks how a missing metabolite changes the developing human brain. Each project feeds the next: patients and populations show which variants matter, stem-cell neurons show what they do, and automation lets me measure it at scale.</p>
+    </div>
+    <div class="chain rv">
+      <a class="node" href="#population"><span class="label">Project 1</span><h3>Who carries the variants?</h3><p>Population genetics of creatine deficiency in over 1.3 million genomes.</p></a>
+      <i class="flow" style="--d:0s" aria-hidden="true"></i>
+      <a class="node" href="gamt.html#lab"><span class="label">Project 2</span><h3>What do they do to a neuron?</h3><p>iPSC-derived neurons and cerebral organoids that model GAMT deficiency.</p></a>
+      <i class="flow" style="--d:0.8s" aria-hidden="true"></i>
+      <a class="node" href="#automation"><span class="label">Project 3</span><h3>How do we measure it at scale?</h3><p>Automated culture and imaging with CellXpress.ai and IN Carta.</p></a>
+    </div>
+    <div class="grid">
+      <a class="card rv" href="agat.html" style="text-decoration:none"><span class="label">Creatine pathway</span><h3>AGAT</h3><p>Step one: carrier frequency and the creatinine signal.</p></a>
+      <a class="card rv" href="gamt.html" style="text-decoration:none"><span class="label">Creatine pathway</span><h3>GAMT</h3><p>Step two: recurrent variants, ancestry, and neuron models.</p></a>
+      <a class="card rv" href="slc6a8.html" style="text-decoration:none"><span class="label">Creatine pathway</span><h3>SLC6A8</h3><p>Transport into cells: the most common of the three.</p></a>
+      <a class="card rv" href="pcos.html" style="text-decoration:none;border-style:dashed"><span class="label">Side project · Women’s health</span><h3>PCOS</h3><p>Co-occurring conditions, age at diagnosis and genetic markers in a diverse population.</p></a>
+    </div>
+  </section>
+
   <section id="research">
     <div class="sec-head rv">
       <p class="label">Research</p>
-      <h2>Three models of GAMT deficiency</h2>
+      <h2>Human models of GAMT deficiency</h2>
       <p>Neurologic injury in GAMT deficiency is irreversible once symptoms begin, and current treatment with creatine, L-ornithine and sodium benzoate cannot reverse established damage. These models test how creatine deficiency disrupts human neurodevelopment, and whether earlier intervention could prevent it.</p>
     </div>
     <div class="grid">
@@ -174,66 +196,6 @@
     </div>
   </section>
 
-  <section id="maturation">
-    <div class="sec-head rv">
-      <p class="label">Maturation</p>
-      <h2>GAMT-deficient neurons mature late</h2>
-      <p>After NGN2 induction, iPSC-derived neurons extend neurites and branch as they mature. Neurons lacking GAMT are delayed. Drag the day to compare the two side by side.</p>
-    </div>
-    <div class="demo rv" id="mat">
-      <div class="demo-head">
-        <h2>Days after induction</h2>
-        <span class="label">Interactive schematic</span>
-      </div>
-      <div class="controls">
-        <label class="range" for="day"><span class="label">Day <output id="dayOut">6</output></span><input id="day" type="range" min="0" max="12" step="0.1" value="6"></label>
-        <button class="btn" id="play" type="button">Play</button>
-      </div>
-      <div class="mat-grid">
-        <figure class="typ"><svg viewBox="0 0 240 200" role="img" aria-label="Schematic neuron from typical cells"><path class="nstroke" id="pTyp"/><circle class="soma" cx="120" cy="100" r="11"/></svg><figcaption>Typical neuron</figcaption></figure>
-        <figure class="ko"><svg viewBox="0 0 240 200" role="img" aria-label="Schematic neuron from cells without GAMT"><path class="nstroke" id="pKO"/><circle class="soma" cx="120" cy="100" r="11"/></svg><figcaption>No GAMT neuron</figcaption></figure>
-        <figure class="curve"><svg id="curve" viewBox="0 0 240 200" role="img" aria-label="Maturity over days for typical neurons and neurons without GAMT"><path class="axis" d="M30 20 V170 H225"/><text x="30" y="188">0</text><text x="214" y="188">12</text><text x="112" y="188">day</text><text x="4" y="14">maturity</text><path class="c c-typ" id="cTyp"/><path class="c c-ko" id="cKO"/><line class="marker" id="mk" x1="30" x2="30" y1="20" y2="170"/></svg><figcaption>Typical (blue), No GAMT (orange)</figcaption></figure>
-      </div>
-      <div class="readout" aria-live="polite">
-        <p id="matStory"></p>
-        <p class="fine">Schematic of a delay, not measured data. The size of the delay shown here is illustrative.</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="species">
-    <div class="callout">
-      <div class="sec-head rv" style="margin-bottom:0">
-        <p class="label">Species divergence</p>
-        <h2>Mouse and human brains express creatine genes very differently</h2>
-        <p>Most mechanistic work on creatine metabolism comes from mice. Public RNA-seq data from purified brain cell types show that <span class="gene">GATM</span> (AGAT, step 1), <span class="gene">GAMT</span> (step 2) and <span class="gene">SLC6A8</span> (the creatine transporter) are expressed at very different levels in mouse and human, which limits how directly mouse findings transfer to human neurodevelopment.</p>
-      </div>
-      <div class="facts rv">
-        <div><span>Disorder</span><span>GAMT deficiency</span></div>
-        <div><span>Missing step</span><span>GAA → creatine</span></div>
-        <div><span>Standard care</span><span>Creatine, L-ornithine, sodium benzoate</span></div>
-        <div><span>Open problem</span><span>Injury is irreversible once symptomatic</span></div>
-      </div>
-    </div>
-
-    <div class="charts rv">
-      <p class="ch-title">Mean expression by brain cell type</p>
-      <div class="legend" role="list"><span role="listitem"><i class="sw h"></i>Human</span><span role="listitem"><i class="sw m"></i>Mouse</span><span>Mean FPKM · Astro = astrocyte, Oligo = oligodendrocyte, Endo = endothelial</span></div>
-      <div class="facets" id="facets"></div>
-
-      <p class="takeaway" id="takeaway">Mouse GAMT expression is about 28-fold higher than human in neurons and about 870-fold higher in oligodendrocytes.</p>
-      <div class="fold-wrap"><svg id="fold" viewBox="0 0 690 400" role="img" aria-label="Horizontal bars on a log scale showing mouse to human fold difference in GATM, GAMT and SLC6A8 expression in neurons, astrocytes and oligodendrocytes"></svg></div>
-      <p class="src">Source: BrainRNAseq.org (Zhang/Barres lab). Values were read from the source figures and rounded, so treat them as approximate. Fold difference is mouse mean FPKM divided by human mean FPKM.</p>
-
-      <details class="data">
-        <summary>Data table and original figures</summary>
-        <div class="tbl"><table id="tbl"></table></div>
-        <img src="img/fpkm.png" width="1400" height="805" loading="lazy" alt="Original figure: GATM, GAMT and SLC6A8 expression in human versus mouse brain cell types, with error bars">
-        <img src="img/fold.png" width="1400" height="805" loading="lazy" alt="Original figure: fold difference in GATM, GAMT and SLC6A8 expression, mouse versus human, log10 scale">
-      </details>
-    </div>
-  </section>
-
   <section id="method">
     <div class="sec-head rv">
       <p class="label">Method</p>
@@ -260,6 +222,25 @@
       <div><span class="label">Step 4</span><b>Readout</b><p>Per-well measurements ready to compare across genotype, treatment and day.</p></div>
     </div>
     <p class="pipe-note rv">Automation is what makes the maturation question quantifiable. Thousands of images across many days and conditions are processed identically, so a developmental delay appears as a pattern in the numbers.</p>
+  </section>
+
+  <section id="population">
+    <div class="sec-head rv">
+      <p class="label">Population genetics</p>
+      <h2>How common are the cerebral creatine deficiency syndromes?</h2>
+      <p>Earlier estimates relied on known pathogenic variants in mostly European cohorts. We analyzed <span data-count="535662">535,662</span> All of Us genomes and 807,162 gnomAD v4 exomes and genomes for variants in <span class="gene">GATM</span> (AGAT), <span class="gene">GAMT</span> and <span class="gene">SLC6A8</span>, and sorted each variant into one of three tiers.</p>
+    </div>
+    <div class="rv" style="display:grid;gap:18px;margin-bottom:24px"><div class="notice rv" role="note"><span aria-hidden="true">●</span><span><b>Preliminary.</b> These results come from a manuscript in preparation. They have not been peer reviewed or published, and the numbers may change.</span></div></div>
+    <div class="grid" style="margin-bottom:24px">
+      <div class="card rv"><p class="label">Tier 1</p><h3>Established pathogenic</h3><p>ClinVar pathogenic or likely pathogenic variants, plus variants reported in patients.</p></div>
+      <div class="card rv"><p class="label">Tier 2</p><h3>Predicted loss-of-function</h3><p>Stop-gained, frameshift, canonical splice and start-loss variants not already in Tier 1.</p></div>
+      <div class="card rv"><p class="label">Tier 3</p><h3>Predicted damaging</h3><p>Missense variants with REVEL ≥ 0.773 and variants with SpliceAI ≥ 0.5 that have not been classified as pathogenic.</p></div>
+    </div>
+    <div class="stats rv">
+      <a class="stat" href="agat.html"><span class="label">AGAT · GATM</span><span class="num">1 in 5,600 to 20,600</span><p>Carrier frequency. One affected US birth every 35 to 470 years. Carriers have 9.6% lower serum creatinine.</p></a>
+      <a class="stat" href="gamt.html"><span class="label">GAMT</span><span class="num">1 in 430 to 720</span><p>Carrier frequency. Two to five affected US births a year, with more unclassified variants in non-European ancestry groups.</p></a>
+      <a class="stat" href="slc6a8.html"><span class="label">SLC6A8 · CTD</span><span class="num">1 in 6,400 to 14,800</span><p>Female carrier frequency. About 18 times as many predicted affected births as GAMT deficiency.</p></a>
+    </div>
   </section>
 
   <section id="talks">
@@ -323,6 +304,7 @@
 </main>
 
 <script src="site.js" defer></script>
+<script src="popgen.js" defer></script>
 <script>
 (function () {
   var root = document.documentElement;
@@ -399,182 +381,6 @@
   }
   document.querySelectorAll("#demo input").forEach(function (i) { i.addEventListener("change", function () { update(false); }); });
   update(true);
-
-  /* ---------- neuron maturation schematic ---------- */
-  var sig = function (x) { return 1 / (1 + Math.exp(-x)); };
-  var mTyp = function (d) { return sig((d - 4.5) / 1.4); };
-  var mKO = function (d) { return sig((d - 8) / 1.5); };
-  var ANG = [-160, -110, -50, 10, 70, 130];
-  function neuron(m) {
-    var cx = 120, cy = 100, out = "";
-    ANG.forEach(function (a, i) {
-      var r = a * Math.PI / 180, L = 6 + m * 62 * (0.85 + 0.15 * ((i % 3) / 2));
-      var sx = cx + Math.cos(r) * 11, sy = cy + Math.sin(r) * 11;
-      var ex = cx + Math.cos(r) * (11 + L), ey = cy + Math.sin(r) * (11 + L);
-      var bend = (i % 2 ? 1 : -1) * L * 0.15;
-      var mx = (sx + ex) / 2 - Math.sin(r) * bend, my = (sy + ey) / 2 + Math.cos(r) * bend;
-      out += "M" + f(sx) + " " + f(sy) + " Q" + f(mx) + " " + f(my) + " " + f(ex) + " " + f(ey);
-      if (m > 0.3) {
-        var t = 0.55, u = 1 - t;
-        var bx = u * u * sx + 2 * u * t * mx + t * t * ex, by = u * u * sy + 2 * u * t * my + t * t * ey;
-        var bl = L * 0.4 * Math.min(1, (m - 0.3) / 0.4), s = i % 2 ? 1 : -1;
-        out += "M" + f(bx) + " " + f(by) + " L" + f(bx + Math.cos(r + 0.7 * s) * bl) + " " + f(by + Math.sin(r + 0.7 * s) * bl);
-      }
-      if (m > 0.65) {
-        var fl = L * 0.2 * Math.min(1, (m - 0.65) / 0.3);
-        [-0.5, 0.5].forEach(function (o) {
-          out += "M" + f(ex) + " " + f(ey) + " L" + f(ex + Math.cos(r + o) * fl) + " " + f(ey + Math.sin(r + o) * fl);
-        });
-      }
-    });
-    return out;
-  }
-  function curve(fn) {
-    var d = "";
-    for (var k = 0; k <= 48; k++) {
-      var x = k / 4;
-      d += (k ? "L" : "M") + f(30 + x / 12 * 195) + " " + f(170 - fn(x) * 150);
-    }
-    return d;
-  }
-  $("cTyp").setAttribute("d", curve(mTyp));
-  $("cKO").setAttribute("d", curve(mKO));
-  var day = $("day"), play = $("play");
-  function matUpdate() {
-    var d = Number(day.value);
-    $("pTyp").setAttribute("d", neuron(mTyp(d)));
-    $("pKO").setAttribute("d", neuron(mKO(d)));
-    $("dayOut").textContent = d.toFixed(1);
-    var x = f(30 + d / 12 * 195), mk = $("mk");
-    mk.setAttribute("x1", x); mk.setAttribute("x2", x);
-    $("matStory").textContent =
-      d < 2.5 ? "Both cultures start with short neurites. The difference has not shown yet."
-      : d < 10 ? "Typical neurons are already extending and branching. Neurons without GAMT are behind."
-      : "Late in the culture, typical neurons are densely branched while neurons without GAMT are still behind.";
-  }
-  day.addEventListener("input", matUpdate);
-  var playing = false;
-  function stop() { playing = false; play.textContent = "Play"; }
-  if (reduce) { play.hidden = true; }
-  play.addEventListener("click", function () {
-    if (playing) { stop(); return; }
-    playing = true; play.textContent = "Pause";
-    var from = Number(day.value) >= 11.9 ? 0 : Number(day.value), start = performance.now();
-    (function step(now) {
-      if (!playing) return;
-      var v = from + (now - start) / 700;
-      if (v >= 12) { day.value = 12; matUpdate(); stop(); return; }
-      day.value = v; matUpdate(); requestAnimationFrame(step);
-    })(start);
-  });
-  matUpdate();
-
-  /* ---------- species charts (values read from BrainRNAseq.org figures) ---------- */
-  var CELLS = ["Neuron", "Astro", "Oligo", "Endo"];
-  var CELL_FULL = ["Neuron", "Astrocyte", "Oligodendrocyte", "Endothelial"];
-  var FP = [
-    { g: "GATM", sub: "AGAT, step 1", max: 120, ticks: [0, 30, 60, 90, 120], h: [6.7, 74, 37.5, 2.9], m: [10.3, 42, 112, 61.3] },
-    { g: "GAMT", sub: "step 2", max: 300, ticks: [0, 100, 200, 300], h: [0.15, 0.3, 0.3, 0.6], m: [4.3, 8.5, 265, 8.3] },
-    { g: "SLC6A8", sub: "creatine transporter", max: 50, ticks: [0, 10, 20, 30, 40, 50], h: [1.25, 3.8, 3.1, 0.85], m: [17, 14, 44.5, 6.6] }
-  ];
-  var FD = [
-    { g: "GATM", d: "AGAT, step 1", v: [1.5, 0.57, 3.0] },
-    { g: "GAMT", d: "step 2", v: [28, 27.5, 870] },
-    { g: "SLC6A8", d: "transporter", v: [13.5, 3.6, 14.3] }
-  ];
-  function mk(tag, attrs, parent, text) {
-    var e = document.createElementNS(NS, tag);
-    for (var k in attrs) e.setAttribute(k, attrs[k]);
-    if (text != null) e.textContent = text;
-    if (parent) parent.appendChild(e);
-    return e;
-  }
-  function vlabel(v) { return v < 1 ? "<1" : v >= 10 ? String(Math.round(v)) : v.toFixed(1); }
-  function topBar(svg, x, top, base, w, cls, tip) {
-    var h = base - top, el;
-    if (h <= 1.2) { el = mk("rect", { x: x, y: base - 1.2, width: w, height: 1.2, class: cls }, svg); }
-    else {
-      var r = Math.min(4, h / 2, w / 2);
-      el = mk("path", { d: "M" + x + " " + base + " V" + f(top + r) + " Q" + x + " " + f(top) + " " + f(x + r) + " " + f(top) + " H" + f(x + w - r) + " Q" + f(x + w) + " " + f(top) + " " + f(x + w) + " " + f(top + r) + " V" + base + " Z", class: cls }, svg);
-    }
-    mk("title", {}, el, tip);
-  }
-  var facets = $("facets");
-  FP.forEach(function (d) {
-    var fig = document.createElement("figure");
-    var h3 = document.createElement("h3");
-    h3.innerHTML = '<span class="gene">' + d.g + "</span><small>" + d.sub + "</small>";
-    fig.appendChild(h3);
-    var svg = mk("svg", { viewBox: "0 0 340 240", role: "img", "aria-label": d.g + " mean FPKM in human and mouse neurons, astrocytes, oligodendrocytes and endothelial cells" });
-    fig.appendChild(svg);
-    var x0 = 38, x1 = 334, y0 = 22, y1 = 204, ph = y1 - y0;
-    var ys = function (v) { return y1 - v / d.max * ph; };
-    d.ticks.forEach(function (t) {
-      mk("line", { x1: x0, x2: x1, y1: f(ys(t)), y2: f(ys(t)), class: t === 0 ? "ax" : "gl" }, svg);
-      mk("text", { x: x0 - 6, y: f(ys(t) + 3.5), "text-anchor": "end", class: "ct" }, svg, String(t));
-    });
-    var gw = (x1 - x0) / 4, bw = 24;
-    CELLS.forEach(function (c, i) {
-      var start = x0 + i * gw + (gw - (2 * bw + 2)) / 2;
-      [["h", d.h[i], "Human"], ["m", d.m[i], "Mouse"]].forEach(function (b, j) {
-        var x = start + j * (bw + 2), top = ys(b[1]);
-        topBar(svg, x, top, y1, bw, b[0] + "bar", d.g + ", " + CELL_FULL[i] + ", " + b[2] + ": about " + (b[1] < 1 ? "under 1" : b[1]) + " FPKM");
-        mk("text", { x: f(x + bw / 2), y: f(Math.min(top, y1 - 1.2) - 4), "text-anchor": "middle", class: "vl" }, svg, vlabel(b[1]));
-      });
-      mk("text", { x: f(x0 + i * gw + gw / 2), y: y1 + 18, "text-anchor": "middle", class: "ct" }, svg, c);
-    });
-    facets.appendChild(fig);
-  });
-
-  (function foldChart() {
-    var svg = $("fold");
-    var X0 = 150, W = 470, LO = -0.4, SPAN = 3.4;
-    var xs = function (v) { return X0 + (Math.log10(v) - LO) / SPAN * W; };
-    var base = xs(1), y = 14, rows = [];
-    FD.forEach(function (g) {
-      rows.push({ head: g, y: y }); y += 24;
-      g.v.forEach(function (v, i) { rows.push({ g: g.g, cell: CELL_FULL[i], v: v, cy: y + 12 }); y += 28; });
-      y += 10;
-    });
-    var bottom = y;
-    [0.5, 1, 10, 100, 1000].forEach(function (t) {
-      mk("line", { x1: f(xs(t)), x2: f(xs(t)), y1: 8, y2: bottom, class: t === 1 ? "ax" : "gl" }, svg);
-      mk("text", { x: f(xs(t)), y: bottom + 16, "text-anchor": "middle", class: "ct" }, svg, (t === 1000 ? "1,000" : t) + "×");
-    });
-    mk("text", { x: f(X0 + W / 2), y: bottom + 38, "text-anchor": "middle", class: "ct" }, svg, "Mouse ÷ human mean FPKM (log scale; 1× = equal)");
-    rows.forEach(function (r) {
-      if (r.head) {
-        var t = mk("text", { x: 6, y: r.y + 14, class: "fgene" }, svg);
-        t.appendChild(document.createTextNode(r.head.g));
-        mk("tspan", { dx: 8 }, t, r.head.d);
-        t.firstChild.parentNode.firstChild.nodeValue = r.head.g;
-        return;
-      }
-      mk("text", { x: 138, y: f(r.cy + 4), "text-anchor": "end", class: "ct" }, svg, r.cell);
-      var xv = xs(r.v), up = r.v > 1, h = 16, top = r.cy - h / 2, rad = 4;
-      var x = up ? base : xv, w = Math.abs(xv - base);
-      var d = up
-        ? "M" + f(x) + " " + f(top) + " H" + f(x + w - rad) + " Q" + f(x + w) + " " + f(top) + " " + f(x + w) + " " + f(top + rad) + " V" + f(top + h - rad) + " Q" + f(x + w) + " " + f(top + h) + " " + f(x + w - rad) + " " + f(top + h) + " H" + f(x) + " Z"
-        : "M" + f(x + w) + " " + f(top) + " H" + f(x + rad) + " Q" + f(x) + " " + f(top) + " " + f(x) + " " + f(top + rad) + " V" + f(top + h - rad) + " Q" + f(x) + " " + f(top + h) + " " + f(x + rad) + " " + f(top + h) + " H" + f(x + w) + " Z";
-      var b = mk("path", { d: d, class: "fbar" }, svg);
-      mk("title", {}, b, r.g + ", " + r.cell + ": about " + r.v + "-fold (mouse ÷ human)");
-      var lbl = "≈" + (r.v >= 100 ? r.v : r.v >= 10 ? Math.round(r.v) : r.v) + "×";
-      mk("text", { x: f(up ? xv + 6 : base + 6), y: f(r.cy + 4), "text-anchor": "start", class: "vl", style: "font-size:11px" }, svg, lbl);
-    });
-    svg.setAttribute("viewBox", "0 0 690 " + (bottom + 50));
-  })();
-
-  (function table() {
-    var t = $("tbl");
-    var html = "<thead><tr><th>Gene</th><th>Cell type</th><th>Human (FPKM)</th><th>Mouse (FPKM)</th><th>Fold (mouse ÷ human)</th></tr></thead><tbody>";
-    FP.forEach(function (d, gi) {
-      CELLS.forEach(function (c, i) {
-        var fold = i < 3 ? "≈" + FD[gi].v[i] + "×" : "n/a";
-        html += "<tr><td>" + d.g + "</td><td>" + CELL_FULL[i] + "</td><td>≈" + (d.h[i] < 1 ? "&lt;1" : d.h[i]) + "</td><td>≈" + d.m[i] + "</td><td>" + fold + "</td></tr>";
-      });
-    });
-    t.innerHTML = html + "</tbody>";
-  })();
 
   /* talk video: loads YouTube only when the viewer presses play (33:56 to 1:01:47) */
   $("playVideo").addEventListener("click", function () {

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="SLC6A8: initial analysis by Aleksander Bogoniewski.">
+<meta name="description" content="Creatine transporter deficiency (SLC6A8): predicted birth prevalence, female carrier frequency and variant map from All of Us and gnomAD.">
 <meta name="theme-color" content="#1d5bd8">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='9' fill='%231d5bd8'/%3E%3C/svg%3E">
 <style>html{color-scheme:light}body{margin:0}img{max-width:100%}</style>
@@ -33,39 +33,76 @@
 
 <main class="wrap" id="top">
   <div class="page-hero">
-    <p class="label">Moves creatine across cell membranes</p>
-    <h1>SLC6A8</h1>
-    <p class="lede rv">SLC6A8 encodes the creatine transporter that carries creatine into cells, including neurons. It is X-linked, and its deficiency (creatine transporter deficiency) is a cerebral creatine deficiency syndrome.</p>
+    <p class="label">Creatine transport</p>
+    <h1>Creatine transporter deficiency is predicted to be about 18 times more common than GAMT deficiency.</h1>
+    <p class="lede"><em class="gene">SLC6A8</em> encodes the transporter that carries creatine into cells, including neurons. It is X-linked, so it mostly affects boys. Unlike AGAT and GAMT deficiency, it does not respond to creatine supplementation, and it is not on the newborn screening panel.</p>
   </div>
+  <div class="strip rv" role="group" aria-label="Creatine pathway with this page highlighted"><span class="met">Arginine + glycine</span><i class="flow" style="--d:0s" aria-hidden="true"></i><a class="enz" href="agat.html">AGAT<small>GATM</small></a><i class="flow" style="--d:0.5s" aria-hidden="true"></i><span class="met">Guanidinoacetate<small>GAA</small></span><i class="flow" style="--d:1s" aria-hidden="true"></i><a class="enz" href="gamt.html">GAMT<small>GAMT</small></a><i class="flow" style="--d:1.5s" aria-hidden="true"></i><span class="met">Creatine</span><i class="flow" style="--d:2s" aria-hidden="true"></i><a class="enz on" href="slc6a8.html">SLC6A8<small>transporter</small></a><i class="flow" style="--d:2.5s" aria-hidden="true"></i><span class="met">Neuron</span></div>
+
+  <section>
+    <div class="rv" style="display:grid;gap:18px"><div class="notice rv" role="note"><span aria-hidden="true">●</span><span><b>Preliminary.</b> These results come from a manuscript in preparation. They have not been peer reviewed or published, and the numbers may change.</span></div></div>
+    <div style="height:24px"></div>
+<div class="stats rv"><div class="stat"><span class="num">≈ 18 : 1</span><p>Predicted ratio of affected births, creatine transporter deficiency to GAMT deficiency, at two of three tiers.</p></div><div class="stat"><span class="num">65 to 117</span><p>Predicted affected male births per year in the US from the combined cohorts, at Tiers 1+2 and 1+2+3.</p></div><div class="stat"><span class="num">1 in 6,400 to 1 in 14,800</span><p>Carrier frequency of qualifying <span class="gene">SLC6A8</span> variants in All of Us females.</p></div><div class="stat"><span class="num">3 of 71</span><p>Variants reported in patients that were carried by any All of Us participant.</p></div></div>
+  </section>
 
   <section>
     <div class="sec-head rv">
-      <p class="label">At a glance</p>
-      <h2>Creatine transporter</h2>
+      <p class="label">Predicted births</p>
+      <h2>Far more boys than the patient numbers suggest</h2>
     </div>
-    <div class="facts rv">
-        <div><span>Gene</span><span>SLC6A8</span></div>
-        <div><span>Protein</span><span>Creatine transporter</span></div>
-        <div><span>Inheritance</span><span>X-linked</span></div>
-        <div><span>Disorder</span><span>Creatine transporter deficiency (cerebral creatine deficiency syndrome)</span></div>
+    <div class="two">
+      <div class="prose rv">
+        <p>About 130 people with creatine transporter deficiency have been reported, similar to the number with GAMT deficiency. The population data say the two should differ many-fold. Because males have a single X chromosome, a variant carried by a heterozygous female predicts affected sons.</p>
+        <p class="m">The gap implies that creatine transporter deficiency is likely underdiagnosed. These estimates exclude de novo variants.</p>
+      </div>
+      <div class="panel rv"><h3>Predicted affected US births per year</h3><div data-chart="births"></div></div>
     </div>
   </section>
 
   <section>
     <div class="sec-head rv">
-      <p class="label">Initial analysis</p>
-      <h2>Results and figures</h2>
+      <p class="label">Carrier frequency</p>
+      <h2>How common are SLC6A8 variants in females?</h2>
     </div>
-    <div class="placeholder rv">
-      <strong>Analysis to be added.</strong>
-      <p>Figures, methods and interpretation for SLC6A8 will go here.</p>
+    <div class="panel rv">
+      <h3>Female carriers by variant tier</h3>
+      <p class="sub">Heterozygous females in All of Us, the frequency expected from gnomAD allele frequency, and the combined estimate.</p>
+      <div data-chart="slc-tiers"></div>
     </div>
+    <p class="fine rv" style="margin-top:14px">Counts of 1 to 19 are reported as “fewer than 20” and the corresponding estimates are suppressed, following the All of Us Data and Statistics Dissemination Policy.</p>
+  </section>
+
+  <section>
+    <div class="sec-head rv">
+      <p class="label">Males</p>
+      <h2>Hemizygous males with no recorded diagnosis</h2>
+    </div>
+    <div class="prose rv">
+      <p>26 males in All of Us carried a Tier 1+2+3 variant on their single X chromosome (1 in 7,909). They carried 20 different variants, and 17 of these were not seen in any female. Fewer than 20 males with a Tier 1+2 variant had health records, and none had a recorded diagnosis consistent with creatine transporter deficiency, such as intellectual disability, developmental delay, autism or epilepsy.</p>
+      <p class="m">Some of these variants may be tolerated, and some may be real cases that were never diagnosed. Separating the two is a question for functional testing, which is where iPSC-derived neurons can help.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head rv">
+      <p class="label">Variant map</p>
+      <h2>Where SLC6A8 variants fall</h2>
+    </div>
+    <div class="placeholder rv"><strong>Figure coming soon.</strong><p>The variant map will be added when the manuscript is submitted.</p></div>
+  </section>
+
+  <section>
+    <div class="sec-head rv">
+      <p class="label">Related</p>
+      <h2>Keep exploring</h2>
+    </div>
+    <div class="nextlinks rv"><a class="btn" href="agat.html">Step one: AGAT</a><a class="btn" href="gamt.html">Step two: GAMT, and mouse vs human expression</a><a class="btn" href="index.html#top">Back to the overview</a></div>
   </section>
 
   <section id="contact" style="padding-top:0">
     <div class="contact rv">
       <p class="label" style="color:inherit;opacity:.8">Contact</p>
-      <h2>Questions or ideas? Let’s talk.</h2>
+      <h2>Questions, corrections or ideas? Let’s talk.</h2>
       <p class="addr">abogonie@g.UCLA.edu</p>
     </div>
     <footer>
@@ -75,5 +112,6 @@
   </section>
 </main>
 <script src="site.js" defer></script>
+<script src="popgen.js" defer></script>
 </body>
 </html>

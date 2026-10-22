@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="GAMT: initial analysis by Aleksander Bogoniewski.">
+<meta name="description" content="GAMT deficiency: carrier frequency, recurrent variants and ancestry from All of Us and gnomAD, plus iPSC neuron models.">
 <meta name="theme-color" content="#1d5bd8">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='9' fill='%231d5bd8'/%3E%3C/svg%3E">
 <style>html{color-scheme:light}body{margin:0}img{max-width:100%}</style>
@@ -34,38 +34,143 @@
 <main class="wrap" id="top">
   <div class="page-hero">
     <p class="label">Final step of creatine synthesis</p>
-    <h1>GAMT</h1>
-    <p class="lede rv">GAMT catalyzes the last step of creatine biosynthesis, transferring a methyl group from S-adenosylmethionine to GAA to form creatine. GAMT deficiency is a cerebral creatine deficiency syndrome. My iPSC-derived neuron work on GAMT is described on the Home page.</p>
+    <h1>GAMT deficiency: common as a carrier state, rare as a diagnosis, and under-counted outside Europe.</h1>
+    <p class="lede">Guanidinoacetate N-methyltransferase (GAMT) turns guanidinoacetate into creatine. Without it the brain is short of creatine and guanidinoacetate builds up. GAMT deficiency was added to the US Recommended Uniform Screening Panel in 2023.</p>
   </div>
+  <div class="strip rv" role="group" aria-label="Creatine pathway with this page highlighted"><span class="met">Arginine + glycine</span><i class="flow" style="--d:0s" aria-hidden="true"></i><a class="enz" href="agat.html">AGAT<small>GATM</small></a><i class="flow" style="--d:0.5s" aria-hidden="true"></i><span class="met">Guanidinoacetate<small>GAA</small></span><i class="flow" style="--d:1s" aria-hidden="true"></i><a class="enz on" href="gamt.html">GAMT<small>GAMT</small></a><i class="flow" style="--d:1.5s" aria-hidden="true"></i><span class="met">Creatine</span><i class="flow" style="--d:2s" aria-hidden="true"></i><a class="enz" href="slc6a8.html">SLC6A8<small>transporter</small></a><i class="flow" style="--d:2.5s" aria-hidden="true"></i><span class="met">Neuron</span></div>
+
+  <section>
+    <div class="rv" style="display:grid;gap:18px"><div class="notice rv" role="note"><span aria-hidden="true">●</span><span><b>Preliminary.</b> These results come from a manuscript in preparation. They have not been peer reviewed or published, and the numbers may change.</span></div></div>
+    <div style="height:24px"></div>
+<div class="stats rv"><div class="stat"><span class="num">1 in 430 to 1 in 720</span><p>Carrier frequency of qualifying <span class="gene">GAMT</span> variants in All of Us, depending on tier.</p></div><div class="stat"><span class="num">2 to 5</span><p>Affected US births per year predicted from All of Us, in line with newborn screening.</p></div><div class="stat"><span class="num">+82% to +171%</span><p>More qualifying alleles in non-European ancestry groups when variants without a prior classification are included, vs +51% in European participants.</p></div><div class="stat"><span class="num">27.2%</span><p>Share of qualifying alleles carried by a single splice variant, <span class="gene">GAMT</span> c.327G&gt;A.</p></div></div>
+  </section>
 
   <section>
     <div class="sec-head rv">
-      <p class="label">At a glance</p>
-      <h2>Guanidinoacetate N-methyltransferase</h2>
+      <p class="label">Recurrent variants</p>
+      <h2>A handful of variants account for most pathogenic alleles</h2>
     </div>
-    <div class="facts rv">
-        <div><span>Gene</span><span>GAMT</span></div>
-        <div><span>Enzyme</span><span>Guanidinoacetate N-methyltransferase</span></div>
-        <div><span>Reaction</span><span>GAA + SAM → creatine + SAH</span></div>
-        <div><span>Disorder</span><span>GAMT deficiency (cerebral creatine deficiency syndrome)</span></div>
+    <div class="panel rv">
+      <h3>The most common GAMT variants in All of Us</h3>
+      <p class="sub">Share of all 808 established pathogenic and predicted loss-of-function alleles. Ten variants, each with 20 or more carriers, make up 69.7%.</p>
+      <div data-chart="gamt-variants"></div>
+    </div>
+    <p class="fine rv" style="margin-top:14px">c.327G&gt;A is synonymous but alters splicing of exon 2. c.491G&gt;A and c.224C&gt;T have conflicting ClinVar classifications and are included because they have been reported in patients.</p>
+  </section>
+
+  <section>
+    <div class="sec-head rv">
+      <p class="label">Ancestry</p>
+      <h2>Known variants undercount carriers outside Europe</h2>
+    </div>
+    <div class="two">
+      <div class="prose rv">
+        <p>Carrier estimates for GAMT deficiency have come from about 10,000 people, mostly of European ancestry. In All of Us, established pathogenic variants gave the highest carrier frequency in European-ancestry participants and lower frequencies in every other group.</p>
+        <p>Much of that gap is a classification gap. Variants that nobody has classified yet add 51% more qualifying alleles in European participants but 82% to 171% more in the other groups. Estimates built only on known pathogenic variants therefore understate the burden outside Europe.</p>
+      </div>
+      <div class="panel rv"><h3>GAMT carrier frequency by genetic ancestry</h3><div data-chart="gamt-ancestry"></div></div>
     </div>
   </section>
 
   <section>
     <div class="sec-head rv">
-      <p class="label">Initial analysis</p>
-      <h2>Results and figures</h2>
+      <p class="label">Newborn screening</p>
+      <h2>Closer to what screening finds</h2>
     </div>
-    <div class="placeholder rv">
-      <strong>Analysis to be added.</strong>
-      <p>Figures, methods and interpretation for GAMT will go here.</p>
+    <div class="prose rv">
+      <p>Pilot newborn screening in Utah and New York found two cases among 811,310 babies. Established pathogenic variants in All of Us would predict 0.39 cases, so the two observed are 5.1 times more than expected (p = 0.059). Adding predicted damaging variants raises the expectation to 1.10 cases, so the two observed are 1.8 times more than expected (p = 0.30).</p>
+      <p class="m">Neither difference is statistically significant, but the pattern suggests that known variants alone miss part of the disease burden.</p>
     </div>
+  </section>
+
+  <section>
+    <div class="sec-head rv">
+      <p class="label">Variant map</p>
+      <h2>Where GAMT variants fall</h2>
+    </div>
+    <div class="placeholder rv"><strong>Figure coming soon.</strong><p>The variant map will be added when the manuscript is submitted.</p></div>
+  </section>
+
+  <section id="lab" style="padding-bottom:0">
+    <div class="sec-head rv">
+      <p class="label">In the lab</p>
+      <h2>Modeling GAMT deficiency in human neurons</h2>
+      <p>Population data tell us how often the disease should occur. The lab work asks what it does to a developing human neuron. This is, to our knowledge, the first human iPSC-derived neuron model of GAMT deficiency.</p>
+    </div>
+  </section>
+  <section id="maturation">
+    <div class="sec-head rv">
+      <p class="label">Maturation</p>
+      <h2>GAMT-deficient neurons mature late</h2>
+      <p>After NGN2 induction, iPSC-derived neurons extend neurites and branch as they mature. Neurons lacking GAMT are delayed. Drag the day to compare the two side by side.</p>
+    </div>
+    <div class="demo rv" id="mat">
+      <div class="demo-head">
+        <h2>Days after induction</h2>
+        <span class="label">Interactive schematic</span>
+      </div>
+      <div class="controls">
+        <label class="range" for="day"><span class="label">Day <output id="dayOut">6</output></span><input id="day" type="range" min="0" max="12" step="0.1" value="6"></label>
+        <button class="btn" id="play" type="button">Play</button>
+      </div>
+      <div class="mat-grid">
+        <figure class="typ"><svg viewBox="0 0 240 200" role="img" aria-label="Schematic neuron from typical cells"><path class="nstroke" id="pTyp"/><circle class="soma" cx="120" cy="100" r="11"/></svg><figcaption>Typical neuron</figcaption></figure>
+        <figure class="ko"><svg viewBox="0 0 240 200" role="img" aria-label="Schematic neuron from cells without GAMT"><path class="nstroke" id="pKO"/><circle class="soma" cx="120" cy="100" r="11"/></svg><figcaption>No GAMT neuron</figcaption></figure>
+        <figure class="curve"><svg id="curve" viewBox="0 0 240 200" role="img" aria-label="Maturity over days for typical neurons and neurons without GAMT"><path class="axis" d="M30 20 V170 H225"/><text x="30" y="188">0</text><text x="214" y="188">12</text><text x="112" y="188">day</text><text x="4" y="14">maturity</text><path class="c c-typ" id="cTyp"/><path class="c c-ko" id="cKO"/><line class="marker" id="mk" x1="30" x2="30" y1="20" y2="170"/></svg><figcaption>Typical (blue), No GAMT (orange)</figcaption></figure>
+      </div>
+      <div class="readout" aria-live="polite">
+        <p id="matStory"></p>
+        <p class="fine">Schematic of a delay, not measured data. The size of the delay shown here is illustrative.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="species">
+    <div class="callout">
+      <div class="sec-head rv" style="margin-bottom:0">
+        <p class="label">Species divergence</p>
+        <h2>Mouse and human brains express creatine genes very differently</h2>
+        <p>Most mechanistic work on creatine metabolism comes from mice. Public RNA-seq data from purified brain cell types show that <span class="gene">GATM</span> (AGAT, step 1), <span class="gene">GAMT</span> (step 2) and <span class="gene">SLC6A8</span> (the creatine transporter) are expressed at very different levels in mouse and human, which limits how directly mouse findings transfer to human neurodevelopment.</p>
+      </div>
+      <div class="facts rv">
+        <div><span>Disorder</span><span>GAMT deficiency</span></div>
+        <div><span>Missing step</span><span>GAA → creatine</span></div>
+        <div><span>Standard care</span><span>Creatine, L-ornithine, sodium benzoate</span></div>
+        <div><span>Open problem</span><span>Injury is irreversible once symptomatic</span></div>
+      </div>
+    </div>
+
+    <div class="charts rv">
+      <p class="ch-title">Mean expression by brain cell type</p>
+      <div class="legend" role="list"><span role="listitem"><i class="sw h"></i>Human</span><span role="listitem"><i class="sw m"></i>Mouse</span><span>Mean FPKM · Astro = astrocyte, Oligo = oligodendrocyte, Endo = endothelial</span></div>
+      <div class="facets" id="facets"></div>
+
+      <p class="takeaway" id="takeaway">Mouse GAMT expression is about 28-fold higher than human in neurons and about 870-fold higher in oligodendrocytes.</p>
+      <div class="fold-wrap"><svg id="fold" viewBox="0 0 690 400" role="img" aria-label="Horizontal bars on a log scale showing mouse to human fold difference in GATM, GAMT and SLC6A8 expression in neurons, astrocytes and oligodendrocytes"></svg></div>
+      <p class="src">Source: BrainRNAseq.org (Zhang/Barres lab). Values were read from the source figures and rounded, so treat them as approximate. Fold difference is mouse mean FPKM divided by human mean FPKM.</p>
+
+      <details class="data">
+        <summary>Data table and original figures</summary>
+        <div class="tbl"><table id="tbl"></table></div>
+        <img src="img/fpkm.png" width="1400" height="805" loading="lazy" alt="Original figure: GATM, GAMT and SLC6A8 expression in human versus mouse brain cell types, with error bars">
+        <img src="img/fold.png" width="1400" height="805" loading="lazy" alt="Original figure: fold difference in GATM, GAMT and SLC6A8 expression, mouse versus human, log10 scale">
+      </details>
+    </div>
+  </section>
+
+
+  <section>
+    <div class="sec-head rv">
+      <p class="label">Related</p>
+      <h2>Keep exploring</h2>
+    </div>
+    <div class="nextlinks rv"><a class="btn" href="agat.html">Step one: AGAT</a><a class="btn" href="slc6a8.html">Creatine transport: SLC6A8</a><a class="btn" href="index.html#top">Back to the overview</a></div>
   </section>
 
   <section id="contact" style="padding-top:0">
     <div class="contact rv">
       <p class="label" style="color:inherit;opacity:.8">Contact</p>
-      <h2>Questions or ideas? Let’s talk.</h2>
+      <h2>Questions, corrections or ideas? Let’s talk.</h2>
       <p class="addr">abogonie@g.UCLA.edu</p>
     </div>
     <footer>
@@ -75,5 +180,8 @@
   </section>
 </main>
 <script src="site.js" defer></script>
+<script src="popgen.js" defer></script>
+<script src="maturation.js" defer></script>
+<script src="species.js" defer></script>
 </body>
 </html>
