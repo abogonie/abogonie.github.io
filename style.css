@@ -230,7 +230,7 @@ details.data img { width: 100%; height: auto; display: block; margin-top: 14px; 
 .mat-grid figure { margin: 0; display: grid; gap: 8px; min-width: 0; justify-items: center; border: 1px solid var(--line); border-radius: 14px; background: var(--bg); padding: 12px; }
 .mat-grid svg { width: 100%; height: auto; max-width: 300px; display: block; }
 .mat-grid figcaption { font: 600 0.95rem/1.2 var(--font-body); text-align: center; }
-.nstroke { fill: none; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2; }
+.nstroke { fill: none; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.7; }
 .typ .nstroke { stroke: var(--accent); }
 .typ .soma { fill: var(--accent); }
 .ko .nstroke { stroke: var(--warn); }
@@ -460,3 +460,38 @@ footer a { text-decoration: none; } footer a:hover { text-decoration: underline;
 #projects .grid { grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr)); }
 @media (min-width: 1000px) { #projects .grid { grid-template-columns: repeat(4, 1fr); } }
 #projects .card h3 { font-size: 1.1rem; }
+
+/* ---- deficiency animation ---- */
+.defic { position: relative; padding-top: 118px; margin-top: 8px; }
+.defic-cv { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+.defic .strip { margin-top: 0; position: relative; z-index: 1; }
+.defic .flow::after { display: none; }
+.defic .strip .enz { position: relative; }
+.defic .strip .enz.blocked { border-color: var(--warn); color: var(--warn); background: color-mix(in srgb, var(--warn) 10%, var(--surface)); }
+.defic .strip .enz.blocked::before { content: "✕"; position: absolute; top: -9px; right: -6px; width: 20px; height: 20px; border-radius: 50%; background: var(--warn); color: var(--surface); display: grid; place-items: center; font-size: 11px; font-weight: 700; }
+.defic .strip .enz.on.blocked::after { animation: none; opacity: 0; }
+.lvl { display: inline-block; margin-top: 6px; padding: 3px 8px; border-radius: 999px; font: 700 0.65rem/1 var(--font-body); letter-spacing: .06em; text-transform: uppercase; }
+.lvl.hi { background: color-mix(in srgb, var(--warn) 16%, var(--surface)); color: var(--warn); }
+.lvl.lo { background: color-mix(in srgb, var(--muted) 16%, var(--surface)); color: var(--muted); }
+.defic-ctl { display: grid; gap: 14px; margin-top: 18px; }
+.defic-cap { min-height: 3em; max-width: 64ch; }
+@media (max-width: 760px) { .defic { padding-top: 0; padding-right: 128px; } }
+
+/* ---- home: science look ---- */
+.hero { position: relative; isolation: isolate; }
+.neuro { position: absolute; inset: -20px -40px; width: calc(100% + 80px); height: calc(100% + 40px); z-index: -1; pointer-events: none; -webkit-mask-image: radial-gradient(ellipse at 70% 40%, #000 20%, transparent 78%); mask-image: radial-gradient(ellipse at 70% 40%, #000 20%, transparent 78%); }
+.caps { display: flex; flex-wrap: wrap; gap: 8px; }
+.caps span { font: 600 0.78rem/1 var(--font-body); padding: 8px 12px; border-radius: 999px; border: 1px solid color-mix(in srgb, var(--accent) 35%, var(--line)); color: var(--accent); background: color-mix(in srgb, var(--accent) 6%, var(--surface)); }
+.first ul { margin: 6px 0 0; padding-left: 18px; display: grid; gap: 4px; font-weight: 600; }
+.glance { display: grid; gap: 0; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); border: 1px solid var(--line); border-radius: 20px; background: var(--surface); overflow: hidden; margin-top: 8px; }
+.glance div { padding: 18px 22px; border-left: 1px solid var(--line); display: grid; gap: 4px; }
+.glance div:first-child { border-left: 0; }
+.glance b { font: 700 clamp(1.4rem, 2.6vw, 2rem)/1.1 var(--font-display); color: var(--accent); }
+.glance span { font-size: 0.8rem; color: var(--muted); }
+.chain.five .flow { flex: 0 0 26px; min-width: 26px; }
+.chain.five .node { padding: 18px 16px; }
+.chain .node .step { font: 700 0.7rem/1 var(--font-body); letter-spacing: .12em; color: var(--accent); }
+.chain .node .where { font-size: 0.74rem; font-weight: 600; color: var(--accent); margin-top: 2px; }
+@media (max-width: 760px) { .glance div { border-left: 0; border-top: 1px solid var(--line); } .glance div:first-child { border-top: 0; } .neuro { inset: 0; width: 100%; height: 100%; } }
+.hero > .glance { grid-column: 1 / -1; }
+.trio { grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); } .tierbox { display: grid; gap: 12px; margin-top: 4px; } .tierbox .card h3 { font-size: 1rem; }

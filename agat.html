@@ -40,11 +40,19 @@
 </div>
 <aside class="hero-card" aria-label="Key numbers"><div class="hs"><b><span data-count="535662">535,662</span></b><span>All of Us whole genomes, with 807,162 gnomAD v4 exomes and genomes for comparison.</span></div><div class="hs"><b>1 in 5,600 to 1 in 20,600</b><span>Carrier frequency of qualifying <span class="gene">GATM</span> variants, depending on how strictly variants are classified.</span></div><div class="hs"><b>−9.6%</b><span>Lower serum creatinine in carriers of <span class="gene">GATM</span> loss-of-function variants (n = 34; p = 0.004).</span></div><div class="hs"><b>0</b><span>Participants carrying two qualifying <span class="gene">GATM</span> alleles, as expected for a disease this rare.</span></div></aside>
   </div>
-  <div class="strip rv" role="group" aria-label="Creatine pathway with this page highlighted"><span class="met">Arginine + glycine</span><i class="flow" style="--d:0s" aria-hidden="true"></i><a class="enz on" href="agat.html">AGAT<small>GATM</small></a><i class="flow" style="--d:0.5s" aria-hidden="true"></i><span class="met">Guanidinoacetate<small>GAA</small></span><i class="flow" style="--d:1s" aria-hidden="true"></i><a class="enz" href="gamt.html">GAMT<small>GAMT</small></a><i class="flow" style="--d:1.5s" aria-hidden="true"></i><span class="met">Creatine</span><i class="flow" style="--d:2s" aria-hidden="true"></i><a class="enz" href="slc6a8.html">SLC6A8<small>transporter</small></a><i class="flow" style="--d:2.5s" aria-hidden="true"></i><span class="met">Neuron</span></div>
+  <div class="defic rv" data-scene="agat"><div class="strip" role="group" aria-label="Creatine pathway with this page highlighted"><span class="met">Arginine + glycine</span><i class="flow" style="--d:0s" aria-hidden="true"></i><a class="enz on" href="agat.html">AGAT<small>GATM</small></a><i class="flow" style="--d:0.5s" aria-hidden="true"></i><span class="met">Guanidinoacetate<small>GAA</small></span><i class="flow" style="--d:1s" aria-hidden="true"></i><a class="enz" href="gamt.html">GAMT<small>GAMT</small></a><i class="flow" style="--d:1.5s" aria-hidden="true"></i><span class="met">Creatine</span><i class="flow" style="--d:2s" aria-hidden="true"></i><a class="enz" href="slc6a8.html">SLC6A8<small>transporter</small></a><i class="flow" style="--d:2.5s" aria-hidden="true"></i><span class="met">Neuron</span></div></div>
 
   <section>
     <div class="rv" style="display:grid;gap:18px"><div class="notice rv" role="note"><span aria-hidden="true">●</span><span><b>Preliminary.</b> These results come from a manuscript in preparation. They have not been peer reviewed or published, and the numbers may change.</span></div></div>
     <div style="height:24px"></div>
+    <div class="tierbox rv">
+      <p class="label">How variants are grouped on this page</p>
+      <div class="grid">
+        <div class="card"><span class="label">Step 1</span><h3>Confirmed pathogenic</h3><p>Listed as pathogenic or likely pathogenic in ClinVar, or reported in patients with the disease.</p></div>
+        <div class="card"><span class="label">Step 2 · adds to step 1</span><h3>Likely pathogenic</h3><p>Variants that should stop the gene working (a premature stop, frameshift, splice-site or start-loss change) but have not been reported in patients.</p></div>
+        <div class="card"><span class="label">Step 3 · adds to steps 1 and 2</span><h3>In silico pathogenic</h3><p>Missense or splice changes that computer tools (REVEL and SpliceAI) predict to be damaging, with no clinical classification yet.</p></div>
+      </div>
+    </div>
 
   </section>
 
@@ -66,7 +74,7 @@
     </div>
     <div class="panel rv">
       <h3>Carriers by variant tier</h3>
-      <p class="sub">Tier 1 is established pathogenic. Tier 2 adds predicted loss-of-function. Tier 3 adds predicted damaging missense and splice variants.</p>
+      <p class="sub">Each step adds a looser class of variant: confirmed pathogenic, then likely pathogenic, then in silico pathogenic.</p>
       <div data-chart="agat-tiers"></div>
     </div>
     <p class="fine rv" style="margin-top:14px">All of Us and gnomAD v4 agree closely at every tier (p ≥ 0.68), and no single GATM variant was carried by 20 or more All of Us participants.</p>
@@ -117,5 +125,6 @@
 <script src="site.js" defer></script>
 <script src="subnav.js" defer></script>
 <script src="popgen.js" defer></script>
+<script src="deficiency.js" defer></script>
 </body>
 </html>

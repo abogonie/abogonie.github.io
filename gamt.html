@@ -38,13 +38,21 @@
 <h1>GAMT deficiency: common as a carrier state, rare as a diagnosis, and under-counted outside Europe.</h1>
 <p class="lede">Guanidinoacetate N-methyltransferase (GAMT) turns guanidinoacetate into creatine. Without it the brain is short of creatine and guanidinoacetate builds up. GAMT deficiency was added to the US Recommended Uniform Screening Panel in 2023.</p>
 </div>
-<aside class="hero-card" aria-label="Key numbers"><div class="hs"><b>1 in 430 to 1 in 720</b><span>Carrier frequency of qualifying <span class="gene">GAMT</span> variants in All of Us, depending on tier.</span></div><div class="hs"><b>2 to 5</b><span>Affected US births per year predicted from All of Us, in line with newborn screening.</span></div><div class="hs"><b>+82% to +171%</b><span>More qualifying alleles in non-European ancestry groups when variants without a prior classification are included, vs +51% in European participants.</span></div><div class="hs"><b>27.2%</b><span>Share of qualifying alleles carried by a single splice variant, <span class="gene">GAMT</span> c.327G&gt;A.</span></div></aside>
+<aside class="hero-card" aria-label="Key numbers"><div class="hs"><b>1 in 430 to 1 in 720</b><span>Carrier frequency of qualifying <span class="gene">GAMT</span> variants in All of Us, depending on how strictly variants are classified.</span></div><div class="hs"><b>2 to 5</b><span>Affected US births per year predicted from All of Us, in line with newborn screening.</span></div><div class="hs"><b>+82% to +171%</b><span>More qualifying alleles in non-European ancestry groups when variants without a prior classification are included, vs +51% in European participants.</span></div><div class="hs"><b>27.2%</b><span>Share of qualifying alleles carried by a single splice variant, <span class="gene">GAMT</span> c.327G&gt;A.</span></div></aside>
   </div>
-  <div class="strip rv" role="group" aria-label="Creatine pathway with this page highlighted"><span class="met">Arginine + glycine</span><i class="flow" style="--d:0s" aria-hidden="true"></i><a class="enz" href="agat.html">AGAT<small>GATM</small></a><i class="flow" style="--d:0.5s" aria-hidden="true"></i><span class="met">Guanidinoacetate<small>GAA</small></span><i class="flow" style="--d:1s" aria-hidden="true"></i><a class="enz on" href="gamt.html">GAMT<small>GAMT</small></a><i class="flow" style="--d:1.5s" aria-hidden="true"></i><span class="met">Creatine</span><i class="flow" style="--d:2s" aria-hidden="true"></i><a class="enz" href="slc6a8.html">SLC6A8<small>transporter</small></a><i class="flow" style="--d:2.5s" aria-hidden="true"></i><span class="met">Neuron</span></div>
+  <div class="defic rv" data-scene="gamt"><div class="strip" role="group" aria-label="Creatine pathway with this page highlighted"><span class="met">Arginine + glycine</span><i class="flow" style="--d:0s" aria-hidden="true"></i><a class="enz" href="agat.html">AGAT<small>GATM</small></a><i class="flow" style="--d:0.5s" aria-hidden="true"></i><span class="met">Guanidinoacetate<small>GAA</small></span><i class="flow" style="--d:1s" aria-hidden="true"></i><a class="enz on" href="gamt.html">GAMT<small>GAMT</small></a><i class="flow" style="--d:1.5s" aria-hidden="true"></i><span class="met">Creatine</span><i class="flow" style="--d:2s" aria-hidden="true"></i><a class="enz" href="slc6a8.html">SLC6A8<small>transporter</small></a><i class="flow" style="--d:2.5s" aria-hidden="true"></i><span class="met">Neuron</span></div></div>
 
   <section>
     <div class="rv" style="display:grid;gap:18px"><div class="notice rv" role="note"><span aria-hidden="true">●</span><span><b>Preliminary.</b> These results come from a manuscript in preparation. They have not been peer reviewed or published, and the numbers may change.</span></div></div>
     <div style="height:24px"></div>
+    <div class="tierbox rv">
+      <p class="label">How variants are grouped on this page</p>
+      <div class="grid">
+        <div class="card"><span class="label">Step 1</span><h3>Confirmed pathogenic</h3><p>Listed as pathogenic or likely pathogenic in ClinVar, or reported in patients with the disease.</p></div>
+        <div class="card"><span class="label">Step 2 · adds to step 1</span><h3>Likely pathogenic</h3><p>Variants that should stop the gene working (a premature stop, frameshift, splice-site or start-loss change) but have not been reported in patients.</p></div>
+        <div class="card"><span class="label">Step 3 · adds to steps 1 and 2</span><h3>In silico pathogenic</h3><p>Missense or splice changes that computer tools (REVEL and SpliceAI) predict to be damaging, with no clinical classification yet.</p></div>
+      </div>
+    </div>
 
   </section>
 
@@ -55,7 +63,7 @@
     </div>
     <div class="panel rv">
       <h3>The most common GAMT variants in All of Us</h3>
-      <p class="sub">Share of all 808 established pathogenic and predicted loss-of-function alleles. Ten variants, each with 20 or more carriers, make up 69.7%.</p>
+      <p class="sub">Share of all 808 confirmed and likely pathogenic alleles. Ten variants, each with 20 or more carriers, make up 69.7%.</p>
       <div data-chart="gamt-variants"></div>
     </div>
     <p class="fine rv" style="margin-top:14px">c.327G&gt;A is synonymous but alters splicing of exon 2. c.491G&gt;A and c.224C&gt;T have conflicting ClinVar classifications and are included because they have been reported in patients.</p>
@@ -68,7 +76,7 @@
     </div>
     <div class="two">
       <div class="prose rv">
-        <p>Carrier estimates for GAMT deficiency have come from about 10,000 people, mostly of European ancestry. In All of Us, established pathogenic variants gave the highest carrier frequency in European-ancestry participants and lower frequencies in every other group.</p>
+        <p>Carrier estimates for GAMT deficiency have come from about 10,000 people, mostly of European ancestry. In All of Us, confirmed pathogenic variants gave the highest carrier frequency in European-ancestry participants and lower frequencies in every other group.</p>
         <p>Much of that gap is a classification gap. Variants that nobody has classified yet add 51% more qualifying alleles in European participants but 82% to 171% more in the other groups. Estimates built only on known pathogenic variants therefore understate the burden outside Europe.</p>
       </div>
       <div class="panel rv"><h3>GAMT carrier frequency by genetic ancestry</h3><div data-chart="gamt-ancestry"></div></div>
@@ -81,7 +89,7 @@
       <h2>Closer to what screening finds</h2>
     </div>
     <div class="prose rv">
-      <p>Pilot newborn screening in Utah and New York found two cases among 811,310 babies. Established pathogenic variants in All of Us would predict 0.39 cases, so the two observed are 5.1 times more than expected (p = 0.059). Adding predicted damaging variants raises the expectation to 1.10 cases, so the two observed are 1.8 times more than expected (p = 0.30).</p>
+      <p>Pilot newborn screening in Utah and New York found two cases among 811,310 babies. Confirmed pathogenic variants in All of Us would predict 0.39 cases, so the two observed are 5.1 times more than expected (p = 0.059). Adding in silico pathogenic variants raises the expectation to 1.10 cases, so the two observed are 1.8 times more than expected (p = 0.30).</p>
       <p class="m">Neither difference is statistically significant, but the pattern suggests that known variants alone miss part of the disease burden.</p>
     </div>
   </section>
@@ -187,5 +195,6 @@
 <script src="popgen.js" defer></script>
 <script src="maturation.js" defer></script>
 <script src="species.js" defer></script>
+<script src="deficiency.js" defer></script>
 </body>
 </html>
