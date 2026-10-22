@@ -3,11 +3,11 @@
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var css = function (n) { return getComputedStyle(document.documentElement).getPropertyValue(n).trim(); };
   var SCENES = {
-    agat: { blocked: 1, pile: 0, cap: 12, lvl: { 2: "lo", 4: "lo", 6: "lo" },
+    agat: { blocked: 1, pile: 0, cap: 150, lvl: { 2: "lo", 4: "lo", 6: "lo" },
       def: "Without AGAT the pathway stops at its first step. Very little guanidinoacetate is made, so creatine is low." },
-    gamt: { blocked: 3, pile: 2, cap: 72, lvl: { 2: "hi", 4: "lo", 6: "lo" },
+    gamt: { blocked: 3, pile: 2, cap: 150, lvl: { 2: "hi", 4: "lo", 6: "lo" },
       def: "Without GAMT, guanidinoacetate cannot be turned into creatine. It piles up while creatine runs low." },
-    slc: { blocked: 5, pile: 4, cap: 64, crn: true, lvl: { 4: "hi", 6: "lo" },
+    slc: { blocked: 5, pile: 4, cap: 150, crn: true, lvl: { 4: "hi", 6: "lo" },
       def: "Without the transporter, creatine is made but cannot enter neurons. It builds up outside the cell, and more of it is converted to creatinine. Guanidinoacetate stays normal." }
   };
   var HEALTHY = "In a healthy cell the pathway runs end to end: arginine and glycine become guanidinoacetate, then creatine, which neurons take up.";
@@ -42,8 +42,8 @@
       colors();
     }
     function slot(i) {
-      var c = C[sc.pile], a = i * 2.39996, rr = 5.4 * Math.sqrt(i + 1);
-      var cx = vertical ? C[sc.pile].right + 56 : c.x, cy = vertical ? c.y : c.top - 52;
+      var c = C[sc.pile], a = i * 2.39996, rr = (vertical ? 4.6 : 6.4) * Math.sqrt(i + 1);
+      var cx = vertical ? C[sc.pile].right + 78 : c.x, cy = vertical ? c.y : c.top - 98;
       return [cx + Math.cos(a) * rr, cy + Math.sin(a) * rr];
     }
     function reset() {
@@ -56,18 +56,19 @@
     function typeAt(k) { return k < 2 ? "sub" : k < 4 ? "gaa" : "cr"; }
     function step(dt) {
       acc += dt;
-      if (acc > 0.2) { acc = 0; parts.push({ k: 0, t: 0, type: "sub", st: "move", a: 1, j: Math.random() * 6.28 }); }
+      if (acc > (deficient ? 0.1 : 0.2)) { acc = 0; parts.push({ k: 0, t: 0, type: "sub", st: "move", a: 1, j: Math.random() * 6.28 }); }
       parts.forEach(function (p) {
         if (p.st === "move") {
           p.t += dt * 0.8;
           if (p.t >= 1) {
             p.k += 1; p.t = 0;
             if (p.k % 2 === 1 && deficient && p.k === sc.blocked) {
-              if (pileN < sc.cap) { p.st = "pile"; p.k = sc.pile; p.i = pileN++; pileList.push(p); p.t = 0; } else { p.st = "fade"; p.k = sc.pile; }
+              if (pileN < sc.cap) { p.st = "pile"; p.sx = C[p.k - 1].x; p.sy = C[p.k - 1].y; p.k = sc.pile; p.i = pileN++; pileList.push(p); p.t = 0; p.g = 0; } else { p.st = "fade"; p.k = sc.pile; }
             } else if (p.k === 6) { p.st = "fade"; }
             else if (p.k % 2 === 0) { p.type = typeAt(p.k); }
           }
-        } else if (p.st === "fade") { p.a -= dt * 1.6; }
+        } else if (p.st === "pile") { p.g = (p.g || 0) + dt * 1.3; }
+        else if (p.st === "fade") { p.a -= dt * 1.6; }
       });
       if (sc.crn && deficient && pileList.length > 6) {
         tConv += dt; if (tConv > 0.8) { tConv = 0; var q = pileList[Math.floor(Math.random() * pileList.length)]; if (q.type === "cr") q.type = "crn"; }
@@ -75,7 +76,7 @@
       parts = parts.filter(function (p) { return p.a > 0; });
     }
     function pos(p) {
-      if (p.st === "pile") { var s = slot(p.i); return [s[0], s[1]]; }
+      if (p.st === "pile") { var s = slot(p.i), g = Math.min(1, p.g || 0), e = 1 - Math.pow(1 - g, 3); return [p.sx + (s[0] - p.sx) * e, p.sy + (s[1] - p.sy) * e]; }
       var a = C[p.k], b = C[Math.min(6, p.k + 1)];
       if (p.st === "fade") return [a.x, a.y];
       return [a.x + (b.x - a.x) * p.t, a.y + (b.y - a.y) * p.t];
@@ -85,7 +86,7 @@
       parts.forEach(function (p) {
         var q = pos(p), j = p.st === "pile" ? Math.sin(now / 520 + p.j) * 1.3 : 0;
         ctx.globalAlpha = Math.max(0, p.a) * (p.st === "pile" ? 0.92 : 0.95);
-        ctx.fillStyle = col[p.type]; ctx.beginPath(); ctx.arc(q[0] + j, q[1] + (p.st === "pile" ? Math.cos(now / 610 + p.j) * 1.3 : 0), p.st === "pile" ? 4.6 : 4, 0, 6.2832); ctx.fill();
+        ctx.fillStyle = col[p.type]; ctx.beginPath(); ctx.arc(q[0] + j, q[1] + (p.st === "pile" ? Math.cos(now / 610 + p.j) * 1.3 : 0), p.st === "pile" ? 5.2 : 4, 0, 6.2832); ctx.fill();
       });
       ctx.globalAlpha = 1;
     }
