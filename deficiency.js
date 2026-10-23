@@ -57,7 +57,7 @@
       mon.style.cssText = "left:" + left.toFixed(1) + "px;top:" + top.toFixed(1) + "px;width:" + w + "px;height:" + h.toFixed(1) + "px";
       NZ = [left + 3 * k, top + 82 * k];
       if (vertical) { var cxm = c.x; PAD = { dir: 1, L: 52, px: cxm - 30, py: e.top - 15, rest: 12, up: -38, ty: e.top - 15 }; PAD.tx = PAD.px; }
-      else { var el0 = e.x - e.w / 2; PAD = { dir: -1, L: 54, px: el0 - 8, py: c.y + 16, rest: 24, up: -40 }; PAD.tx = PAD.px - PAD.L * Math.cos(PAD.rest * Math.PI / 180) * 0.9; PAD.ty = PAD.py; }
+      else { var el0 = e.x - e.w / 2; PAD = { dir: -1, L: 44, px: el0 - 22, py: c.y + 16, rest: 24, up: -40 }; PAD.tx = PAD.px - PAD.L * Math.cos(PAD.rest * Math.PI / 180) * 0.9; PAD.ty = PAD.py; }
       var key = [g.Bl, g.Br, g.Ff, PAD.px, PAD.py].map(Math.round).join(",");
       if (key !== geoKey) { geoKey = key; parts = parts.filter(function (p) { return p.st !== "ball" && p.st !== "suck"; }); pileN = 0; pileList = []; }
     }
@@ -179,13 +179,31 @@
         ctx.restore();
       }
       if (deficient && PAD) {
-        var a = padAngle(), dx = PAD.dir * Math.cos(a), dy = Math.sin(a), tipx = PAD.px + dx * PAD.L, tipy = PAD.py + dy * PAD.L;
-        ctx.save(); ctx.lineCap = "round"; ctx.globalAlpha = 1;
-        ctx.strokeStyle = "#7a1f2b"; ctx.lineWidth = 13; ctx.beginPath(); ctx.moveTo(PAD.px, PAD.py); ctx.lineTo(tipx, tipy); ctx.stroke();
-        ctx.strokeStyle = "#ef4b5b"; ctx.lineWidth = 10; ctx.beginPath(); ctx.moveTo(PAD.px, PAD.py); ctx.lineTo(tipx, tipy); ctx.stroke();
-        ctx.strokeStyle = "rgba(255,255,255,.55)"; ctx.lineWidth = 2.2; ctx.beginPath(); ctx.moveTo(PAD.px + dy * 2.5, PAD.py - dx * 2.5 * PAD.dir * -1); ctx.lineTo(tipx + dy * 2.5, tipy - dx * 2.5 * PAD.dir * -1); ctx.stroke();
-        ctx.fillStyle = "#ffd23f"; ctx.beginPath(); ctx.arc(PAD.px, PAD.py, 8.5, 0, 6.2832); ctx.fill(); ctx.strokeStyle = "#7a1f2b"; ctx.lineWidth = 2; ctx.stroke();
-        ctx.fillStyle = "#7a1f2b"; ctx.beginPath(); ctx.arc(PAD.px, PAD.py, 2.6, 0, 6.2832); ctx.fill();
+        var a = padAngle(), ph0 = function (ang) { return Math.atan2(Math.sin(ang), PAD.dir * Math.cos(ang)); };
+        var dx = PAD.dir * Math.cos(a), dy = Math.sin(a), nx = -dy, ny = dx, r1 = 9.5, r2 = 4.6, L = PAD.L;
+        var tipx = PAD.px + dx * L, tipy = PAD.py + dy * L;
+        ctx.save(); ctx.lineCap = "round"; ctx.lineJoin = "round";
+        /* swing range guide */
+        var g1 = ph0(PAD.rest * Math.PI / 180), g2 = ph0(PAD.up * Math.PI / 180);
+        ctx.globalAlpha = 0.28; ctx.strokeStyle = col.sub; ctx.lineWidth = 1.5; ctx.setLineDash([2, 5]); ctx.beginPath();
+        for (var s = 0; s <= 16; s++) { var gg = g1 + (g2 - g1) * s / 16, ax = PAD.px + Math.cos(gg) * (L + 7), ay = PAD.py + Math.sin(gg) * (L + 7); if (s) ctx.lineTo(ax, ay); else ctx.moveTo(ax, ay); }
+        ctx.stroke(); ctx.setLineDash([]); ctx.globalAlpha = 1;
+        /* mounting plate */
+        ctx.fillStyle = "#1f2f57"; ctx.beginPath(); ctx.arc(PAD.px, PAD.py, 14, 0, 6.2832); ctx.fill();
+        /* tapered flipper body */
+        var body = function (grow, fill) {
+          ctx.fillStyle = fill; ctx.beginPath();
+          ctx.moveTo(PAD.px + nx * (r1 + grow), PAD.py + ny * (r1 + grow)); ctx.lineTo(tipx + nx * (r2 + grow), tipy + ny * (r2 + grow));
+          ctx.arc(tipx, tipy, r2 + grow, Math.atan2(ny, nx), Math.atan2(ny, nx) + Math.PI, false);
+          ctx.lineTo(PAD.px - nx * (r1 + grow), PAD.py - ny * (r1 + grow));
+          ctx.arc(PAD.px, PAD.py, r1 + grow, Math.atan2(-ny, -nx), Math.atan2(-ny, -nx) + Math.PI, false); ctx.closePath(); ctx.fill();
+        };
+        body(2, "#5b1220"); body(0, "#e23d52");
+        /* highlight and rubber edge */
+        ctx.strokeStyle = "rgba(255,255,255,.55)"; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(PAD.px + nx * r1 * 0.45 + dx * 6, PAD.py + ny * r1 * 0.45 + dy * 6); ctx.lineTo(tipx + nx * r2 * 0.4 - dx * 4, tipy + ny * r2 * 0.4 - dy * 4); ctx.stroke();
+        /* hub */
+        ctx.fillStyle = "#f4f6fb"; ctx.beginPath(); ctx.arc(PAD.px, PAD.py, 6.2, 0, 6.2832); ctx.fill();
+        ctx.fillStyle = "#1f2f57"; ctx.beginPath(); ctx.arc(PAD.px, PAD.py, 2.4, 0, 6.2832); ctx.fill();
         ctx.restore();
       }
       parts.forEach(function (p) {

@@ -21,7 +21,7 @@
     { n: "Creatine synthesis", a: 24, b: 29, s: "Translation and function. Ribosomes translate GAMT mRNA. GAMT methylates guanidinoacetate (GAA) using S-adenosylmethionine (SAM) to form creatine. AAV-mediated GAMT expression restored creatine and lowered GAA in a Gamt-deficient mouse model [8].", l: "Neurons start making the missing creatine, and the toxic GAA falls." }
   ];
   var svgHost = document.getElementById("aavSvg"), chipsHost = document.getElementById("aavChips"), story = document.getElementById("aavStory"), playBtn = document.getElementById("aavPlay");
-  var svg = el("svg", { viewBox: "0 0 960 540", role: "img", "aria-label": "Schematic of an AAV capsid binding a neuron, entering by endocytosis, trafficking to the nucleus, releasing a GAMT expression cassette, and producing GAMT enzyme that converts guanidinoacetate to creatine." }, svgHost);
+  var svg = el("svg", { width: "100%", height: "100%", preserveAspectRatio: "xMidYMid meet", viewBox: "0 0 960 540", role: "img", "aria-label": "Schematic of an AAV capsid binding a neuron, entering by endocytosis, trafficking to the nucleus, releasing a GAMT expression cassette, and producing GAMT enzyme that converts guanidinoacetate to creatine." }, svgHost);
   var defs = el("defs", {}, svg);
   var clip = el("clipPath", { id: "aavClip" }, defs); el("rect", { x: 0, y: 0, width: 960, height: 540, rx: 20 }, clip);
   var root = el("g", { "clip-path": "url(#aavClip)" }, svg);
