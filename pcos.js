@@ -55,7 +55,7 @@
         if (d.case_ && e > 0.9) { var p = (Math.sin(now / 700 + d.ph) + 1) / 2; ctx.globalAlpha = 0.3 + 0.55 * p; ctx.strokeStyle = fg; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.arc(x, y, rd + 2 + 3 * p, 0, 6.283); ctx.stroke(); }
       });
       ctx.globalAlpha = 1; ctx.fillStyle = fg; ctx.font = "600 12px 'Open Sans', Arial, sans-serif"; ctx.textAlign = "center";
-      G.forEach(function (gg, i) { ctx.globalAlpha = Math.max(0, e * 1.4 - .4); var C = geo[i]; if (C[2] > 22 || W < 680) ctx.fillText(gg.a.toUpperCase(), C[0], C[1] + C[2] + 18); }); ctx.globalAlpha = 1;
+      G.forEach(function (gg, i) { ctx.globalAlpha = Math.max(0, e * 1.4 - .4); var C = geo[i]; ctx.fillText(gg.a.toUpperCase(), C[0], C[1] + C[2] + 18); }); ctx.globalAlpha = 1;
     }
     function loop(now) { raf = 0; if (!visible || document.hidden) { lastNow = 0; return; } draw(now); raf = requestAnimationFrame(loop); }
     function go() { if (!reduce && !raf) raf = requestAnimationFrame(loop); }
