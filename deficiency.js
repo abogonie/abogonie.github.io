@@ -119,25 +119,20 @@
     function step(dt) {
       var run = phase === 0; if (run) acc += dt;
       if (acc > (deficient ? 0.3 : 0.5)) { acc = 0; if (!(reduce && deficient && pileN >= sc.cap)) parts.push({ k: 0, t: 0, type: "sub", st: "move", a: 1, j: Math.random() * 6.28, ln: (Math.random() - 0.5) * 2, w2: Math.random() * 6.28 }); }
-      if (swingT >= 0) { swingT += dt; if (swingT > 0.5) swingT = -1; }
       parts.forEach(function (p) {
         if (p.st === "move") {
           if (!run) return;
           p.t += dt * 0.36;
-          if (deficient && p.k === sc.pile && GEO && PAD) {
-            var q0 = pos(p);
-            if (vertical ? q0[1] >= PAD.ty - 22 : q0[0] >= PAD.tx) {
-              if (swingT >= 0 && swingT < 0.16) { p.t -= dt * 0.36; return; }
-              p.st = "kick"; p.kt = 0; p.k0 = q0; swingT = 0; return;
-            }
+          if (deficient && p.k === sc.pile && GEO) {
+            var q0 = pos(p), E = C[sc.blocked];
+            if (vertical ? q0[1] + 4.5 >= E.top : q0[0] + 4.5 >= E.x - E.w / 2) { launch(p, q0); return; }
           }
           if (p.t >= 1) {
             p.k += 1; p.t = 0;
             if (p.k === 6) { p.st = "fade"; }
             else if (p.k % 2 === 0) { p.type = typeAt(p.k); }
           }
-        } else if (p.st === "kick") { p.kt += dt; if (p.kt >= 0.09) launch(p, padSurf(padAngle())); }
-        else if (p.st === "suck") { p.u += dt / 1.1; if (p.u >= 1) p.a = 0; }
+        } else if (p.st === "suck") { p.u += dt / 1.1; if (p.u >= 1) p.a = 0; }
         else if (p.st === "fade") { p.a -= dt * 1.6; }
       });
       if (GEO && phase < 2) physics(dt);
@@ -154,7 +149,6 @@
     }
     function pos(p) {
       if (p.st === "ball") return [p.x, p.y];
-      if (p.st === "kick") { var s = Math.min(1, p.kt / 0.07), tp = padSurf(padAngle()), es = 1 - Math.pow(1 - s, 2); return [p.k0[0] + (tp[0] - p.k0[0]) * es, p.k0[1] + (tp[1] - p.k0[1]) * es]; }
       if (p.st === "suck") {
         if (p.u <= 0) return [p.fx, p.fy];
         var e2 = p.u * p.u, dx = NZ[0] - p.fx, dy = NZ[1] - p.fy, L = Math.hypot(dx, dy) || 1, bend = Math.sin(Math.PI * e2) * 22 * (p.ln || 1);
@@ -176,34 +170,6 @@
         ctx.globalAlpha = al * 0.55; ctx.strokeStyle = "#fff"; ctx.lineWidth = 1.6; ctx.beginPath(); ctx.moveTo(g.Bl - 2.5, g.Wt + 4); ctx.lineTo(g.Bl - 2.5, g.Ff); ctx.moveTo(g.Br - 2.5, g.Wt + 4); ctx.lineTo(g.Br - 2.5, g.Ff); ctx.stroke();
         ctx.globalAlpha = al; ctx.fillStyle = col.gaa; ctx.beginPath(); ctx.roundRect ? ctx.roundRect(g.Bl - 8, g.Ff + 3, g.Br - g.Bl + 16, 7, 3.5) : ctx.rect(g.Bl - 8, g.Ff + 3, g.Br - g.Bl + 16, 7); ctx.fill();
         for (var q = 0; q < 4; q++) { var on = Math.floor(now / 420 + q) % 2 === 0; ctx.globalAlpha = al * (on ? 1 : 0.35); ctx.fillStyle = q % 2 ? col.gaa : "#ffd23f"; ctx.beginPath(); ctx.arc(q < 2 ? g.Bl - 1 : g.Br + 1, g.Wt + 8 + (q % 2) * 16, 3, 0, 6.2832); ctx.fill(); }
-        ctx.restore();
-      }
-      if (deficient && PAD) {
-        var a = padAngle(), ph0 = function (ang) { return Math.atan2(Math.sin(ang), PAD.dir * Math.cos(ang)); };
-        var dx = PAD.dir * Math.cos(a), dy = Math.sin(a), nx = -dy, ny = dx, r1 = 9.5, r2 = 4.6, L = PAD.L;
-        var tipx = PAD.px + dx * L, tipy = PAD.py + dy * L;
-        ctx.save(); ctx.lineCap = "round"; ctx.lineJoin = "round";
-        /* swing range guide */
-        var g1 = ph0(PAD.rest * Math.PI / 180), g2 = ph0(PAD.up * Math.PI / 180);
-        ctx.globalAlpha = 0.28; ctx.strokeStyle = col.sub; ctx.lineWidth = 1.5; ctx.setLineDash([2, 5]); ctx.beginPath();
-        for (var s = 0; s <= 16; s++) { var gg = g1 + (g2 - g1) * s / 16, ax = PAD.px + Math.cos(gg) * (L + 7), ay = PAD.py + Math.sin(gg) * (L + 7); if (s) ctx.lineTo(ax, ay); else ctx.moveTo(ax, ay); }
-        ctx.stroke(); ctx.setLineDash([]); ctx.globalAlpha = 1;
-        /* mounting plate */
-        ctx.fillStyle = "#1f2f57"; ctx.beginPath(); ctx.arc(PAD.px, PAD.py, 14, 0, 6.2832); ctx.fill();
-        /* tapered flipper body */
-        var body = function (grow, fill) {
-          ctx.fillStyle = fill; ctx.beginPath();
-          ctx.moveTo(PAD.px + nx * (r1 + grow), PAD.py + ny * (r1 + grow)); ctx.lineTo(tipx + nx * (r2 + grow), tipy + ny * (r2 + grow));
-          ctx.arc(tipx, tipy, r2 + grow, Math.atan2(ny, nx), Math.atan2(ny, nx) + Math.PI, false);
-          ctx.lineTo(PAD.px - nx * (r1 + grow), PAD.py - ny * (r1 + grow));
-          ctx.arc(PAD.px, PAD.py, r1 + grow, Math.atan2(-ny, -nx), Math.atan2(-ny, -nx) + Math.PI, false); ctx.closePath(); ctx.fill();
-        };
-        body(2, "#5b1220"); body(0, "#e23d52");
-        /* highlight and rubber edge */
-        ctx.strokeStyle = "rgba(255,255,255,.55)"; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(PAD.px + nx * r1 * 0.45 + dx * 6, PAD.py + ny * r1 * 0.45 + dy * 6); ctx.lineTo(tipx + nx * r2 * 0.4 - dx * 4, tipy + ny * r2 * 0.4 - dy * 4); ctx.stroke();
-        /* hub */
-        ctx.fillStyle = "#f4f6fb"; ctx.beginPath(); ctx.arc(PAD.px, PAD.py, 6.2, 0, 6.2832); ctx.fill();
-        ctx.fillStyle = "#1f2f57"; ctx.beginPath(); ctx.arc(PAD.px, PAD.py, 2.4, 0, 6.2832); ctx.fill();
         ctx.restore();
       }
       parts.forEach(function (p) {
