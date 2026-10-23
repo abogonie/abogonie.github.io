@@ -46,9 +46,9 @@
     function placeMon() {
       var c = C[sc.pile], e = C[sc.blocked], w = vertical ? 78 : 104, h = w * 128 / 120, k = w / 120, left, top, g = {};
       if (vertical) {
-        g.Bl = c.right + 8; g.Br = W - 4; g.Ff = e.top - 2; g.near = g.Bl;
+        g.Bl = c.right + 8; g.Br = W - 4; g.Ff = e.top - 10; g.near = g.Bl;
       } else {
-        var bw = Math.min(172, Math.max(c.w, 152)); g.Bl = c.x - bw / 2; g.Br = c.x + bw / 2; g.Ff = c.top - 2; g.near = g.Br;
+        var bw = Math.min(172, Math.max(c.w, 152)); g.Bl = c.x - bw / 2; g.Br = c.x + bw / 2; g.Ff = c.top - 10; g.near = g.Br;
       }
       g.Bl = Math.max(g.Bl, 6); g.Br = Math.min(g.Br, W - 6);
       var per = Math.max(4, Math.floor((g.Br - g.Bl - 6) / (RB * 2))), rows = Math.ceil(sc.cap / per);
@@ -115,7 +115,7 @@
       cap.textContent = deficient ? sc.def : HEALTHY;
       bH.setAttribute("aria-pressed", String(!deficient)); bD.setAttribute("aria-pressed", String(deficient));
     }
-    function typeAt(k) { return k < 2 ? "sub" : k < 4 ? "gaa" : "cr"; }
+    function typeAt(k) { return k < 1 ? "sub" : k < 3 ? "gaa" : "cr"; }
     function step(dt) {
       var run = phase === 0; if (run) acc += dt;
       if (acc > (deficient ? 0.3 : 0.5)) { acc = 0; if (!(reduce && deficient && pileN >= sc.cap)) parts.push({ k: 0, t: 0, s: Math.random() < 0.5, type: "sub", st: "move", a: 1, j: Math.random() * 6.28, ln: (Math.random() - 0.5) * 2, w2: Math.random() * 6.28 }); }
@@ -130,7 +130,7 @@
           if (p.t >= 1) {
             p.k += 1; p.t = 0;
             if (p.k === 6) { p.st = "fade"; }
-            else if (p.k % 2 === 0) { p.type = typeAt(p.k); }
+            else if (p.k % 2 === 1) { p.type = typeAt(p.k); }
           }
         } else if (p.st === "suck") { p.u += dt / 1.1; if (p.u >= 1) p.a = 0; }
         else if (p.st === "fade") { p.a -= dt * 1.6; }
