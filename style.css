@@ -462,7 +462,7 @@ footer a { text-decoration: none; } footer a:hover { text-decoration: underline;
 #projects .card h3 { font-size: 1.1rem; }
 
 /* ---- deficiency animation ---- */
-.defic { position: relative; padding-top: 205px; margin-top: 8px; }
+.defic { position: relative; overflow-x: clip; padding-top: 205px; margin-top: 8px; }
 .defic-cv { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
 .defic .strip { margin-top: 0; position: relative; z-index: 1; }
 .defic .flow::after { display: none; }
