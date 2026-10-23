@@ -579,3 +579,38 @@ footer a { text-decoration: none; } footer a:hover { text-decoration: underline;
 .refs li:target { color: var(--fg); }
 .glance b span { font: inherit; color: inherit; }
 .defic .strip .enz:not(.blocked) { background: var(--surface); }
+
+.aav-meters { display: none; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.aav-meters div { display: grid; gap: 4px; }
+.aav-meters span { font: 600 .72rem/1.2 var(--font-body); color: var(--muted); }
+.aav-meters i { display: block; height: 8px; border-radius: 4px; background: var(--line); overflow: hidden; }
+.aav-meters b { display: block; height: 100%; width: 0; border-radius: 4px; }
+@media (max-width: 640px) {
+  .aav { padding: 12px; gap: 12px; }
+  .aav-meters { display: grid; }
+  .aav .chip { padding: 9px 12px 9px 8px; font-size: .82rem; min-height: 40px; }
+  .aav-bar .btn { width: 100%; justify-content: center; min-height: 44px; }
+  .aav-bar { flex-direction: column-reverse; align-items: stretch; }
+  .aav-story { font-size: .95rem; min-height: 9em; }
+}
+
+/* pathway: horizontal on wide screens, vertical on phones */
+.pathway.pv { display: none; }
+@media (max-width: 640px) {
+  .pathway.ph { display: none; }
+  .pathway.pv { display: block; overflow: visible; padding-inline: 12px; }
+  .pathway.pv svg { min-width: 0; max-width: 340px; margin-inline: auto; }
+}
+
+/* ---- touch targets on phones ---- */
+@media (max-width: 640px) {
+  .links a { display: inline-flex; align-items: center; min-height: 40px; padding-inline: 4px; }
+  .theme { width: 40px; height: 40px; }
+  .subnav a { padding: 11px 14px; }
+  .seg span { padding: 12px 15px; }
+  .defic .seg button, .seg button { min-height: 40px; padding-block: 11px; }
+  details.data summary, .talks a, .video-note a { display: inline-block; padding-block: 10px; }
+  footer a { display: inline-block; padding: 8px 2px; }
+  .btn { min-height: 44px; }
+  input[type="range"] { min-height: 32px; }
+}

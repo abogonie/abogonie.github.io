@@ -6,7 +6,7 @@
   var W = 0, H = 0, dpr = 1, nodes = [], pulses = [], raf = 0, last = 0, visible = true, accent = "#1d5bd8";
   function colors() { accent = getComputedStyle(document.documentElement).getPropertyValue("--accent").trim() || accent; }
   function init() {
-    var r = host.getBoundingClientRect(); W = r.width; H = r.height; dpr = Math.min(2, window.devicePixelRatio || 1);
+    var r = host.getBoundingClientRect(); W = r.width; H = r.height; dpr = Math.min(W < 640 ? 1.5 : 2, window.devicePixelRatio || 1);
     cv.width = W * dpr; cv.height = H * dpr; cv.style.width = W + "px"; cv.style.height = H + "px"; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     var n = Math.max(18, Math.min(60, Math.round(W * H / 14000)));
     nodes = []; for (var i = 0; i < n; i++) nodes.push({ x: Math.random() * W, y: Math.random() * H, vx: (Math.random() - .5) * 8, vy: (Math.random() - .5) * 8, r: 1.6 + Math.random() * 1.8 });

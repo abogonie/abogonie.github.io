@@ -71,7 +71,7 @@
   lbl.ss = tx(705, 328, "single-stranded genome", { c: MUT, a: "middle", s: 11 });
   lbl.ds = tx(705, 338, "double-stranded episome", { c: MUT, a: "middle", s: 11 });
   lbl.mrna = tx(590, 372, "GAMT mRNA", { c: ACC });
-  lbl.rib = tx(372, 428, "ribosomes", { c: MUT });
+  lbl.rib = tx(366, 440, "ribosomes", { c: MUT });
   lbl.rxn = tx(470, 520, "GAA + SAM  →  creatine + SAH", { c: FG, a: "middle", s: 12, w: 700 });
 
   /* capsids */
@@ -105,9 +105,9 @@
   /* substrate and product dots */
   var dots = []; for (var d = 0; d < 7; d++) dots.push(el("circle", { r: 5, style: "fill:" + WARN }, root));
   /* meters */
-  var mt0 = 24, my0 = 392; el("rect", { x: mt0 - 8, y: my0 - 22, width: 214, height: 120, rx: 12, style: "fill:" + SURF + ";stroke:" + LINE + ";opacity:.96" }, root);
+  var mt0 = 24, my0 = 392, gM = el("g", {}, root); el("rect", { x: mt0 - 8, y: my0 - 22, width: 214, height: 120, rx: 12, style: "fill:" + SURF + ";stroke:" + LINE + ";opacity:.96" }, gM);
   var bars = [["GAMT enzyme", VIO], ["Creatine", ACC], ["GAA (toxic)", WARN]].map(function (q, i) {
-    var y = my0 + i * 34; tx(mt0 + 4, y - 4, q[0], { s: 11 }); el("rect", { x: mt0 + 4, y: y, width: 190, height: 9, rx: 4.5, style: "fill:" + LINE }, root); return el("rect", { x: mt0 + 4, y: y, width: 0, height: 9, rx: 4.5, style: "fill:" + q[1] }, root);
+    var y = my0 + i * 34; tx(mt0 + 4, y - 4, q[0], { s: 11, p: gM }); el("rect", { x: mt0 + 4, y: y, width: 190, height: 9, rx: 4.5, style: "fill:" + LINE }, gM); return el("rect", { x: mt0 + 4, y: y, width: 0, height: 9, rx: 4.5, style: "fill:" + q[1] }, gM);
   });
   tx(mt0 + 4, my0 - 8 - 12 + 2, "", {});
   tx(936, 528, "Schematic, not to scale", { a: "end", s: 11, w: 500 });
@@ -116,6 +116,18 @@
   var place = function (g, x, y, s, o) { g.setAttribute("transform", "translate(" + x.toFixed(1) + " " + y.toFixed(1) + ") scale(" + (s == null ? 1 : s) + ")"); g.style.opacity = o == null ? 1 : o; };
   var show = function (e, o) { e.style.opacity = o; };
 
+  var mq = window.matchMedia("(max-width: 640px)"), cam = { x: 480, y: 270, init: false }, hm = ["aavM0", "aavM1", "aavM2"].map(function (id) { return document.getElementById(id); });
+  if (!hm[0]) hm = null;
+  function camera(t, tA) {
+    var mob = mq.matches;
+    gM.style.display = mob ? "none" : "";
+    if (!mob) { svg.setAttribute("viewBox", "0 0 960 540"); cam.init = false; return; }
+    var tx2, ty2 = 270;
+    if (t < 10) tx2 = tA[0] + 70; else if (t < 16.5) tx2 = tA[0] + 40; else if (t < 24) tx2 = 650; else { tx2 = 405; ty2 = 300; }
+    tx2 = Math.max(200, Math.min(760, tx2)); ty2 = Math.max(250, Math.min(290, ty2));
+    if (!cam.init) { cam.x = tx2; cam.y = ty2; cam.init = true; } else { cam.x += (tx2 - cam.x) * 0.06; cam.y += (ty2 - cam.y) * 0.06; }
+    svg.setAttribute("viewBox", (cam.x - 200).toFixed(1) + " " + (cam.y - 250).toFixed(1) + " 400 500");
+  }
   function render(t) {
     var A, w, u, pos, v;
     /* capsid A path */
@@ -169,6 +181,9 @@
     bars[0].setAttribute("width", (190 * E(g1)).toFixed(1));
     bars[1].setAttribute("width", (190 * (.08 + .88 * E(g2))).toFixed(1));
     bars[2].setAttribute("width", (190 * (1 - .62 * E(g2))).toFixed(1));
+    if (hm) { hm[0].style.width = (100 * E(g1)).toFixed(1) + "%"; hm[1].style.width = (100 * (.08 + .88 * E(g2))).toFixed(1) + "%"; hm[2].style.width = (100 * (1 - .62 * E(g2))).toFixed(1) + "%"; }
+    /* camera */
+    camera(t, tA);
     /* labels */
     var fade = function (e, a, b) { e.style.opacity = t >= a && t <= b ? 1 : 0; e.style.transition = "opacity .4s"; };
     fade(lbl.rec, 0.4, 3.4); fade(lbl.pit, 3, 5.6); fade(lbl.mt, 6, 10); fade(lbl.vp1, 10, 12.4); fade(lbl.npc, 12, 15);

@@ -166,7 +166,7 @@
           <label><input type="radio" name="supp" value="gaa"><span>GAA</span></label>
         </fieldset>
       </div>
-      <div class="pathway">
+      <div class="pathway ph">
         <svg id="pathway" viewBox="0 0 760 198" role="img" aria-label="Pathway from arginine and glycine to guanidinoacetate to creatine. Arrow width shows relative flux. Creatine represses GATM.">
           <g class="node"><rect x="8" y="70" width="170" height="58" rx="12"/><text x="93" y="96">Arginine + Glycine</text><text class="sub" x="93" y="114">substrates</text></g>
           <g class="node"><rect x="296" y="70" width="168" height="58" rx="12"/><text x="380" y="96">GAA</text><text class="sub" x="380" y="114">guanidinoacetate</text></g>
@@ -178,6 +178,20 @@
           <g id="g2"><line class="aline" id="a2l" y1="99" y2="99"/><path class="ahead" id="a2h"/><path class="cross" d="M510 85 l28 28 M538 85 l-28 28"/><text class="enz" x="524" y="136">GAMT</text></g>
           <g id="supG" hidden><line class="sup" x1="380" y1="170" x2="380" y2="152"/><path class="suph" d="M380 138 L371 154 H389 Z"/><text class="supl" x="380" y="190">+ GAA</text></g>
           <g id="supC" hidden><line class="sup" x1="667" y1="170" x2="667" y2="152"/><path class="suph" d="M667 138 L658 154 H676 Z"/><text class="supl" x="667" y="190">+ creatine</text></g>
+        </svg>
+      </div>
+      <div class="pathway pv">
+        <svg id="pathwayV" viewBox="0 0 320 400" role="img" aria-label="Pathway from arginine and glycine down to guanidinoacetate and then creatine. Arrow width shows relative flux. Creatine represses GATM.">
+          <g class="node"><rect x="60" y="6" width="200" height="56" rx="12"/><text x="160" y="31">Arginine + Glycine</text><text class="sub" x="160" y="49">substrates</text></g>
+          <g class="node"><rect x="60" y="152" width="200" height="56" rx="12"/><text x="160" y="177">GAA</text><text class="sub" x="160" y="195">guanidinoacetate</text></g>
+          <g class="node"><rect x="60" y="298" width="200" height="56" rx="12"/><text x="160" y="323">Creatine</text><text class="sub" x="160" y="341">N-methyl-GAA</text></g>
+          <path class="fb" id="fbv" d="M262 326 H304 V108 H196"/>
+          <path class="fbt" id="fbtv" d="M196 98 V118"/>
+          <text class="fbl" x="300" y="84" style="text-anchor:end">creatine represses GATM</text>
+          <g id="g1v"><line class="aline" id="a1lv" x1="160" x2="160"/><path class="ahead" id="a1hv"/><text class="enz" x="182" y="112" style="text-anchor:start">AGAT · GATM</text></g>
+          <g id="g2v"><line class="aline" id="a2lv" x1="160" x2="160"/><path class="ahead" id="a2hv"/><path class="cross" d="M146 244 l28 28 M174 244 l-28 28"/><text class="enz" x="182" y="258" style="text-anchor:start">GAMT</text></g>
+          <g id="supGv" hidden><line class="sup" x1="14" y1="180" x2="40" y2="180"/><path class="suph" d="M56 180 L40 171 V189 Z"/><text class="supl" x="30" y="166">+ GAA</text></g>
+          <g id="supCv" hidden><line class="sup" x1="14" y1="326" x2="40" y2="326"/><path class="suph" d="M56 326 L40 317 V335 Z"/><text class="supl" x="32" y="312">+ creatine</text></g>
         </svg>
       </div>
       <div class="struct">
@@ -262,6 +276,7 @@
     <figure class="aav rv" id="aav">
       <div class="aav-bar"><div class="aav-chips" id="aavChips" role="group" aria-label="Delivery steps"></div><button class="btn" id="aavPlay" type="button">Pause</button></div>
       <div class="aav-svg" id="aavSvg"></div>
+      <div class="aav-meters" aria-hidden="true"><div><span>GAMT enzyme</span><i><b id="aavM0" style="background:#7a5af8"></b></i></div><div><span>Creatine</span><i><b id="aavM1" style="background:var(--accent)"></b></i></div><div><span>GAA (toxic)</span><i><b id="aavM2" style="background:var(--warn)"></b></i></div></div>
       <p class="aav-story" id="aavStory" aria-live="polite"></p>
       <figcaption>Schematic of the generic AAV life cycle, not to scale and not experimental data. The vector cassette is illustrative, and step numbers refer to the references below.</figcaption>
     </figure>
@@ -409,11 +424,19 @@
     l.setAttribute("x1", x1); l.setAttribute("x2", f(tip - hl + 1)); l.setAttribute("stroke-width", f(w));
     $("a" + n + "h").setAttribute("d", "M" + tip + " 99 L" + f(tip - hl) + " " + f(99 - hh) + " V" + f(99 + hh) + " Z");
   }
+  function arrowV(n, y1, tip, w) {
+    var hl = 8 + w * 0.9, hh = 4 + w * 0.8, l = $("a" + n + "lv");
+    l.setAttribute("y1", y1); l.setAttribute("y2", f(tip - hl + 1)); l.setAttribute("stroke-width", f(w));
+    $("a" + n + "hv").setAttribute("d", "M160 " + tip + " L" + f(160 - hh) + " " + f(tip - hl) + " H" + f(160 + hh) + " Z");
+  }
   var cur = null, seq = 0;
   function render(s) {
     arrow(1, 186, 290, width(s.s1));
     arrow(2, 472, 576, width(s.s2));
     $("g2").classList.toggle("blocked", s.s2 < 1);
+    arrowV(1, 70, 146, width(s.s1)); arrowV(2, 216, 292, width(s.s2));
+    $("g2v").classList.toggle("blocked", s.s2 < 1);
+    var fv = $("fbv"); fv.setAttribute("stroke-width", f(0.8 + s.cr / 100 * 2.6)); fv.style.opacity = f(0.25 + 0.75 * s.cr / 100); $("fbtv").style.opacity = fv.style.opacity;
     var fb = $("fb");
     fb.setAttribute("stroke-width", f(0.8 + s.cr / 100 * 2.6));
     fb.style.opacity = f(0.25 + 0.75 * s.cr / 100);
@@ -431,8 +454,8 @@
   function update(first) {
     var t = target();
     $("story").textContent = stories[t.k];
-    if (t.s === "gaa") $("supG").removeAttribute("hidden"); else $("supG").setAttribute("hidden", "");
-    if (t.s === "cr") $("supC").removeAttribute("hidden"); else $("supC").setAttribute("hidden", "");
+    if (t.s === "gaa") { $("supG").removeAttribute("hidden"); $("supGv").removeAttribute("hidden"); } else { $("supG").setAttribute("hidden", ""); $("supGv").setAttribute("hidden", ""); }
+    if (t.s === "cr") { $("supC").removeAttribute("hidden"); $("supCv").removeAttribute("hidden"); } else { $("supC").setAttribute("hidden", ""); $("supCv").setAttribute("hidden", ""); }
     if (first || reduce || !cur) { cur = t; render(cur); return; }
     var from = { cr: cur.cr, gaa: cur.gaa, s1: cur.s1, s2: cur.s2 }, t0 = performance.now(), my = ++seq;
     (function step(now) {
