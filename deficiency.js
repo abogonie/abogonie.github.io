@@ -33,7 +33,7 @@
     var badges = {};
     Object.keys(sc.lvl).forEach(function (k) { var b = document.createElement("span"); b.className = "lvl " + sc.lvl[k]; b.textContent = LVL[sc.lvl[k]]; nodes[k].appendChild(b); badges[k] = b; });
 
-    var GEO = null, geoKey = "", GR = 420, RB = 5, vacuuming = false, phase = 0, ph = 0, vacT = 0, NZ = [0, 0], deficient = true, parts = [], pileN = 0, pileList = [], acc = 0, tConv = 0, W = 0, H = 0, dpr = 1, C = [], vertical = false, visible = true, last = 0, raf = 0;
+    var PAD = null, swingT = -1, GEO = null, geoKey = "", GR = 420, RB = 5, vacuuming = false, phase = 0, ph = 0, vacT = 0, NZ = [0, 0], deficient = true, parts = [], pileN = 0, pileList = [], acc = 0, tConv = 0, W = 0, H = 0, dpr = 1, C = [], vertical = false, visible = true, last = 0, raf = 0;
     var col = {};
     function colors() { col = { sub: css("--muted") || "#667", gaa: css("--warn") || "#c60", cr: css("--accent") || "#25c", crn: css("--fold") || "#0a8" }; }
     function layout() {
@@ -50,13 +50,28 @@
       } else {
         var bw = Math.min(172, Math.max(c.w, 152)); g.Bl = c.x - bw / 2; g.Br = c.x + bw / 2; g.Ff = c.top - 2; g.near = g.Br;
       }
+      g.Bl = Math.max(g.Bl, 6); g.Br = Math.min(g.Br, W - 6);
       var per = Math.max(4, Math.floor((g.Br - g.Bl - 6) / (RB * 2))), rows = Math.ceil(sc.cap / per);
       g.Hb = Math.min(190, rows * RB * 1.8 + 34); g.Wt = g.Ff - g.Hb; GEO = g;
       if (vertical) { left = g.Br - w; top = g.Ff + 8; } else { left = Math.min(g.Br + 8, W - w - 4); top = g.Ff - g.Hb * 0.45 - 82 * k; }
       mon.style.cssText = "left:" + left.toFixed(1) + "px;top:" + top.toFixed(1) + "px;width:" + w + "px;height:" + h.toFixed(1) + "px";
       NZ = [left + 3 * k, top + 82 * k];
-      var key = [g.Bl, g.Br, g.Ff].map(Math.round).join(",");
+      if (vertical) { var cxm = c.x; PAD = { dir: 1, L: 52, px: cxm - 30, py: e.top - 15, rest: 12, up: -38, ty: e.top - 15 }; PAD.tx = PAD.px; }
+      else { var el0 = e.x - e.w / 2; PAD = { dir: -1, L: 54, px: el0 - 8, py: c.y + 16, rest: 24, up: -40 }; PAD.tx = PAD.px - PAD.L * Math.cos(PAD.rest * Math.PI / 180) * 0.9; PAD.ty = PAD.py; }
+      var key = [g.Bl, g.Br, g.Ff, PAD.px, PAD.py].map(Math.round).join(",");
       if (key !== geoKey) { geoKey = key; parts = parts.filter(function (p) { return p.st !== "ball" && p.st !== "suck"; }); pileN = 0; pileList = []; }
+    }
+    function padAngle() {
+      var r = PAD.rest, u = PAD.up, s = swingT, e;
+      if (s < 0) return r * Math.PI / 180;
+      if (s < 0.1) { e = 1 - Math.pow(1 - s / 0.1, 3); return (r + (u - r) * e) * Math.PI / 180; }
+      if (s < 0.16) return u * Math.PI / 180;
+      if (s < 0.42) { e = (s - 0.16) / 0.26; e = e * e * (3 - 2 * e); return (u + (r - u) * e) * Math.PI / 180; }
+      return r * Math.PI / 180;
+    }
+    function padSurf(a) {
+      var dx = PAD.dir * Math.cos(a), dy = Math.sin(a), s = PAD.L * 0.88, n = PAD.dir === -1 ? [-dy, dx] : [dy, -dx];
+      return [PAD.px + dx * s + n[0] * (RB + 5), PAD.py + dy * s + n[1] * (RB + 5)];
     }
     function launch(p, q) {
       var g = GEO, xl = q[0], yl = q[1], h = 14 + Math.random() * 40, apexY = g.Wt - h;
@@ -94,7 +109,7 @@
     function callVac() { if (phase || !pileList.length || reduce) return; phase = 1; ph = 0; mon.classList.add("here"); }
     mon.addEventListener("click", callVac);
     function reset() {
-      parts = []; pileN = 0; pileList = []; acc = 0; tConv = 0; vacuuming = false; phase = 0; ph = 0; vacT = 0; mon.classList.remove("on"); mon.classList.toggle("here", reduce); mon.style.display = deficient ? "" : "none";
+      parts = []; pileN = 0; pileList = []; acc = 0; tConv = 0; vacuuming = false; swingT = -1; phase = 0; ph = 0; vacT = 0; mon.classList.remove("on"); mon.classList.toggle("here", reduce); mon.style.display = deficient ? "" : "none";
       nodes.forEach(function (n, i) { if (i % 2) { n.classList.toggle("blocked", deficient && i === sc.blocked); } });
       Object.keys(badges).forEach(function (k) { badges[k].style.display = deficient ? "" : "none"; });
       cap.textContent = deficient ? sc.def : HEALTHY;
@@ -103,21 +118,26 @@
     function typeAt(k) { return k < 2 ? "sub" : k < 4 ? "gaa" : "cr"; }
     function step(dt) {
       var run = phase === 0; if (run) acc += dt;
-      if (acc > (deficient ? 0.22 : 0.5)) { acc = 0; if (!(reduce && deficient && pileN >= sc.cap)) parts.push({ k: 0, t: 0, type: "sub", st: "move", a: 1, j: Math.random() * 6.28, ln: (Math.random() - 0.5) * 2, w2: Math.random() * 6.28 }); }
+      if (acc > (deficient ? 0.3 : 0.5)) { acc = 0; if (!(reduce && deficient && pileN >= sc.cap)) parts.push({ k: 0, t: 0, type: "sub", st: "move", a: 1, j: Math.random() * 6.28, ln: (Math.random() - 0.5) * 2, w2: Math.random() * 6.28 }); }
+      if (swingT >= 0) { swingT += dt; if (swingT > 0.5) swingT = -1; }
       parts.forEach(function (p) {
         if (p.st === "move") {
           if (!run) return;
           p.t += dt * 0.36;
-          if (deficient && p.k === sc.pile && GEO) {
-            var q0 = pos(p), E = C[sc.blocked];
-            if (vertical ? q0[1] + 4.5 >= E.top : q0[0] + 4.5 >= E.x - E.w / 2) { launch(p, q0); return; }
+          if (deficient && p.k === sc.pile && GEO && PAD) {
+            var q0 = pos(p);
+            if (vertical ? q0[1] >= PAD.ty - 22 : q0[0] >= PAD.tx) {
+              if (swingT >= 0 && swingT < 0.16) { p.t -= dt * 0.36; return; }
+              p.st = "kick"; p.kt = 0; p.k0 = q0; swingT = 0; return;
+            }
           }
           if (p.t >= 1) {
             p.k += 1; p.t = 0;
             if (p.k === 6) { p.st = "fade"; }
             else if (p.k % 2 === 0) { p.type = typeAt(p.k); }
           }
-        } else if (p.st === "suck") { p.u += dt / 1.1; if (p.u >= 1) p.a = 0; }
+        } else if (p.st === "kick") { p.kt += dt; if (p.kt >= 0.09) launch(p, padSurf(padAngle())); }
+        else if (p.st === "suck") { p.u += dt / 1.1; if (p.u >= 1) p.a = 0; }
         else if (p.st === "fade") { p.a -= dt * 1.6; }
       });
       if (GEO && phase < 2) physics(dt);
@@ -134,6 +154,7 @@
     }
     function pos(p) {
       if (p.st === "ball") return [p.x, p.y];
+      if (p.st === "kick") { var s = Math.min(1, p.kt / 0.07), tp = padSurf(padAngle()), es = 1 - Math.pow(1 - s, 2); return [p.k0[0] + (tp[0] - p.k0[0]) * es, p.k0[1] + (tp[1] - p.k0[1]) * es]; }
       if (p.st === "suck") {
         if (p.u <= 0) return [p.fx, p.fy];
         var e2 = p.u * p.u, dx = NZ[0] - p.fx, dy = NZ[1] - p.fy, L = Math.hypot(dx, dy) || 1, bend = Math.sin(Math.PI * e2) * 22 * (p.ln || 1);
@@ -147,8 +168,25 @@
     function draw(now) {
       ctx.clearRect(0, 0, W, H);
       if (deficient && GEO) {
-        var g = GEO; ctx.save(); ctx.globalAlpha = phase >= 2 ? 0.12 : 0.6; ctx.strokeStyle = col.sub; ctx.lineWidth = 2.5; ctx.lineJoin = "round"; ctx.lineCap = "round";
-        ctx.beginPath(); ctx.moveTo(g.Bl, g.Wt); ctx.lineTo(g.Bl, g.Ff + 1); ctx.lineTo(g.Br, g.Ff + 1); ctx.lineTo(g.Br, g.Wt); ctx.stroke(); ctx.restore();
+        var g = GEO, hatch = phase >= 2, al = hatch ? 0.18 : 1, lw = 7;
+        ctx.save(); ctx.lineJoin = "round"; ctx.lineCap = "round";
+        /* arcade box: glossy walls, base plate, blinking lights */
+        ctx.globalAlpha = al * 0.05; ctx.fillStyle = col.cr; ctx.fillRect(g.Bl, g.Wt, g.Br - g.Bl, g.Ff - g.Wt);
+        ctx.globalAlpha = al; ctx.strokeStyle = col.cr; ctx.lineWidth = lw; ctx.beginPath(); ctx.moveTo(g.Bl - 1, g.Wt); ctx.lineTo(g.Bl - 1, g.Ff + 3); ctx.lineTo(g.Br + 1, g.Ff + 3); ctx.lineTo(g.Br + 1, g.Wt); ctx.stroke();
+        ctx.globalAlpha = al * 0.55; ctx.strokeStyle = "#fff"; ctx.lineWidth = 1.6; ctx.beginPath(); ctx.moveTo(g.Bl - 2.5, g.Wt + 4); ctx.lineTo(g.Bl - 2.5, g.Ff); ctx.moveTo(g.Br - 2.5, g.Wt + 4); ctx.lineTo(g.Br - 2.5, g.Ff); ctx.stroke();
+        ctx.globalAlpha = al; ctx.fillStyle = col.gaa; ctx.beginPath(); ctx.roundRect ? ctx.roundRect(g.Bl - 8, g.Ff + 3, g.Br - g.Bl + 16, 7, 3.5) : ctx.rect(g.Bl - 8, g.Ff + 3, g.Br - g.Bl + 16, 7); ctx.fill();
+        for (var q = 0; q < 4; q++) { var on = Math.floor(now / 420 + q) % 2 === 0; ctx.globalAlpha = al * (on ? 1 : 0.35); ctx.fillStyle = q % 2 ? col.gaa : "#ffd23f"; ctx.beginPath(); ctx.arc(q < 2 ? g.Bl - 1 : g.Br + 1, g.Wt + 8 + (q % 2) * 16, 3, 0, 6.2832); ctx.fill(); }
+        ctx.restore();
+      }
+      if (deficient && PAD) {
+        var a = padAngle(), dx = PAD.dir * Math.cos(a), dy = Math.sin(a), tipx = PAD.px + dx * PAD.L, tipy = PAD.py + dy * PAD.L;
+        ctx.save(); ctx.lineCap = "round"; ctx.globalAlpha = 1;
+        ctx.strokeStyle = "#7a1f2b"; ctx.lineWidth = 13; ctx.beginPath(); ctx.moveTo(PAD.px, PAD.py); ctx.lineTo(tipx, tipy); ctx.stroke();
+        ctx.strokeStyle = "#ef4b5b"; ctx.lineWidth = 10; ctx.beginPath(); ctx.moveTo(PAD.px, PAD.py); ctx.lineTo(tipx, tipy); ctx.stroke();
+        ctx.strokeStyle = "rgba(255,255,255,.55)"; ctx.lineWidth = 2.2; ctx.beginPath(); ctx.moveTo(PAD.px + dy * 2.5, PAD.py - dx * 2.5 * PAD.dir * -1); ctx.lineTo(tipx + dy * 2.5, tipy - dx * 2.5 * PAD.dir * -1); ctx.stroke();
+        ctx.fillStyle = "#ffd23f"; ctx.beginPath(); ctx.arc(PAD.px, PAD.py, 8.5, 0, 6.2832); ctx.fill(); ctx.strokeStyle = "#7a1f2b"; ctx.lineWidth = 2; ctx.stroke();
+        ctx.fillStyle = "#7a1f2b"; ctx.beginPath(); ctx.arc(PAD.px, PAD.py, 2.6, 0, 6.2832); ctx.fill();
+        ctx.restore();
       }
       parts.forEach(function (p) {
         var q = pos(p), j = 0;

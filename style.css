@@ -554,3 +554,28 @@ footer a { text-decoration: none; } footer a:hover { text-decoration: underline;
 @keyframes cxstep { 0%, 33% { border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 18%, transparent); } 34%, 100% { border-color: var(--line); box-shadow: none; } }
 @media (max-width: 959px) { .cx.hero-art { grid-template-columns: 1fr; } }
 @media (prefers-reduced-motion: reduce) { .cx-strip, .cx-screen, .cx-blips rect, .cx-scan, .cx-head, .cx-drop, .cx-steps li { animation: none; } .cx-strip { stroke-dasharray: none; opacity: .5; } .cx-drop, .cx-scan { display: none; } }
+
+/* ---- hero stats card, automation layout, AAV figure, references ---- */
+@media (min-width: 960px) { .hero > .glance { grid-column: 2; grid-row: 1 / span 5; align-self: center; grid-template-columns: 1fr; margin: 0; } .hero > .glance div { border-left: 0; border-top: 1px solid var(--line); } .hero > .glance div:first-child { border-top: 0; } }
+.auto-grid { display: grid; gap: 28px; align-items: center; margin-bottom: 8px; }
+@media (min-width: 900px) { .auto-grid { grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr); } }
+.auto-grid .pipe { grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); }
+.aav { margin: 0; display: grid; gap: 14px; padding: 16px; border: 1px solid var(--line); border-radius: 22px; background: var(--surface); min-width: 0; }
+.aav-bar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; }
+.aav-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.aav .chip { display: inline-flex; align-items: center; gap: 6px; padding: 6px 11px 6px 6px; border: 1px solid var(--line); border-radius: 999px; background: none; color: var(--muted); font: 600 .78rem/1 var(--font-body); cursor: pointer; }
+.aav .chip i { font-style: normal; display: grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; background: var(--line); color: var(--fg); font-size: .7rem; }
+.aav .chip.on { border-color: var(--accent); color: var(--fg); background: color-mix(in srgb, var(--accent) 10%, transparent); }
+.aav .chip.on i { background: var(--accent); color: var(--accent-ink); }
+.aav-bar .btn { padding: 9px 16px; }
+.aav-svg svg { display: block; width: 100%; height: auto; border-radius: 16px; border: 1px solid var(--line); }
+.aav-story { margin: 0; min-height: 5.6em; color: var(--muted); max-width: 90ch; }
+.aav-story b { color: var(--fg); }
+.aav-story em { color: var(--fg); font-style: normal; }
+.aav-story sup a, .refs a { color: var(--accent); }
+.aav figcaption { font-size: .8rem; color: var(--muted); }
+.refs { margin: 0; padding-left: 1.4em; display: grid; gap: 10px; max-width: 100ch; color: var(--muted); font-size: .92rem; }
+.refs li { padding-left: 4px; word-break: break-word; }
+.refs li:target { color: var(--fg); }
+.glance b span { font: inherit; color: inherit; }
+.defic .strip .enz:not(.blocked) { background: var(--surface); }
