@@ -17,7 +17,7 @@
       { n: "Middle Eastern", a: "mid", cases: 23, ctrl: 975, c: "#2e9e47" }
     ];
     var TC = 0; G.forEach(function (g) { g.tot = g.cases + g.ctrl; g.k = Math.max(2, Math.round(g.tot / UNIT)); g.rings = Math.max(1, Math.round(g.k * g.cases / g.tot)); TC += g.cases; });
-    var ctx = cv.getContext("2d"), W = 0, H = 0, dpr = 1, dots = [], t0 = 0, started = false, sepT = 0, sepC = 0, lastNow = 0, btn = null, raf = 0, visible = true, col = [], fg = "#111", rd = 3, geo = [];
+    var rotY = 0.6, rotX = -0.25, vY = 0.25, vX = 0, drag = null, Rs = 120, ctx = cv.getContext("2d"), W = 0, H = 0, dpr = 1, dots = [], t0 = 0, started = false, sepT = 0, sepC = 0, lastNow = 0, btn = null, raf = 0, visible = true, col = [], fg = "#111", rd = 3, geo = [];
     var f1 = function (n) { return n.toLocaleString("en-US"); };
     function colors() { col = G.map(function (g) { return g.c.charAt(0) === "#" ? g.c : css(g.c, "#2563eb"); }); fg = css("--fg", "#111"); }
     function layout() {
@@ -38,27 +38,42 @@
       W = cv.clientWidth; dpr = Math.min(2, window.devicePixelRatio || 1);
       cv.style.height = W < 680 ? "560px" : "400px"; H = cv.clientHeight;
       cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); colors();
-      geo = layout(); dots = []; var bw = Math.min(W * .22, 150), bh = Math.min(H * .3, 110);
+      geo = layout(); dots = []; Rs = Math.max(70, Math.min(H * 0.4, W * 0.3));
       G.forEach(function (g, gi) {
         var C = geo[gi];
         for (var i = 0; i < g.k; i++) {
-          var a = Math.random() * 6.283, d = Math.sqrt(Math.random()) * C[2], a2 = Math.random() * 6.283, d2 = Math.sqrt(Math.random());
-          dots.push({ g: gi, bx: W / 2 + Math.cos(a2) * d2 * bw, by: H * .5 + Math.sin(a2) * d2 * bh, tx: C[0] + Math.cos(a) * d, ty: C[1] + Math.sin(a) * d, x: Math.random() * W, y: Math.random() * H, ph: Math.random() * 6.283, case_: i < g.rings });
+          var a = Math.random() * 6.283, d = Math.sqrt(Math.random()) * C[2], u = Math.random() * 2 - 1, a2 = Math.random() * 6.283, q = Math.sqrt(1 - u * u), sh = 0.8 + 0.2 * Math.cbrt(Math.random());
+          dots.push({ g: gi, x3: q * Math.cos(a2) * sh, y3: u * sh, z3: q * Math.sin(a2) * sh, bx: 0, by: 0, dz: 0, tx: C[0] + Math.cos(a) * d, ty: C[1] + Math.sin(a) * d, x: Math.random() * W, y: Math.random() * H, ph: Math.random() * 6.283, case_: i < g.rings });
         }
       });
     }
     function draw(now) {
       ctx.clearRect(0, 0, W, H); var k = started ? Math.min(1, (now - t0) / 1600) : 0, g = 1 - Math.pow(1 - k, 3), dtt = lastNow ? Math.min(.05, (now - lastNow) / 1000) : 0; lastNow = now; sepC += (sepT - sepC) * Math.min(1, dtt * 2.4); if (Math.abs(sepT - sepC) < .002) sepC = sepT; var e = sepC * sepC * (3 - 2 * sepC);
+      if (!drag && !reduce) { rotY += vY * dtt; rotX += vX * dtt; vX *= Math.pow(0.12, dtt); vY += (0.25 - vY) * Math.min(1, dtt * 0.8); rotX *= Math.pow(0.7, dtt); }
+      var cY = Math.cos(rotY), sY = Math.sin(rotY), cX = Math.cos(rotX), sX = Math.sin(rotX), cx0 = W / 2, cy0 = H / 2;
       dots.forEach(function (d) {
-        var gx = d.x + (d.bx - d.x) * g, gy = d.y + (d.by - d.y) * g, x = gx + (d.tx - gx) * e + Math.sin(now / 1300 + d.ph) * 1.6 * g, y = gy + (d.ty - gy) * e + Math.cos(now / 1500 + d.ph) * 1.6 * g;
-        ctx.fillStyle = col[d.g]; ctx.globalAlpha = 0.85; ctx.beginPath(); ctx.arc(x, y, rd, 0, 6.283); ctx.fill();
+        var x1 = d.x3 * cY + d.z3 * sY, z1 = -d.x3 * sY + d.z3 * cY, y1 = d.y3 * cX - z1 * sX, z2 = d.y3 * sX + z1 * cX, sc = 1 + 0.22 * z2;
+        d.bx = cx0 + x1 * Rs * sc; d.by = cy0 + y1 * Rs * sc; d.dz = z2;
+      });
+      if (e < 0.5) dots.sort(function (p, q) { return p.dz - q.dz; });
+      dots.forEach(function (d) {
+        var gx = d.x + (d.bx - d.x) * g, gy = d.y + (d.by - d.y) * g, x = gx + (d.tx - gx) * e, y = gy + (d.ty - gy) * e;
+        if (e > 0.5) { x += Math.sin(now / 1300 + d.ph) * 1.6; y += Math.cos(now / 1500 + d.ph) * 1.6; }
+        var dep = (1 - e) * d.dz * g;
+        ctx.fillStyle = col[d.g]; ctx.globalAlpha = 0.85 + 0.12 * dep - (dep < 0 ? 0.28 * -dep : 0); ctx.beginPath(); ctx.arc(x, y, rd * (1 + 0.28 * dep), 0, 6.283); ctx.fill();
         if (d.case_ && e > 0.9) { var p = (Math.sin(now / 700 + d.ph) + 1) / 2; ctx.globalAlpha = 0.3 + 0.55 * p; ctx.strokeStyle = fg; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.arc(x, y, rd + 2 + 3 * p, 0, 6.283); ctx.stroke(); }
       });
       ctx.globalAlpha = 1; ctx.fillStyle = fg; ctx.font = "600 12px 'Open Sans', Arial, sans-serif"; ctx.textAlign = "center";
-      G.forEach(function (gg, i) { ctx.globalAlpha = Math.max(0, e * 1.4 - .4); var C = geo[i]; ctx.fillText(gg.a.toUpperCase(), C[0], C[1] + C[2] + 18); }); ctx.globalAlpha = 1;
+      G.forEach(function (gg, i) { ctx.globalAlpha = Math.max(0, e * 1.4 - .4); var C = geo[i]; ctx.fillText(gg.a.toUpperCase(), C[0], C[1] + C[2] + 18); });
+      ctx.globalAlpha = Math.max(0, 1 - e * 3) * 0.7; ctx.font = "400 12px 'Open Sans', Arial, sans-serif"; ctx.fillText("Drag to rotate", W / 2, H - 10); ctx.globalAlpha = 1;
     }
     function loop(now) { raf = 0; if (!visible || document.hidden) { lastNow = 0; return; } draw(now); raf = requestAnimationFrame(loop); }
     function go() { if (!reduce && !raf) raf = requestAnimationFrame(loop); }
+    cv.style.touchAction = "pan-y"; cv.style.cursor = "grab"; cv.setAttribute("tabindex", "0");
+    cv.addEventListener("pointerdown", function (ev) { if (sepC > 0.5) return; drag = { x: ev.clientX, y: ev.clientY, t: performance.now(), touch: ev.pointerType === "touch" }; try { cv.setPointerCapture(ev.pointerId); } catch (x) {} cv.style.cursor = "grabbing"; });
+    cv.addEventListener("pointermove", function (ev) { if (!drag) return; var dx = ev.clientX - drag.x, dy = drag.touch ? 0 : ev.clientY - drag.y, now = performance.now(), dt = Math.max(0.008, (now - drag.t) / 1000); rotY += dx * 0.011; rotX = Math.max(-1.3, Math.min(1.3, rotX + dy * 0.011)); vY = dx * 0.011 / dt; vX = dy * 0.011 / dt; vY = Math.max(-6, Math.min(6, vY)); drag.x = ev.clientX; drag.y = ev.clientY; drag.t = now; if (reduce) draw(0); });
+    var endDrag = function () { drag = null; cv.style.cursor = "grab"; }; cv.addEventListener("pointerup", endDrag); cv.addEventListener("pointercancel", endDrag);
+    cv.addEventListener("keydown", function (ev) { if (ev.key === "ArrowLeft") { rotY -= 0.2; } else if (ev.key === "ArrowRight") { rotY += 0.2; } else if (ev.key === "ArrowUp") { rotX = Math.max(-1.3, rotX - 0.2); } else if (ev.key === "ArrowDown") { rotX = Math.min(1.3, rotX + 0.2); } else return; ev.preventDefault(); if (reduce) draw(0); });
     var key = document.createElement("ul"); key.className = "cohort-key";
     G.forEach(function (g, i) { var li = document.createElement("li"); li.innerHTML = '<i></i><span><b>' + g.n + ' (' + g.a + ')</b><br>' + f1(g.cases) + ' cases · ' + f1(g.ctrl) + ' controls · ' + (100 * g.cases / TC).toFixed(1) + '% of cases</span>'; li.firstChild.style.background = g.c.charAt(0) === "#" ? g.c : "var(" + g.c + ")"; key.appendChild(li); });
     build();
