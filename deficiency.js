@@ -4,11 +4,11 @@
   var css = function (n) { return getComputedStyle(document.documentElement).getPropertyValue(n).trim(); };
   var SCENES = {
     agat: { blocked: 1, pile: 0, cap: 150, lvl: { 2: "lo", 4: "lo", 6: "lo" },
-      def: "Without AGAT the pathway stops at its first step. Very little guanidinoacetate is made, so creatine is low." },
+      def: "Without AGAT the pathway stops at its first step. Arginine and glycine bounce off the block and pile up, very little guanidinoacetate is made, and creatine is low." },
     gamt: { blocked: 3, pile: 2, cap: 150, lvl: { 2: "hi", 4: "lo", 6: "lo" },
-      def: "Without GAMT, guanidinoacetate cannot be turned into creatine. It piles up while creatine runs low." },
+      def: "Without GAMT, guanidinoacetate cannot be turned into creatine. It bounces off the block and piles up while creatine runs low." },
     slc: { blocked: 5, pile: 4, cap: 150, crn: true, lvl: { 4: "hi", 6: "lo" },
-      def: "Without the transporter, creatine is made but cannot enter neurons. It builds up outside the cell, and more of it is converted to creatinine. Guanidinoacetate stays normal." }
+      def: "Without the transporter, creatine is made but cannot enter neurons. It bounces off the transporter and builds up outside the cell, and more of it is converted to creatinine. Guanidinoacetate stays normal." }
   };
   var HEALTHY = "In a healthy cell the pathway runs end to end: arginine and glycine become guanidinoacetate, then creatine, which neurons take up.";
   var LVL = { hi: "High", lo: "Low" };
@@ -33,7 +33,7 @@
     var badges = {};
     Object.keys(sc.lvl).forEach(function (k) { var b = document.createElement("span"); b.className = "lvl " + sc.lvl[k]; b.textContent = LVL[sc.lvl[k]]; nodes[k].appendChild(b); badges[k] = b; });
 
-    var vacuuming = false, phase = 0, ph = 0, vacT = 0, NZ = [0, 0], deficient = true, parts = [], pileN = 0, pileList = [], acc = 0, tConv = 0, W = 0, H = 0, dpr = 1, C = [], vertical = false, visible = true, last = 0, raf = 0;
+    var GEO = null, geoKey = "", GR = 420, RB = 5, vacuuming = false, phase = 0, ph = 0, vacT = 0, NZ = [0, 0], deficient = true, parts = [], pileN = 0, pileList = [], acc = 0, tConv = 0, W = 0, H = 0, dpr = 1, C = [], vertical = false, visible = true, last = 0, raf = 0;
     var col = {};
     function colors() { col = { sub: css("--muted") || "#667", gaa: css("--warn") || "#c60", cr: css("--accent") || "#25c", crn: css("--fold") || "#0a8" }; }
     function layout() {
@@ -44,11 +44,46 @@
       colors(); placeMon();
     }
     function placeMon() {
-      var c = C[sc.pile], w = vertical ? 78 : 104, h = w * 128 / 120, k = w / 120, left, top;
-      if (vertical) { left = c.right + 78 - w / 2; top = c.y + 58; }
-      else { left = Math.min(c.x + 84, W - w - 4); top = c.top - 98 - 82 * k; }
+      var c = C[sc.pile], e = C[sc.blocked], w = vertical ? 78 : 104, h = w * 128 / 120, k = w / 120, left, top, g = {};
+      if (vertical) {
+        g.Bl = c.right + 8; g.Br = W - 4; g.Ff = e.top - 2; g.near = g.Bl;
+      } else {
+        var bw = Math.min(172, Math.max(c.w, 152)); g.Bl = c.x - bw / 2; g.Br = c.x + bw / 2; g.Ff = c.top - 2; g.near = g.Br;
+      }
+      var per = Math.max(4, Math.floor((g.Br - g.Bl - 6) / (RB * 2))), rows = Math.ceil(sc.cap / per);
+      g.Hb = Math.min(190, rows * RB * 1.8 + 34); g.Wt = g.Ff - g.Hb; GEO = g;
+      if (vertical) { left = g.Br - w; top = g.Ff + 8; } else { left = Math.min(g.Br + 8, W - w - 4); top = g.Ff - g.Hb * 0.45 - 82 * k; }
       mon.style.cssText = "left:" + left.toFixed(1) + "px;top:" + top.toFixed(1) + "px;width:" + w + "px;height:" + h.toFixed(1) + "px";
       NZ = [left + 3 * k, top + 82 * k];
+      var key = [g.Bl, g.Br, g.Ff].map(Math.round).join(",");
+      if (key !== geoKey) { geoKey = key; parts = parts.filter(function (p) { return p.st !== "ball" && p.st !== "suck"; }); pileN = 0; pileList = []; }
+    }
+    function launch(p, q) {
+      var g = GEO, xl = q[0], yl = q[1], h = 14 + Math.random() * 40, apexY = g.Wt - h;
+      if (yl - apexY < 24) apexY = yl - 24;
+      var vy0 = -Math.sqrt(2 * GR * (yl - apexY)), ta = -vy0 / GR, w = Math.sqrt(2 * Math.max(1, h - 8) / GR), tc = ta + w * (Math.random() * 1.6 - 0.8);
+      p.st = "ball"; p.x = xl; p.y = yl; p.px = xl; p.vy = vy0; p.vx = (g.near - xl) / tc; p.i = pileN++; pileList.push(p);
+    }
+    function physics(dt) {
+      var g = GEO, balls = (pileList = pileList.filter(function (p) { return p.a > 0; })), n = balls.length, S = 3, ds = dt / S, r = RB, s, i, j, b, o;
+      for (s = 0; s < S; s++) {
+        for (i = 0; i < n; i++) {
+          b = balls[i]; b.px = b.x; b.vy += GR * ds; b.x += b.vx * ds; b.y += b.vy * ds;
+          [g.Bl, g.Br].forEach(function (wx) { if (b.y > g.Wt && Math.abs(b.x - wx) < r) { var side = b.px >= wx ? 1 : -1; b.x = wx + side * r; b.vx = -b.vx * 0.3; if (side * b.vx < 0) b.vx = side * Math.abs(b.vx); } });
+          if (b.x > g.Bl - r && b.x < g.Br + r && b.y > g.Ff - r && b.y < g.Ff + r * 2) { b.y = g.Ff - r; if (b.vy > 40) b.vy = -b.vy * 0.28; else b.vy = 0; b.vx *= Math.max(0, 1 - 5 * ds); }
+          if (b.y > H + 60) b.a = 0;
+        }
+        for (var it = 0; it < 3; it++) for (i = 0; i < n; i++) for (j = i + 1; j < n; j++) {
+          b = balls[i]; o = balls[j]; var dx = o.x - b.x, dy = o.y - b.y, d2 = dx * dx + dy * dy, m = 2 * r;
+          if (d2 < m * m && d2 > 1e-6) {
+            var d = Math.sqrt(d2), nx = dx / d, ny = dy / d, ov = (m - d) * 0.5;
+            b.x -= nx * ov; b.y -= ny * ov; o.x += nx * ov; o.y += ny * ov;
+            var vn = (o.vx - b.vx) * nx + (o.vy - b.vy) * ny;
+            if (vn < 0) { var jn = -(1 + (vn < -60 ? 0.25 : 0)) * vn * 0.5; b.vx -= jn * nx; b.vy -= jn * ny; o.vx += jn * nx; o.vy += jn * ny; }
+            b.vx *= 0.9985; o.vx *= 0.9985;
+          }
+        }
+      }
     }
     function startVac() {
       if (vacuuming || !pileList.length) return; vacuuming = true; phase = 2; vacT = 0;
@@ -58,11 +93,6 @@
     }
     function callVac() { if (phase || !pileList.length || reduce) return; phase = 1; ph = 0; mon.classList.add("here"); }
     mon.addEventListener("click", callVac);
-    function slot(i) {
-      var c = C[sc.pile], a = i * 2.39996, rr = (vertical ? 4.6 : 6.4) * Math.sqrt(i + 1);
-      var cx = vertical ? C[sc.pile].right + 78 : c.x, cy = vertical ? c.y : c.top - 98;
-      return [cx + Math.cos(a) * rr, cy + Math.sin(a) * rr];
-    }
     function reset() {
       parts = []; pileN = 0; pileList = []; acc = 0; tConv = 0; vacuuming = false; phase = 0; ph = 0; vacT = 0; mon.classList.remove("on"); mon.classList.toggle("here", reduce); mon.style.display = deficient ? "" : "none";
       nodes.forEach(function (n, i) { if (i % 2) { n.classList.toggle("blocked", deficient && i === sc.blocked); } });
@@ -73,23 +103,24 @@
     function typeAt(k) { return k < 2 ? "sub" : k < 4 ? "gaa" : "cr"; }
     function step(dt) {
       var run = phase === 0; if (run) acc += dt;
-      if (acc > (deficient ? 0.22 : 0.5)) { acc = 0; parts.push({ k: 0, t: 0, type: "sub", st: "move", a: 1, j: Math.random() * 6.28, ln: (Math.random() - 0.5) * 2, w2: Math.random() * 6.28 }); }
+      if (acc > (deficient ? 0.22 : 0.5)) { acc = 0; if (!(reduce && deficient && pileN >= sc.cap)) parts.push({ k: 0, t: 0, type: "sub", st: "move", a: 1, j: Math.random() * 6.28, ln: (Math.random() - 0.5) * 2, w2: Math.random() * 6.28 }); }
       parts.forEach(function (p) {
         if (p.st === "move") {
           if (!run) return;
           p.t += dt * 0.36;
+          if (deficient && p.k === sc.pile && GEO) {
+            var q0 = pos(p), E = C[sc.blocked];
+            if (vertical ? q0[1] + 4.5 >= E.top : q0[0] + 4.5 >= E.x - E.w / 2) { launch(p, q0); return; }
+          }
           if (p.t >= 1) {
             p.k += 1; p.t = 0;
-            if (p.k % 2 === 1 && deficient && p.k === sc.blocked) {
-              if (vacuuming) { p.st = "suck"; p.fx = C[p.k - 1].x; p.fy = C[p.k - 1].y; p.u = 0; }
-              else if (pileN < sc.cap) { p.st = "pile"; p.sx = C[p.k - 1].x; p.sy = C[p.k - 1].y; p.k = sc.pile; p.i = pileN++; pileList.push(p); p.t = 0; p.g = 0; } else { p.st = "fade"; p.k = sc.pile; }
-            } else if (p.k === 6) { p.st = "fade"; }
+            if (p.k === 6) { p.st = "fade"; }
             else if (p.k % 2 === 0) { p.type = typeAt(p.k); }
           }
-        } else if (p.st === "pile") { p.g = (p.g || 0) + dt * 0.8; }
-        else if (p.st === "suck") { p.u += dt / 1.1; if (p.u >= 1) p.a = 0; }
+        } else if (p.st === "suck") { p.u += dt / 1.1; if (p.u >= 1) p.a = 0; }
         else if (p.st === "fade") { p.a -= dt * 1.6; }
       });
+      if (GEO && phase < 2) physics(dt);
       if (sc.crn && deficient && !vacuuming && pileList.length > 6) {
         tConv += dt; if (tConv > 0.8) { tConv = 0; var q = pileList[Math.floor(Math.random() * pileList.length)]; if (q.type === "cr") q.type = "crn"; }
       }
@@ -102,7 +133,7 @@
       }
     }
     function pos(p) {
-      if (p.st === "pile") { var s = slot(p.i), g = Math.min(1, p.g || 0), e = 1 - Math.pow(1 - g, 3); return [p.sx + (s[0] - p.sx) * e, p.sy + (s[1] - p.sy) * e]; }
+      if (p.st === "ball") return [p.x, p.y];
       if (p.st === "suck") {
         if (p.u <= 0) return [p.fx, p.fy];
         var e2 = p.u * p.u, dx = NZ[0] - p.fx, dy = NZ[1] - p.fy, L = Math.hypot(dx, dy) || 1, bend = Math.sin(Math.PI * e2) * 22 * (p.ln || 1);
@@ -115,10 +146,14 @@
     }
     function draw(now) {
       ctx.clearRect(0, 0, W, H);
+      if (deficient && GEO) {
+        var g = GEO; ctx.save(); ctx.globalAlpha = phase >= 2 ? 0.12 : 0.6; ctx.strokeStyle = col.sub; ctx.lineWidth = 2.5; ctx.lineJoin = "round"; ctx.lineCap = "round";
+        ctx.beginPath(); ctx.moveTo(g.Bl, g.Wt); ctx.lineTo(g.Bl, g.Ff + 1); ctx.lineTo(g.Br, g.Ff + 1); ctx.lineTo(g.Br, g.Wt); ctx.stroke(); ctx.restore();
+      }
       parts.forEach(function (p) {
-        var q = pos(p), j = p.st === "pile" ? Math.sin(now / 520 + p.j) * 1.3 : 0;
-        ctx.globalAlpha = Math.max(0, p.a) * (p.st === "pile" ? 0.92 : 0.95);
-        ctx.fillStyle = col[p.type]; ctx.beginPath(); ctx.arc(q[0] + j, q[1] + (p.st === "pile" ? Math.cos(now / 610 + p.j) * 1.3 : 0), p.st === "suck" ? Math.max(1.5, 5.2 * (1 - Math.max(0, p.u) * 0.7)) : p.st === "pile" ? 5.2 : 4, 0, 6.2832); ctx.fill();
+        var q = pos(p), j = 0;
+        ctx.globalAlpha = Math.max(0, p.a) * 0.95;
+        ctx.fillStyle = col[p.type]; ctx.beginPath(); ctx.arc(q[0] + j, q[1], p.st === "suck" ? Math.max(1.5, RB * (1 - Math.max(0, p.u) * 0.7)) : p.st === "ball" ? RB : 4.4, 0, 6.2832); ctx.fill();
       });
       if (vacuuming) { ctx.strokeStyle = col.sub; ctx.lineWidth = 1.6; ctx.lineCap = "round"; for (var k = 0; k < 7; k++) { var tt = (now / 700 + k / 7) % 1, ang = Math.PI + (k - 3) * 0.16, rr = 14 + (1 - tt) * 46; ctx.globalAlpha = 0.5 * tt; ctx.beginPath(); ctx.moveTo(NZ[0] + Math.cos(ang) * rr, NZ[1] + Math.sin(ang) * rr); ctx.lineTo(NZ[0] + Math.cos(ang) * (rr - 8), NZ[1] + Math.sin(ang) * (rr - 8)); ctx.stroke(); } }
       ctx.globalAlpha = 1;
