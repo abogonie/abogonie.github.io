@@ -736,3 +736,8 @@ footer { padding-top: 18px; }
 .auto-grid + p, .auto-grid ~ .grid { margin-top: 28px; }
 .hero-card { border: 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); border-radius: 0; background: none; box-shadow: none; padding: 4px 0; }
 .tierbox, .figure-soon, .soon { border-radius: 4px; }
+.cohort-wrap { margin-top: 20px; }
+.cohort-key { list-style: none; margin: 14px 0 0; padding: 0; display: grid; gap: 10px 24px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); font: 400 0.85rem/1.4 var(--font-ui); color: var(--muted); }
+.cohort-key li { display: flex; gap: 10px; align-items: flex-start; }
+.cohort-key i { flex: none; width: 11px; height: 11px; border-radius: 50%; margin-top: 4px; }
+.cohort-key b { color: var(--fg); font-weight: 600; }

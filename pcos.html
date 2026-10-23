@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Open+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
-<link rel="stylesheet" href="style.css?v=20261022h">
+<link rel="stylesheet" href="style.css?v=20261022j">
 </head>
 <body>
 <div class="progress" aria-hidden="true"></div>
@@ -57,7 +57,7 @@
       <div class="card rv" style="border-style:dashed"><span class="label">Not yet known</span><h3>Open questions</h3><p>How genetic risk relates to age at diagnosis and to co-occurring conditions is still being analyzed. Individual loci are underpowered, so none can be called replicated on its own. Effect sizes appear smaller than published, which is expected when published effects are inflated and PCOS is defined differently.</p></div>
     </div>
     <p class="fine rv" style="margin-top:14px">African and Latino/Admixed American groups are ones where PCOS genetics has been studied much less.</p>
-    <div class="panel rv" style="margin-top:28px"><h3>How a polygenic score is tested</h3><p class="sub">A score adds up the published risk variants a person carries. If the variants hold up, people with PCOS should tend to score a little higher.</p><svg id="pgs" role="img" aria-label="Two overlapping bell curves. The curve for people with PCOS sits slightly to the right of the curve for people without PCOS."></svg><div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between"><p class="ill">Illustration of the idea, not measured data.</p><button class="btn" id="pgsReplay" type="button">Replay</button></div></div>
+    <div class="panel rv" style="margin-top:28px"><h3>How a polygenic score is tested</h3><p class="sub">A score adds up the published risk variants a person carries. If the variants hold up, people with PCOS should tend to score a little higher.</p><svg id="pgs" role="img" aria-label="Two overlapping bell curves. The curve for people with PCOS sits slightly to the right of the curve for people without PCOS."></svg><div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between"><p class="ill">The analysis includes 4,768 cases and 283,890 controls. Dot counts are proportional to the people measured in each group (cases plus controls). Rings show PCOS cases at each group’s own rate, rounded up to at least one ring so every group is visible; the key lists the exact counts.</p><button class="btn" id="pgsReplay" type="button">Replay</button></div></div>
   </section>
 
   <section id="diverse-cohort" data-nav="Diverse cohort">
@@ -68,11 +68,12 @@
     <div class="two">
       <div class="prose rv">
         <p>PCOS genetics has been studied much less in some groups, including African and Latino/Admixed American populations. All of Us includes people from many ancestry groups, so it can ask whether the published risk loci hold up beyond the groups they were first found in.</p>
-        <p class="m">Each dot below is a person, and everyone starts out overlapped. Press the button to separate people by ancestry group. Rings mark people with PCOS. Group sizes are not to scale.</p>
+        <p class="m">Each dot below stands for about 150 people in the All of Us analysis, and everyone starts out overlapped. Press the button to separate them into the six ancestry groups examined. Rings mark people with PCOS.</p>
       </div>
-      <div class="cohort-wrap rv"><canvas id="cohort" role="img" aria-label="Illustration of four ancestry groups of people, with a few people in each group highlighted as having PCOS"></canvas></div>
+      
     </div>
-    <p class="ill rv" style="margin-top:12px">Illustration of the idea, not measured data.</p>
+    <div class="cohort-wrap rv"><canvas id="cohort" role="img" aria-label="Dots sized to the number of people measured in each of six ancestry groups: European, Admixed American, African, East Asian, South Asian and Middle Eastern, with a few in each group ringed as having PCOS"></canvas></div>
+    <p class="ill rv" style="margin-top:12px">The analysis includes 4,768 cases and 283,890 controls. Dot counts are proportional to the people measured in each group (cases plus controls). Rings show PCOS cases at each group’s own rate, rounded up to at least one ring so every group is visible; the key lists the exact counts.</p>
   </section>
 
   <section id="next" data-nav="Next">
@@ -120,8 +121,8 @@
     </footer>
   </section>
 </main>
-<script src="site.js?v=20261022h" defer></script>
-<script src="subnav.js?v=20261022h" defer></script>
-<script src="pcos.js?v=20261022h" defer></script>
+<script src="site.js?v=20261022j" defer></script>
+<script src="subnav.js?v=20261022j" defer></script>
+<script src="pcos.js?v=20261022j" defer></script>
 </body>
 </html>
