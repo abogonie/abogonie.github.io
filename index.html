@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Open+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
-<link rel="stylesheet" href="style.css?v=20261022e">
+<link rel="stylesheet" href="style.css?v=20261022h">
 </head>
 <body><svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
   <defs>
@@ -66,7 +66,6 @@
 
 <main class="wrap" id="top">
   <div class="hero">
-    <canvas class="neuro" aria-hidden="true"></canvas>
     <p class="label">iPSCs · NGN2 neurons · Cerebral organoids · Creatine metabolism</p>
     <h1>Modeling creatine deficiency in the developing <em>human</em> brain.</h1>
     <p class="lede">Cerebral creatine deficiency syndromes (CCDS) are inborn errors of creatine synthesis (AGAT and GAMT) and transport (SLC6A8). They present with intellectual disability, epilepsy and developmental delay. In plain terms, the brain cannot make or take up the creatine it uses as an energy reserve, and children pay for it while they develop. I model these disorders in patient-derived and CRISPR-edited iPSCs, NGN2 cortical neurons and cerebral organoids, and pair the models with population genetics.</p>
@@ -254,10 +253,10 @@
       <figcaption>CellXpress.ai (Molecular Devices), the automated culture system used here.</figcaption>
     </figure>
     <div class="pipe">
-      <div><span class="label">Step 1</span><b>Plate</b><p>96-well plates laid out by genotype and treatment, with untreated controls for each.</p></div>
-      <div><span class="label">Step 2</span><b>CellXpress.ai</b><p>Automated feeding, passaging and imaging on a fixed schedule for iPSCs, neurons and organoids.</p></div>
-      <div><span class="label">Step 3</span><b>IN Carta</b><p>Segmentation models trained on my own annotations trace neuronal soma and neurite outgrowth in every image.</p></div>
-      <div><span class="label">Step 4</span><b>Readout</b><p>Per-well measurements ready to compare across genotype, treatment and day.</p></div>
+      <div><b>Plate</b><p>96-well plates laid out by genotype and treatment, with untreated controls for each.</p></div>
+      <div><b>CellXpress.ai</b><p>Automated feeding, passaging and imaging on a fixed schedule for iPSCs, neurons and organoids.</p></div>
+      <div><b>IN Carta</b><p>Segmentation models trained on my own annotations trace neuronal soma and neurite outgrowth in every image.</p></div>
+      <div><b>Readout</b><p>Per-well measurements ready to compare across genotype, treatment and day.</p></div>
     </div>
     </div>
     <p class="pipe-note rv">The same platform that measures neuronal maturation is used to look for ways to correct it, because existing treatment cannot reverse damage once it has occurred.</p>
@@ -290,9 +289,9 @@
     </div>
     <div class="rv" style="display:grid;gap:18px;margin-bottom:24px"><div class="notice rv" role="note"><span aria-hidden="true">●</span><span><b>Preliminary.</b> These results come from a manuscript in preparation. They have not been peer reviewed or published, and the numbers may change.</span></div></div>
     <div class="grid" style="margin-bottom:24px">
-      <div class="card rv"><p class="label">Step 1</p><h3>Confirmed pathogenic</h3><p>Listed as pathogenic or likely pathogenic in ClinVar, or reported in patients with the disease.</p></div>
-      <div class="card rv"><p class="label">Step 2</p><h3>Likely pathogenic</h3><p>Variants that should stop the gene working (premature stop, frameshift, splice-site or start-loss) but have not been reported in patients.</p></div>
-      <div class="card rv"><p class="label">Step 3</p><h3>In silico pathogenic</h3><p>Missense or splice changes that computer tools (REVEL, SpliceAI) predict to be damaging but nobody has classified yet.</p></div>
+      <div class="card rv"><h3>Confirmed pathogenic</h3><p>Listed as pathogenic or likely pathogenic in ClinVar, or reported in patients with the disease.</p></div>
+      <div class="card rv"><h3>Likely pathogenic</h3><p>Variants that should stop the gene working (premature stop, frameshift, splice-site or start-loss) but have not been reported in patients.</p></div>
+      <div class="card rv"><h3>In silico pathogenic</h3><p>Missense or splice changes that computer tools (REVEL, SpliceAI) predict to be damaging but nobody has classified yet.</p></div>
     </div>
     <div class="stats rv">
       <a class="stat" href="agat.html"><span class="label">AGAT · GATM</span><span class="num">1 in 5,600 to 20,600</span><p>Carrier frequency. One affected US birth every 35 to 470 years. Carriers have 9.6% lower serum creatinine.</p></a>
@@ -379,11 +378,11 @@
   </section>
 </main>
 
-<script src="site.js?v=20261022e" defer></script>
-<script src="neuro.js?v=20261022e" defer></script>
-<script src="subnav.js?v=20261022e" defer></script>
-<script src="popgen.js?v=20261022e" defer></script>
-<script src="aav.js?v=20261022e" defer></script>
+<script src="site.js?v=20261022h" defer></script>
+<script src="neuro.js?v=20261022h" defer></script>
+<script src="subnav.js?v=20261022h" defer></script>
+<script src="popgen.js?v=20261022h" defer></script>
+<script src="aav.js?v=20261022h" defer></script>
 <script>
 (function () {
   var root = document.documentElement;
