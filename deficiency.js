@@ -27,7 +27,7 @@
     bH.type = bD.type = "button"; bH.textContent = "Healthy"; bD.textContent = "With deficiency";
     seg.appendChild(bH); seg.appendChild(bD);
     var legend = document.createElement("div"); legend.className = "keyline";
-    legend.innerHTML = '<span><i style="--c:var(--muted)"></i>Arginine + glycine</span><span><i style="--c:var(--warn)"></i>Guanidinoacetate</span><span><i style="--c:var(--accent)"></i>Creatine</span>' + (sc.crn ? '<span><i style="--c:var(--fold)"></i>Creatinine</span>' : "");
+    legend.innerHTML = '<span><i style="--c:#8b5cf6"></i>Arginine</span><span><i style="--c:#e0529c"></i>Glycine</span><span><i style="--c:var(--warn)"></i>Guanidinoacetate</span><span><i style="--c:var(--accent)"></i>Creatine</span>' + (sc.crn ? '<span><i style="--c:var(--fold)"></i>Creatinine</span>' : "");
     var cap = document.createElement("p"); cap.className = "callnote defic-cap"; cap.setAttribute("aria-live", "polite");
     ctl.appendChild(seg); ctl.appendChild(legend); ctl.appendChild(cap); host.appendChild(ctl); host.appendChild(mon);
     var badges = {};
@@ -35,7 +35,7 @@
 
     var PAD = null, swingT = -1, GEO = null, geoKey = "", GR = 420, RB = 5, vacuuming = false, phase = 0, ph = 0, vacT = 0, NZ = [0, 0], deficient = true, parts = [], pileN = 0, pileList = [], acc = 0, tConv = 0, W = 0, H = 0, dpr = 1, C = [], vertical = false, visible = true, last = 0, raf = 0;
     var col = {};
-    function colors() { col = { sub: css("--muted") || "#667", gaa: css("--warn") || "#c60", cr: css("--accent") || "#25c", crn: css("--fold") || "#0a8" }; }
+    function colors() { col = { arg: "#8b5cf6", gly: "#e0529c", sub: css("--muted") || "#667", gaa: css("--warn") || "#c60", cr: css("--accent") || "#25c", crn: css("--fold") || "#0a8" }; }
     function layout() {
       var r = host.getBoundingClientRect(), sc2 = host.offsetWidth ? r.width / host.offsetWidth : 1; W = host.offsetWidth; H = host.offsetHeight; dpr = Math.min(2, window.devicePixelRatio || 1);
       cv.width = W * dpr; cv.height = H * dpr; cv.style.width = W + "px"; cv.style.height = H + "px"; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -118,7 +118,7 @@
     function typeAt(k) { return k < 2 ? "sub" : k < 4 ? "gaa" : "cr"; }
     function step(dt) {
       var run = phase === 0; if (run) acc += dt;
-      if (acc > (deficient ? 0.3 : 0.5)) { acc = 0; if (!(reduce && deficient && pileN >= sc.cap)) parts.push({ k: 0, t: 0, type: "sub", st: "move", a: 1, j: Math.random() * 6.28, ln: (Math.random() - 0.5) * 2, w2: Math.random() * 6.28 }); }
+      if (acc > (deficient ? 0.3 : 0.5)) { acc = 0; if (!(reduce && deficient && pileN >= sc.cap)) parts.push({ k: 0, t: 0, s: Math.random() < 0.5, type: "sub", st: "move", a: 1, j: Math.random() * 6.28, ln: (Math.random() - 0.5) * 2, w2: Math.random() * 6.28 }); }
       parts.forEach(function (p) {
         if (p.st === "move") {
           if (!run) return;
@@ -175,7 +175,7 @@
       parts.forEach(function (p) {
         var q = pos(p), j = 0;
         ctx.globalAlpha = Math.max(0, p.a) * 0.95;
-        ctx.fillStyle = col[p.type]; ctx.beginPath(); ctx.arc(q[0] + j, q[1], p.st === "suck" ? Math.max(1.5, RB * (1 - Math.max(0, p.u) * 0.7)) : p.st === "ball" ? RB : 4.4, 0, 6.2832); ctx.fill();
+        ctx.fillStyle = col[p.type === "sub" ? (p.s ? "gly" : "arg") : p.type]; ctx.beginPath(); ctx.arc(q[0] + j, q[1], p.st === "suck" ? Math.max(1.5, RB * (1 - Math.max(0, p.u) * 0.7)) : p.st === "ball" ? RB : 4.4, 0, 6.2832); ctx.fill();
       });
       if (vacuuming) { ctx.strokeStyle = col.sub; ctx.lineWidth = 1.6; ctx.lineCap = "round"; for (var k = 0; k < 7; k++) { var tt = (now / 700 + k / 7) % 1, ang = Math.PI + (k - 3) * 0.16, rr = 14 + (1 - tt) * 46; ctx.globalAlpha = 0.5 * tt; ctx.beginPath(); ctx.moveTo(NZ[0] + Math.cos(ang) * rr, NZ[1] + Math.sin(ang) * rr); ctx.lineTo(NZ[0] + Math.cos(ang) * (rr - 8), NZ[1] + Math.sin(ang) * (rr - 8)); ctx.stroke(); } }
       ctx.globalAlpha = 1;
