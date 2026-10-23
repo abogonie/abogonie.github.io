@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="Research by Aleksander Bogoniewski on iPSC-derived neurons, cerebral organoids and creatine deficiency (GAMT).">
 <meta name="theme-color" content="#1d5bd8">
@@ -68,7 +69,7 @@
     <canvas class="neuro" aria-hidden="true"></canvas>
     <p class="label">iPSCs · NGN2 neurons · Cerebral organoids · Creatine metabolism</p>
     <h1>Modeling creatine deficiency in the developing <em>human</em> brain.</h1>
-    <p class="lede">Guanidinoacetate N-methyltransferase (GAMT) catalyzes the final step of creatine biosynthesis. Loss-of-function variants cause a neurodevelopmental disorder marked by intellectual disability, epilepsy and developmental delay, and the same pathway includes AGAT and the creatine transporter SLC6A8. I use patient-derived and CRISPR-edited iPSCs, cortical neurons and cerebral organoids to define how creatine deficiency alters human brain development.</p>
+    <p class="lede">Cerebral creatine deficiency syndromes (CCDS) are inborn errors of creatine synthesis (AGAT and GAMT) and transport (SLC6A8). They present with intellectual disability, epilepsy and developmental delay. In plain terms, the brain cannot make or take up the creatine it uses as an energy reserve, and children pay for it while they develop. I model these disorders in patient-derived and CRISPR-edited iPSCs, NGN2 cortical neurons and cerebral organoids, and pair the models with population genetics.</p>
     <div class="first">
       <span class="label">What is distinctive</span>
       <ul>
@@ -76,17 +77,35 @@
         <li>To my knowledge, the only platform that combines automated human neuron modeling, drug screening and AAV gene editing for these disorders.</li>
       </ul>
     </div>
-    <div class="caps" aria-label="Capabilities"><span>Automated culture and imaging</span><span>Drug screening</span><span>AAV gene editing</span><span>Population genetics</span></div>
     <div class="cta-row">
       <a class="btn primary" href="#projects">See the projects</a>
       <a class="btn" href="#research">Lab research</a>
       <a class="btn" href="https://scholar.google.com/citations?user=MNiEL0IAAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar</a>
     </div>
 
-    <div class="hero-art" aria-hidden="false">
-      <figure><img src="img/neurons.jpg" width="620" height="360" alt="iPSC-derived neurons at day 21, stained for nuclei and NeuN"><figcaption>iPSC-derived neurons</figcaption></figure>
-      <figure><img src="img/organoid.jpg" width="784" height="388" alt="Cerebral organoid at day 150, immunostained"><figcaption>Cerebral organoid</figcaption></figure>
-    </div>
+<figure class="cx hero-art" id="cx">
+      <div class="cx-stage">
+        <img src="img/cellxpress.webp" width="1200" height="1165" alt="CellXpress.ai automated cell culture system from Molecular Devices">
+        <svg class="cx-fx" viewBox="0 0 1871 1817" aria-hidden="true" focusable="false">
+          <defs>
+            <filter id="cxglow" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="6"/></filter>
+            <linearGradient id="cxtrail" x1="1" x2="0"><stop offset="0" stop-color="#5cf2ff" stop-opacity=".55"/><stop offset="1" stop-color="#5cf2ff" stop-opacity="0"/></linearGradient>
+          </defs>
+          <path class="cx-strip" d="M384.7 826.1 H1541.8 Q1574.4 831.5 1579.8 875.0 L1603.7 1092.3 Q1610.2 1131.4 1647.2 1132.5 H1842.7" filter="url(#cxglow)"/>
+          <path class="cx-strip cx-strip-core" d="M384.7 826.1 H1541.8 Q1574.4 831.5 1579.8 875.0 L1603.7 1092.3 Q1610.2 1131.4 1647.2 1132.5 H1842.7"/>
+          <rect class="cx-screen" x="1620.0" y="369.8" width="157.5" height="149.9" rx="6"/>
+          <g class="cx-blips"><rect x="1627.6" y="427.3" width="12.0" height="12.0" rx="2" style="animation-delay:0.00s"/><rect x="1646.1" y="427.3" width="12.0" height="12.0" rx="2" style="animation-delay:0.37s"/><rect x="1664.6" y="427.3" width="12.0" height="12.0" rx="2" style="animation-delay:0.74s"/><rect x="1683.0" y="427.3" width="12.0" height="12.0" rx="2" style="animation-delay:1.11s"/><rect x="1627.6" y="448.0" width="12.0" height="12.0" rx="2" style="animation-delay:1.48s"/><rect x="1646.1" y="448.0" width="12.0" height="12.0" rx="2" style="animation-delay:1.85s"/><rect x="1664.6" y="448.0" width="12.0" height="12.0" rx="2" style="animation-delay:2.22s"/><rect x="1683.0" y="448.0" width="12.0" height="12.0" rx="2" style="animation-delay:0.19s"/><rect x="1627.6" y="468.6" width="12.0" height="12.0" rx="2" style="animation-delay:0.56s"/><rect x="1646.1" y="468.6" width="12.0" height="12.0" rx="2" style="animation-delay:0.93s"/><rect x="1664.6" y="468.6" width="12.0" height="12.0" rx="2" style="animation-delay:1.30s"/><rect x="1683.0" y="468.6" width="12.0" height="12.0" rx="2" style="animation-delay:1.67s"/></g>
+          <g class="cx-scan"><rect x="449.6" y="619.7" width="60" height="124.9" fill="url(#cxtrail)"/><rect x="509.6" y="619.7" width="3" height="124.9" fill="#8ff7ff"/></g>
+          <g class="cx-head"><rect x="556.3" y="392.6" width="28.2" height="28.2" rx="5" fill="#5cf2ff" filter="url(#cxglow)"/><rect x="559.6" y="395.8" width="21.7" height="21.7" rx="4" fill="#d9fdff"/><path d="M570.4 420.8 V572.9" stroke="#5cf2ff" stroke-width="3" stroke-dasharray="3 6" opacity=".7"/><circle class="cx-drop" cx="570.4" cy="579.5" r="7"/><circle class="cx-drop" cx="570.4" cy="579.5" r="7" style="animation-delay:.9s"/></g>
+        </svg>
+      </div>
+      <ol class="cx-steps" aria-label="What the system does">
+        <li style="--i:0"><b>Feed</b><span>automated media changes</span></li>
+        <li style="--i:1"><b>Image</b><span>high-content scans</span></li>
+        <li style="--i:2"><b>Analyze</b><span>IN Carta segmentation</span></li>
+      </ol>
+      <figcaption>CellXpress.ai (Molecular Devices), the automated culture system used here.</figcaption>
+    </figure>
 
     <div class="glance rv">
       <div><b><span data-count="1342824">1,342,824</span></b><span>genomes analyzed (All of Us + gnomAD)</span></div>
@@ -95,6 +114,63 @@
       <div><b>6</b><span>conference talks, 2022 to 2026</span></div>
     </div>
 
+  </div>
+
+  <section id="projects" data-nav="Projects">
+    <div class="sec-head rv">
+      <p class="label">Projects</p>
+      <h2>From a patient variant to a candidate therapy</h2>
+      <p>My neuroscience research follows one question from the genome to the dish: how does a missing metabolite change the developing human brain, and can it be corrected? Population genetics shows which variants matter, stem-cell neurons show what they do, and automation lets me test treatments at scale.</p>
+    </div>
+    <div class="chain five rv">
+      <a class="node" href="#research"><span class="step">01</span><h3>Patient-derived iPSCs</h3><p>Lines from patients, plus CRISPR-edited lines that remove the gene.</p></a>
+      <i class="flow" style="--d:0s" aria-hidden="true"></i>
+      <a class="node" href="#research"><span class="step">02</span><h3>Neurons and organoids</h3><p>NGN2 cortical neurons and cerebral organoids that follow early human development.</p></a>
+      <i class="flow" style="--d:0.5s" aria-hidden="true"></i>
+      <a class="node" href="#automation"><span class="step">03</span><h3>Automated culture and imaging</h3><p>CellXpress.ai handles the cells and IN Carta reads every image.</p></a>
+      <i class="flow" style="--d:1s" aria-hidden="true"></i>
+      <a class="node" href="#automation"><span class="step">04</span><h3>Drug screening</h3><p>Small molecules tested under identical, automated conditions.</p></a>
+      <i class="flow" style="--d:1.5s" aria-hidden="true"></i>
+      <a class="node" href="#automation"><span class="step">05</span><h3>AAV gene editing</h3><p>Gene-based strategies to correct the defect.</p></a>
+    </div>
+  </section>
+
+  <section id="research" data-nav="Models">
+    <div class="sec-head rv">
+      <p class="label">Research</p>
+      <h2>Human models of GAMT deficiency</h2>
+      <p>Neurologic injury in GAMT deficiency is irreversible once symptoms begin, and current treatment with creatine, L-ornithine and sodium benzoate cannot reverse established damage. In plain terms, by the time a child shows symptoms the harm is done. These models test how creatine deficiency disrupts human neurodevelopment, and whether earlier intervention could prevent it.</p>
+    </div>
+    <div class="grid">
+      <div class="card rv">
+        <figure class="fig">
+          <img src="img/organoid.jpg" width="784" height="388" loading="lazy" alt="Cerebral organoid at day 150, immunostained for DAPI, Olig2, GFAP and synaptophysin">
+          <figcaption>Cerebral organoid, day 150. DAPI (nuclei), Olig2 (oligodendrocyte lineage), GFAP (astrocytes), synaptophysin (synapses).</figcaption>
+        </figure>
+        <p class="label">Organoids</p>
+        <h3>Cerebral organoids</h3>
+        <p>Patient-derived and CRISPR-edited iPSCs are patterned into cerebral organoids that follow early human cortical development. GAMT-deficient organoids show delayed neuronal maturation, few mature high-energy neurons, and altered stem cell proliferation.</p>
+        <div class="meta"><span class="tag">iPSC-derived</span><span class="tag">Maturation</span><span class="tag">Proliferation</span></div>
+      </div>
+      <div class="card rv">
+        <figure class="fig">
+          <img src="img/neurons.jpg" width="620" height="360" loading="lazy" alt="Day 21 iPSC-derived neurons imaged at 1000x and 2000x, stained for Hoechst, endogenous GFP and NeuN">
+          <figcaption>iPSC-derived neurons, day 21, 1000× and 2000×. Hoechst (nuclei), endogenous GFP, NeuN (mature neurons).</figcaption>
+        </figure>
+        <p class="label">Neurons</p>
+        <h3>Cortical neurons from a GAMT knockout line</h3>
+        <p>A CRISPR GAMT knockout iPSC line shows marked suppression of the creatine pathway and downstream metabolism, partially rescued by 72 hours of creatine supplementation. NGN2-induced cortical neurons from this line are delayed in maturation. To our knowledge, this is the first human iPSC-to-neuron model of GAMT deficiency.</p>
+        <div class="meta"><span class="tag">CRISPR knockout</span><span class="tag">NGN2 neurons</span><span class="tag">High-content imaging</span></div>
+      </div>
+      <div class="card rv">
+        <svg class="st" viewBox="0 0 580 210" role="img" aria-label="Skeletal structures of guanidinoacetate and creatine"><use href="#s-gaa" x="0" y="0" width="280" height="190"/><use href="#s-cr" x="300" y="0" width="280" height="190"/><text class="st-cap" x="140" y="204">GAA</text><text class="st-cap" x="440" y="204">Creatine</text></svg>
+        <p class="label">Metabolism</p>
+        <h3>Creatine and guanidinoacetate</h3>
+        <p>GAMT transfers a methyl group from S-adenosylmethionine to GAA to form creatine. Loss of function depletes creatine and causes GAA to accumulate. The work compares how each metabolite affects iPSC proliferation and neuronal maturation, with and without a functional pathway.</p>
+        <div class="meta"><span class="tag">GAMT</span><span class="tag">Supplementation</span><span class="tag">Neurodevelopment</span></div>
+      </div>
+    </div>
+    <div class="rv" style="margin-top:32px">
     <div class="demo" id="demo">
       <div class="demo-head">
         <h2>Creatine biosynthesis: GATM and GAMT</h2>
@@ -153,75 +229,14 @@
         <p class="fine">Schematic of pathway logic, not experimental data. Arrow width scales with relative flux and bar length with relative level.</p>
       </div>
     </div>
-  </div>
-
-  <section id="projects" data-nav="Projects">
-    <div class="sec-head rv">
-      <p class="label">Projects</p>
-      <h2>From a patient variant to a candidate therapy</h2>
-      <p>My neuroscience research follows one question from the genome to the dish: how does a missing metabolite change the developing human brain, and can it be corrected? Population genetics shows which variants matter, stem-cell neurons show what they do, and automation lets me test treatments at scale.</p>
-    </div>
-    <div class="chain five rv">
-      <a class="node" href="#research"><span class="step">01</span><h3>Patient-derived iPSCs</h3><p>Lines from patients, plus CRISPR-edited lines that remove the gene.</p></a>
-      <i class="flow" style="--d:0s" aria-hidden="true"></i>
-      <a class="node" href="#research"><span class="step">02</span><h3>Neurons and organoids</h3><p>NGN2 cortical neurons and cerebral organoids that follow early human development.</p></a>
-      <i class="flow" style="--d:0.5s" aria-hidden="true"></i>
-      <a class="node" href="#automation"><span class="step">03</span><h3>Automated culture and imaging</h3><p>CellXpress.ai handles the cells and IN Carta reads every image.</p></a>
-      <i class="flow" style="--d:1s" aria-hidden="true"></i>
-      <a class="node" href="#therapeutics"><span class="step">04</span><h3>Drug screening</h3><p>Small molecules tested under identical, automated conditions.</p></a>
-      <i class="flow" style="--d:1.5s" aria-hidden="true"></i>
-      <a class="node" href="#therapeutics"><span class="step">05</span><h3>AAV gene editing</h3><p>Gene-based strategies to correct the defect.</p></a>
-    </div>
-    <div class="grid">
-      <a class="card rv" href="agat.html" style="text-decoration:none"><span class="label">Creatine pathway</span><h3>AGAT</h3><p>Step one: carrier frequency and the creatinine signal.</p></a>
-      <a class="card rv" href="gamt.html" style="text-decoration:none"><span class="label">Creatine pathway</span><h3>GAMT</h3><p>Step two: recurrent variants, ancestry, and neuron models.</p></a>
-      <a class="card rv" href="slc6a8.html" style="text-decoration:none"><span class="label">Creatine pathway</span><h3>SLC6A8</h3><p>Transport into cells: the most common of the three.</p></a>
-      <a class="card rv" href="pcos.html" style="text-decoration:none;border-style:dashed"><span class="label">Side project · Women’s health</span><h3>PCOS</h3><p>Co-occurring conditions, age at diagnosis and genetic markers in a diverse population.</p></a>
-    </div>
-  </section>
-
-  <section id="research" data-nav="Models">
-    <div class="sec-head rv">
-      <p class="label">Research</p>
-      <h2>Human models of GAMT deficiency</h2>
-      <p>Neurologic injury in GAMT deficiency is irreversible once symptoms begin, and current treatment with creatine, L-ornithine and sodium benzoate cannot reverse established damage. These models test how creatine deficiency disrupts human neurodevelopment, and whether earlier intervention could prevent it.</p>
-    </div>
-    <div class="grid">
-      <div class="card rv">
-        <figure class="fig">
-          <img src="img/organoid.jpg" width="784" height="388" loading="lazy" alt="Cerebral organoid at day 150, immunostained for DAPI, Olig2, GFAP and synaptophysin">
-          <figcaption>Cerebral organoid, day 150. DAPI (nuclei), Olig2 (oligodendrocyte lineage), GFAP (astrocytes), synaptophysin (synapses).</figcaption>
-        </figure>
-        <p class="label">Organoids</p>
-        <h3>Cerebral organoids</h3>
-        <p>Patient-derived and CRISPR-edited iPSCs are patterned into cerebral organoids that follow early human cortical development. GAMT-deficient organoids show delayed neuronal maturation, few mature high-energy neurons, and altered stem cell proliferation.</p>
-        <div class="meta"><span class="tag">iPSC-derived</span><span class="tag">Maturation</span><span class="tag">Proliferation</span></div>
-      </div>
-      <div class="card rv">
-        <figure class="fig">
-          <img src="img/neurons.jpg" width="620" height="360" loading="lazy" alt="Day 21 iPSC-derived neurons imaged at 1000x and 2000x, stained for Hoechst, endogenous GFP and NeuN">
-          <figcaption>iPSC-derived neurons, day 21, 1000× and 2000×. Hoechst (nuclei), endogenous GFP, NeuN (mature neurons).</figcaption>
-        </figure>
-        <p class="label">Neurons</p>
-        <h3>Cortical neurons from a GAMT knockout line</h3>
-        <p>A CRISPR GAMT knockout iPSC line shows marked suppression of the creatine pathway and downstream metabolism, partially rescued by 72 hours of creatine supplementation. NGN2-induced cortical neurons from this line are delayed in maturation. To our knowledge, this is the first human iPSC-to-neuron model of GAMT deficiency.</p>
-        <div class="meta"><span class="tag">CRISPR knockout</span><span class="tag">NGN2 neurons</span><span class="tag">High-content imaging</span></div>
-      </div>
-      <div class="card rv">
-        <svg class="st" viewBox="0 0 580 210" role="img" aria-label="Skeletal structures of guanidinoacetate and creatine"><use href="#s-gaa" x="0" y="0" width="280" height="190"/><use href="#s-cr" x="300" y="0" width="280" height="190"/><text class="st-cap" x="140" y="204">GAA</text><text class="st-cap" x="440" y="204">Creatine</text></svg>
-        <p class="label">Metabolism</p>
-        <h3>Creatine and guanidinoacetate</h3>
-        <p>GAMT transfers a methyl group from S-adenosylmethionine to GAA to form creatine. Loss of function depletes creatine and causes GAA to accumulate. The work compares how each metabolite affects iPSC proliferation and neuronal maturation, with and without a functional pathway.</p>
-        <div class="meta"><span class="tag">GAMT</span><span class="tag">Supplementation</span><span class="tag">Neurodevelopment</span></div>
-      </div>
     </div>
   </section>
 
   <section id="automation" data-nav="Automation">
     <div class="sec-head rv">
-      <p class="label">Automation</p>
+      <p class="label">Automation and screening</p>
       <h2>Robots feed the cells, software reads the images</h2>
-      <p>My cultures run on a CellXpress.ai automated cell culture system from Molecular Devices, and its images feed directly into IN Carta for analysis. Every plate receives the same handling on the same schedule, which removes operator variability from the measurements.</p>
+      <p>My cultures run on a CellXpress.ai automated cell culture system from Molecular Devices, and its images feed directly into IN Carta for analysis. Every plate receives the same handling on the same schedule, which removes operator variability from the measurements. In plain terms, robots do the feeding and photographing, so every dish is treated exactly alike.</p>
     </div>
     <div class="pipe rv">
       <div><span class="label">Step 1</span><b>Plate</b><p>96-well plates laid out by genotype and treatment, with untreated controls for each.</p></div>
@@ -229,15 +244,7 @@
       <div><span class="label">Step 3</span><b>IN Carta</b><p>Segmentation models trained on my own annotations trace neuronal soma and neurite outgrowth in every image.</p></div>
       <div><span class="label">Step 4</span><b>Readout</b><p>Per-well measurements ready to compare across genotype, treatment and day.</p></div>
     </div>
-    <p class="pipe-note rv">Automation is what makes the maturation question quantifiable. Thousands of images across many days and conditions are processed identically, so a developmental delay appears as a pattern in the numbers.</p>
-  </section>
-
-  <section id="therapeutics" data-nav="Therapeutics">
-    <div class="sec-head rv">
-      <p class="label">Therapeutics</p>
-      <h2>Screening for drugs and testing gene-based repair</h2>
-      <p>Treatment for these disorders is limited, and existing damage cannot be reversed. The same automated platform that measures neuronal maturation is used to look for ways to correct it.</p>
-    </div>
+    <p class="pipe-note rv">The same platform that measures neuronal maturation is used to look for ways to correct it, because existing treatment cannot reverse damage once it has occurred.</p>
     <div class="grid">
       <div class="card rv"><span class="label">Small molecules</span><h3>Drug screening</h3><p>Compounds are tested on patient-derived and gene-edited neurons, with every plate handled and imaged on the same schedule.</p></div>
       <div class="card rv"><span class="label">Gene therapy</span><h3>AAV gene editing</h3><p>AAV vectors are used to test gene-based strategies, including for SLC6A8 deficiency, which does not respond to creatine supplementation.</p></div>
@@ -248,7 +255,7 @@
     <div class="sec-head rv">
       <p class="label">Population genetics</p>
       <h2>How common are the cerebral creatine deficiency syndromes?</h2>
-      <p>Earlier estimates relied on known pathogenic variants in mostly European cohorts. We analyzed <span data-count="535662">535,662</span> All of Us genomes and 807,162 gnomAD v4 exomes and genomes for variants in <span class="gene">GATM</span> (AGAT), <span class="gene">GAMT</span> and <span class="gene">SLC6A8</span>, and sorted each variant into three groups, from the most certain to the least. Each group is added to the one before it.</p>
+      <p>Earlier estimates relied on known pathogenic variants in mostly European cohorts. We analyzed <span data-count="535662">535,662</span> All of Us genomes and 807,162 gnomAD v4 exomes and genomes for variants in <span class="gene">GATM</span> (AGAT), <span class="gene">GAMT</span> and <span class="gene">SLC6A8</span>, and sorted each variant into three groups, from the most certain to the least. Each group is added to the one before it. In plain terms, we counted how many people quietly carry one broken copy of these genes.</p>
     </div>
     <div class="rv" style="display:grid;gap:18px;margin-bottom:24px"><div class="notice rv" role="note"><span aria-hidden="true">●</span><span><b>Preliminary.</b> These results come from a manuscript in preparation. They have not been peer reviewed or published, and the numbers may change.</span></div></div>
     <div class="grid" style="margin-bottom:24px">
@@ -261,6 +268,7 @@
       <a class="stat" href="gamt.html"><span class="label">GAMT</span><span class="num">1 in 430 to 720</span><p>Carrier frequency. Two to five affected US births a year, with more unclassified variants in non-European ancestry groups.</p></a>
       <a class="stat" href="slc6a8.html"><span class="label">SLC6A8 · CTD</span><span class="num">1 in 6,400 to 14,800</span><p>Female carrier frequency. About 18 times as many predicted affected births as GAMT deficiency.</p></a>
     </div>
+    <a class="card rv" href="pcos.html" style="text-decoration:none;border-style:dashed;margin-top:24px;max-width:560px"><span class="label">Side project · Women’s health</span><h3>PCOS</h3><p>Co-occurring conditions, age at diagnosis and genetic markers in a diverse population.</p></a>
   </section>
 
   <section id="talks" data-nav="Talks">

@@ -527,3 +527,30 @@ footer a { text-decoration: none; } footer a:hover { text-decoration: underline;
 @keyframes monshake { 0%, 100% { transform: translate(0, 0); } 25% { transform: translate(-1.2px, 0.8px); } 75% { transform: translate(1.2px, -0.8px); } }
 @media (prefers-reduced-motion: reduce) { .mon { transition: none; } .mon-body, .mon-eyes, .mon.on .mon-body, .mon.on .mon-arm { animation: none; } }
 .cohort-wrap .btn { margin: 6px 0 4px 8px; }
+
+/* ---- CellXpress.ai figure ---- */
+.cx { display: grid; gap: 14px; align-self: center; margin: 0; }
+.cx-stage { position: relative; border-radius: 24px; padding: 8px 4px; background: radial-gradient(120% 90% at 50% 30%, color-mix(in srgb, var(--accent) 14%, var(--surface)), var(--surface)); border: 1px solid var(--line); overflow: hidden; }
+.cx-stage img { display: block; width: 100%; height: auto; border-radius: 0; border: 0; position: relative; }
+.cx-fx { position: absolute; inset: 8px 4px; width: calc(100% - 8px); height: calc(100% - 16px); pointer-events: none; }
+.cx figcaption { position: static; background: none; padding: 0; text-transform: none; letter-spacing: 0; font: 400 .8rem/1.4 var(--font-body); color: var(--muted); }
+.cx-strip { fill: none; stroke: #5cf2ff; stroke-width: 22; stroke-linecap: round; stroke-dasharray: 150 760; opacity: .9; animation: cxrun 5s linear infinite; }
+.cx-strip-core { stroke: #b9fbff; stroke-width: 7; }
+.cx-screen { fill: #5cf2ff; opacity: .1; animation: cxpulse 2.6s ease-in-out infinite; }
+.cx-blips rect { fill: #7dffb2; opacity: 0; animation: cxblip 2.4s ease-in-out infinite; }
+.cx-scan { animation: cxscan 4.5s ease-in-out infinite alternate; }
+.cx-head { animation: cxhead 9s ease-in-out infinite alternate; }
+.cx-drop { fill: #8ff7ff; opacity: 0; animation: cxdrop 1.8s ease-in infinite; }
+@keyframes cxrun { to { stroke-dashoffset: -910; } }
+@keyframes cxpulse { 50% { opacity: .28; } }
+@keyframes cxblip { 0%, 100% { opacity: 0; } 40%, 60% { opacity: .9; } }
+@keyframes cxscan { from { transform: translateX(0); } to { transform: translateX(885px); } }
+@keyframes cxhead { from { transform: translateX(0); } to { transform: translateX(870px); } }
+@keyframes cxdrop { 0% { transform: translateY(0); opacity: 0; } 15% { opacity: 1; } 100% { transform: translateY(80px); opacity: 0; } }
+.cx-steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.cx-steps li { display: grid; gap: 2px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); animation: cxstep 9s infinite; animation-delay: calc(var(--i) * 3s); }
+.cx-steps b { font: 700 .85rem/1.2 var(--font-body); }
+.cx-steps span { font-size: .72rem; color: var(--muted); }
+@keyframes cxstep { 0%, 33% { border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 18%, transparent); } 34%, 100% { border-color: var(--line); box-shadow: none; } }
+@media (max-width: 959px) { .cx.hero-art { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: reduce) { .cx-strip, .cx-screen, .cx-blips rect, .cx-scan, .cx-head, .cx-drop, .cx-steps li { animation: none; } .cx-strip { stroke-dasharray: none; opacity: .5; } .cx-drop, .cx-scan { display: none; } }
