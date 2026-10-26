@@ -741,3 +741,4 @@ footer { padding-top: 18px; }
 .cohort-key li { display: flex; gap: 10px; align-items: flex-start; }
 .cohort-key i { flex: none; width: 11px; height: 11px; border-radius: 50%; margin-top: 4px; }
 .cohort-key b { color: var(--fg); font-weight: 600; }
+.defic .strip .enz.on:not(.blocked) { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
