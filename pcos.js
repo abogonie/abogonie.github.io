@@ -51,6 +51,26 @@
       ctx.clearRect(0, 0, W, H); var k = started ? Math.min(1, (now - t0) / 1600) : 0, g = 1 - Math.pow(1 - k, 3), dtt = lastNow ? Math.min(.05, (now - lastNow) / 1000) : 0; lastNow = now; sepC += (sepT - sepC) * Math.min(1, dtt * 2.4); if (Math.abs(sepT - sepC) < .002) sepC = sepT; var e = sepC * sepC * (3 - 2 * sepC);
       if (!drag && !reduce) { rotY += vY * dtt; rotX += vX * dtt; vX *= Math.pow(0.12, dtt); vY += (0.25 - vY) * Math.min(1, dtt * 0.8); rotX *= Math.pow(0.7, dtt); }
       var cY = Math.cos(rotY), sY = Math.sin(rotY), cX = Math.cos(rotX), sX = Math.sin(rotX), cx0 = W / 2, cy0 = H / 2;
+      var se = (1 - e) * g;
+      if (se > 0.01) {
+        ctx.save(); ctx.fillStyle = fg; ctx.strokeStyle = fg;
+        ctx.globalAlpha = 0.07 * se; ctx.beginPath(); ctx.ellipse(cx0, cy0 + Rs * 1.16, Rs * 0.8, Rs * 0.09, 0, 0, 6.283); ctx.fill();
+        var gr = ctx.createRadialGradient(cx0 - Rs * 0.35, cy0 - Rs * 0.4, Rs * 0.1, cx0, cy0, Rs * 1.05); gr.addColorStop(0, "rgba(255,255,255,0.0)"); gr.addColorStop(1, "rgba(120,140,170,0.16)");
+        ctx.globalAlpha = se; ctx.fillStyle = gr; ctx.beginPath(); ctx.arc(cx0, cy0, Rs * 1.04, 0, 6.283); ctx.fill();
+        ctx.globalAlpha = 0.22 * se; ctx.lineWidth = 1.2; ctx.beginPath(); ctx.arc(cx0, cy0, Rs * 1.04, 0, 6.283); ctx.stroke();
+        ctx.lineWidth = 0.8; ctx.lineCap = "round";
+        for (var gi2 = 0; gi2 < 11; gi2++) {
+          var mer = gi2 < 6, ang = mer ? gi2 * Math.PI / 6 : (gi2 - 6 + 1) / 6 * Math.PI - Math.PI / 2, px = 0, py = 0, has = false;
+          for (var st = 0; st <= 48; st++) {
+            var th = st / 48 * 6.283, X, Y, Z;
+            if (mer) { X = Math.cos(th) * Math.cos(ang); Z = Math.cos(th) * Math.sin(ang); Y = Math.sin(th); } else { X = Math.cos(th) * Math.cos(ang); Z = Math.sin(th) * Math.cos(ang); Y = Math.sin(ang); }
+            var a1 = X * cY + Z * sY, b1 = -X * sY + Z * cY, c1 = Y * cX - b1 * sX, d1 = Y * sX + b1 * cX, s1 = 1 + 0.22 * d1, qx = cx0 + a1 * Rs * s1 * 1.0, qy = cy0 + c1 * Rs * s1 * 1.0;
+            if (has) { ctx.globalAlpha = (d1 > 0 ? 0.16 : 0.05) * se; ctx.beginPath(); ctx.moveTo(px, py); ctx.lineTo(qx, qy); ctx.stroke(); }
+            px = qx; py = qy; has = true;
+          }
+        }
+        ctx.restore();
+      }
       dots.forEach(function (d) {
         var x1 = d.x3 * cY + d.z3 * sY, z1 = -d.x3 * sY + d.z3 * cY, y1 = d.y3 * cX - z1 * sX, z2 = d.y3 * sX + z1 * cX, sc = 1 + 0.22 * z2;
         d.bx = cx0 + x1 * Rs * sc; d.by = cy0 + y1 * Rs * sc; d.dz = z2;
@@ -59,23 +79,25 @@
       dots.forEach(function (d) {
         var gx = d.x + (d.bx - d.x) * g, gy = d.y + (d.by - d.y) * g, x = gx + (d.tx - gx) * e, y = gy + (d.ty - gy) * e;
         if (e > 0.5) { x += Math.sin(now / 1300 + d.ph) * 1.6; y += Math.cos(now / 1500 + d.ph) * 1.6; }
-        var dep = (1 - e) * d.dz * g;
-        ctx.fillStyle = col[d.g]; ctx.globalAlpha = 0.85 + 0.12 * dep - (dep < 0 ? 0.28 * -dep : 0); ctx.beginPath(); ctx.arc(x, y, rd * (1 + 0.28 * dep), 0, 6.283); ctx.fill();
-        if (d.case_ && e > 0.9) { var p = (Math.sin(now / 700 + d.ph) + 1) / 2; ctx.globalAlpha = 0.3 + 0.55 * p; ctx.strokeStyle = fg; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.arc(x, y, rd + 2 + 3 * p, 0, 6.283); ctx.stroke(); }
+        var dep = (1 - e) * d.dz * g, rr = rd * (1 + 0.3 * dep);
+        ctx.fillStyle = col[d.g]; ctx.globalAlpha = Math.max(0.18, 0.8 + 0.2 * dep - (dep < 0 ? 0.3 * -dep : 0)); ctx.beginPath(); ctx.arc(x, y, rr, 0, 6.283); ctx.fill();
+        if (dep > 0.25) { ctx.fillStyle = "#fff"; ctx.globalAlpha = 0.35 * dep; ctx.beginPath(); ctx.arc(x - rr * 0.3, y - rr * 0.3, rr * 0.38, 0, 6.283); ctx.fill(); }
+        if (d.case_ && k > 0.6) { var p = (Math.sin(now / 700 + d.ph) + 1) / 2, far = dep < -0.2 ? 0.35 : 1; ctx.strokeStyle = fg; ctx.lineWidth = 1.4; ctx.globalAlpha = far * (e > 0.9 ? 0.3 + 0.55 * p : 0.85); ctx.beginPath(); ctx.arc(x, y, rr + 2 + (e > 0.9 ? 3 * p : 0.8), 0, 6.283); ctx.stroke(); }
       });
       ctx.globalAlpha = 1; ctx.fillStyle = fg; ctx.font = "600 12px 'Open Sans', Arial, sans-serif"; ctx.textAlign = "center";
       G.forEach(function (gg, i) { ctx.globalAlpha = Math.max(0, e * 1.4 - .4); var C = geo[i]; ctx.fillText(gg.a.toUpperCase(), C[0], C[1] + C[2] + 18); });
-      ctx.globalAlpha = Math.max(0, 1 - e * 3) * 0.7; ctx.font = "400 12px 'Open Sans', Arial, sans-serif"; ctx.fillText("Drag to rotate", W / 2, H - 10); ctx.globalAlpha = 1;
+      ctx.globalAlpha = Math.max(0, 1 - e * 3) * 0.7; ctx.font = "400 12px 'Open Sans', Arial, sans-serif"; ctx.fillText("Drag to rotate · rings = people with PCOS", W / 2, H - 10); ctx.globalAlpha = 1;
     }
     function loop(now) { raf = 0; if (!visible || document.hidden) { lastNow = 0; return; } draw(now); raf = requestAnimationFrame(loop); }
     function go() { if (!reduce && !raf) raf = requestAnimationFrame(loop); }
     cv.style.touchAction = "pan-y"; cv.style.cursor = "grab"; cv.setAttribute("tabindex", "0");
     cv.addEventListener("pointerdown", function (ev) { if (sepC > 0.5) return; drag = { x: ev.clientX, y: ev.clientY, t: performance.now(), touch: ev.pointerType === "touch" }; try { cv.setPointerCapture(ev.pointerId); } catch (x) {} cv.style.cursor = "grabbing"; });
-    cv.addEventListener("pointermove", function (ev) { if (!drag) return; var dx = ev.clientX - drag.x, dy = drag.touch ? 0 : ev.clientY - drag.y, now = performance.now(), dt = Math.max(0.008, (now - drag.t) / 1000); rotY += dx * 0.011; rotX = Math.max(-1.3, Math.min(1.3, rotX + dy * 0.011)); vY = dx * 0.011 / dt; vX = dy * 0.011 / dt; vY = Math.max(-6, Math.min(6, vY)); drag.x = ev.clientX; drag.y = ev.clientY; drag.t = now; if (reduce) draw(0); });
+    cv.addEventListener("pointermove", function (ev) { if (!drag) return; var dx = ev.clientX - drag.x, dy = drag.touch ? 0 : ev.clientY - drag.y, now = performance.now(), dt = Math.max(0.008, (now - drag.t) / 1000); rotY += dx * 0.011; rotX = Math.max(-1.3, Math.min(1.3, rotX - dy * 0.011)); vY = dx * 0.011 / dt; vX = -dy * 0.011 / dt; vY = Math.max(-6, Math.min(6, vY)); drag.x = ev.clientX; drag.y = ev.clientY; drag.t = now; if (reduce) draw(0); });
     var endDrag = function () { drag = null; cv.style.cursor = "grab"; }; cv.addEventListener("pointerup", endDrag); cv.addEventListener("pointercancel", endDrag);
-    cv.addEventListener("keydown", function (ev) { if (ev.key === "ArrowLeft") { rotY -= 0.2; } else if (ev.key === "ArrowRight") { rotY += 0.2; } else if (ev.key === "ArrowUp") { rotX = Math.max(-1.3, rotX - 0.2); } else if (ev.key === "ArrowDown") { rotX = Math.min(1.3, rotX + 0.2); } else return; ev.preventDefault(); if (reduce) draw(0); });
+    cv.addEventListener("keydown", function (ev) { if (ev.key === "ArrowLeft") { rotY -= 0.2; } else if (ev.key === "ArrowRight") { rotY += 0.2; } else if (ev.key === "ArrowUp") { rotX = Math.min(1.3, rotX + 0.2); } else if (ev.key === "ArrowDown") { rotX = Math.max(-1.3, rotX - 0.2); } else return; ev.preventDefault(); if (reduce) draw(0); });
     var key = document.createElement("ul"); key.className = "cohort-key";
     G.forEach(function (g, i) { var li = document.createElement("li"); li.innerHTML = '<i></i><span><b>' + g.n + ' (' + g.a + ')</b><br>' + f1(g.cases) + ' cases · ' + f1(g.ctrl) + ' controls · ' + (100 * g.cases / TC).toFixed(1) + '% of cases</span>'; li.firstChild.style.background = g.c.charAt(0) === "#" ? g.c : "var(" + g.c + ")"; key.appendChild(li); });
+    (function () { var li = document.createElement("li"); li.innerHTML = '<i class="ring"></i><span><b>Ringed dot = a person with PCOS</b><br>' + f1(TC) + ' cases in total, spread through every group above. The rest are controls.</span>'; key.appendChild(li); })();
     build();
     btn = document.createElement("button"); btn.type = "button"; btn.className = "btn"; btn.textContent = "Separate by ancestry"; btn.setAttribute("aria-pressed", "false");
     cv.parentNode.appendChild(btn); cv.parentNode.appendChild(key);

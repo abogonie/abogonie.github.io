@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Open+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
-<link rel="stylesheet" href="style.css?v=20261026a">
+<link rel="stylesheet" href="style.css?v=20261027b">
 </head>
 <body><svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
   <defs>
@@ -65,31 +65,65 @@
 </header>
 
 <main class="wrap" id="top">
-  <div class="hero">
-    <p class="label">iPSCs · NGN2 neurons · Cerebral organoids · Creatine metabolism</p>
-    <h1>Modeling creatine deficiency in the developing <em>human</em> brain.</h1>
-    <p class="lede">Cerebral creatine deficiency syndromes (CCDS) are inborn errors of creatine synthesis (AGAT and GAMT) and transport (SLC6A8). They present with intellectual disability, epilepsy and developmental delay. In plain terms, the brain cannot make or take up the creatine it uses as an energy reserve, and children pay for it while they develop. I model these disorders in patient-derived and CRISPR-edited iPSCs, NGN2 cortical neurons and cerebral organoids, and pair the models with population genetics.</p>
-    <div class="first">
-      <span class="label">What is distinctive</span>
-      <ul>
-        <li>To our knowledge, the first human iPSC-derived neuron model of GAMT deficiency.</li>
-        <li>The only platform that combines automated human neuron modeling, drug screening and AAV gene editing for these disorders.</li>
-      </ul>
+  <div class="hero hero-band">
+    <div class="hero-main">
+      <p class="hero-kicker">Aleksander Bogoniewski · UCLA</p>
+      <h1>Modeling creatine deficiency in the developing <em>human</em> brain.</h1>
+      <p class="lede">Cerebral creatine deficiency syndromes (CCDS) are inborn errors of creatine synthesis (AGAT and GAMT) and transport (SLC6A8). They present with intellectual disability, epilepsy and developmental delay. In plain terms, the brain cannot make or take up the creatine it uses as an energy reserve, and children pay for it while they develop. I model these disorders in patient-derived and CRISPR-edited iPSCs, NGN2 cortical neurons and cerebral organoids, and pair the models with population genetics.</p>
+      <div class="first">
+        <ul>
+          <li>To our knowledge, the first human iPSC-derived neuron model of GAMT deficiency.</li>
+          <li>The only platform that combines automated human neuron modeling, drug screening and AAV gene editing for these disorders.</li>
+        </ul>
+      </div>
+      <div class="cta-row">
+        <a class="btn primary" href="#projects">See the projects</a>
+        <a class="btn" href="#research">Lab research</a>
+        <a class="btn" href="https://scholar.google.com/citations?user=MNiEL0IAAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar</a>
+      </div>
     </div>
-    <div class="cta-row">
-      <a class="btn primary" href="#projects">See the projects</a>
-      <a class="btn" href="#research">Lab research</a>
-      <a class="btn" href="https://scholar.google.com/citations?user=MNiEL0IAAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar</a>
-    </div>
-
-
-    <div class="glance rv">
+    <figure class="hero-mol" aria-label="GAMT adds a methyl group to guanidinoacetate to make creatine">
+      <svg viewBox="0 0 700 250" role="img" aria-label="Guanidinoacetate plus a methyl group becomes creatine, catalysed by GAMT">
+        <g transform="translate(0 10) scale(1.0357)">
+      <path class="bond" d="M90 100 L64.5 114.5"/>
+      <path class="bond" d="M90 100 L125 120 L152.2 104.5"/>
+      <path class="bond" d="M167.8 104.5 L195 120 L222.2 104.5"/>
+      <path class="bond" d="M87 98 V72 M93 98 V72"/>
+      <path class="bond" d="M192 122 V148 M198 122 V148"/>
+      <text class="atom" x="90" y="66" text-anchor="middle">O</text>
+      <text class="atom" x="61" y="126" text-anchor="end">HO</text>
+      <text class="atom" x="153" y="105">N</text>
+      <text class="atom" x="160" y="127" text-anchor="middle" style="font-size:14px">H</text>
+      <text class="atom" x="223" y="105">NH<tspan dy="5" font-size="12">2</tspan></text>
+      <text class="atom" x="188" y="171">NH</text>
+    </g>
+        <g transform="translate(410 10) scale(1.0357)">
+      <path class="bond" d="M90 100 L64.5 114.5"/>
+      <path class="bond" d="M90 100 L125 120 L152.2 104.5"/>
+      <path class="bond" d="M167.8 104.5 L195 120 L222.2 104.5"/>
+      <path class="bond" d="M87 98 V72 M93 98 V72"/>
+      <path class="bond" d="M192 122 V148 M198 122 V148"/>
+      <path class="bond me" d="M160 91 V68"/>
+      <text class="atom" x="90" y="66" text-anchor="middle">O</text>
+      <text class="atom" x="61" y="126" text-anchor="end">HO</text>
+      <text class="atom" x="153" y="105">N</text>
+      <text class="atom me" x="150" y="62">CH<tspan dy="5" font-size="12">3</tspan></text>
+      <text class="atom" x="223" y="105">NH<tspan dy="5" font-size="12">2</tspan></text>
+      <text class="atom" x="188" y="171">NH</text>
+    </g>
+        <path class="mol-arrow" d="M300 108 H392 M382 98 L394 108 L382 118"/>
+        <text x="347" y="88" text-anchor="middle" class="mol-t mol-t-b">GAMT</text>
+        <text x="347" y="134" text-anchor="middle" class="mol-t">+ CH<tspan dy="4" font-size="9">3</tspan></text>
+        <text x="145" y="236" text-anchor="middle" class="mol-t">Guanidinoacetate (GAA)</text>
+        <text x="555" y="236" text-anchor="middle" class="mol-t">Creatine</text>
+      </svg>
+    </figure>
+    <div class="glance">
       <div><b><span data-count="1342824">1,342,824</span></b><span>genomes analyzed (All of Us + gnomAD)</span></div>
       <div><b>3</b><span>creatine-pathway genes: GATM, GAMT, SLC6A8</span></div>
       <div><b>2</b><span>human neural models: neurons and organoids</span></div>
       <div><b>6</b><span>conference talks, 2022 to 2026</span></div>
     </div>
-
   </div>
 
   <section id="projects" data-nav="Projects">
@@ -378,11 +412,11 @@
   </section>
 </main>
 
-<script src="site.js?v=20261026a" defer></script>
-<script src="neuro.js?v=20261026a" defer></script>
-<script src="subnav.js?v=20261026a" defer></script>
-<script src="popgen.js?v=20261026a" defer></script>
-<script src="aav.js?v=20261026a" defer></script>
+<script src="site.js?v=20261027b" defer></script>
+<script src="neuro.js?v=20261027b" defer></script>
+<script src="subnav.js?v=20261027b" defer></script>
+<script src="popgen.js?v=20261027b" defer></script>
+<script src="aav.js?v=20261027b" defer></script>
 <script>
 (function () {
   var root = document.documentElement;

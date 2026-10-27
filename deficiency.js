@@ -4,11 +4,11 @@
   var css = function (n) { return getComputedStyle(document.documentElement).getPropertyValue(n).trim(); };
   var SCENES = {
     agat: { blocked: 1, pile: 0, cap: 150, lvl: { 2: "lo", 4: "lo", 6: "lo" },
-      def: "Without AGAT the pathway stops at its first step. Arginine and glycine bounce off the block and pile up, very little guanidinoacetate is made, and creatine is low." },
+      def: "Without AGAT the pathway stops at its first step. Arginine and glycine “bounce” off the block (in reality they simply cannot bind the missing enzyme) and pile up, very little guanidinoacetate is made, and creatine is low." },
     gamt: { blocked: 3, pile: 2, cap: 150, lvl: { 2: "hi", 4: "lo", 6: "lo" },
-      def: "Without GAMT, guanidinoacetate cannot be turned into creatine. It bounces off the block and piles up while creatine runs low." },
-    slc: { blocked: 5, pile: 4, cap: 150, crn: true, lvl: { 4: "hi", 6: "lo" },
-      def: "Without the transporter, creatine is made but cannot enter neurons. It bounces off the transporter and builds up outside the cell, and more of it is converted to creatinine. Guanidinoacetate stays normal." }
+      def: "Without GAMT, guanidinoacetate cannot be turned into creatine. It “bounces” off the block (in reality it simply does not bind the missing enzyme) and piles up while creatine runs low." },
+    slc: { blocked: 5, pile: 4, cap: 90, binW: 124, crn: true, lvl: { 4: "hi", 6: "lo" },
+      def: "Without the transporter, creatine is made but cannot enter neurons. It “bounces” off the transporter (in reality there is nothing to carry it across) and builds up outside the cell, and more of it is converted to creatinine. Guanidinoacetate stays normal." }
   };
   var HEALTHY = "In a healthy cell the pathway runs end to end: arginine and glycine become guanidinoacetate, then creatine, which neurons take up.";
   var LVL = { hi: "High", lo: "Low" };
@@ -48,7 +48,7 @@
       if (vertical) {
         g.Bl = c.right + 8; g.Br = W - 4; g.Ff = e.top - 10; g.near = g.Bl;
       } else {
-        var bw = Math.min(172, Math.max(c.w, 152)); g.Bl = c.x - bw / 2; g.Br = c.x + bw / 2; g.Ff = c.top - 10; g.near = g.Br;
+        var bw = sc.binW || Math.min(172, Math.max(c.w, 152)); g.Bl = c.x - bw / 2; g.Br = c.x + bw / 2; g.Ff = c.top - 10; g.near = g.Br;
       }
       g.Bl = Math.max(g.Bl, 6); g.Br = Math.min(g.Br, W - 6);
       var per = Math.max(4, Math.floor((g.Br - g.Bl - 6) / (RB * 2))), rows = Math.ceil(sc.cap / per);
@@ -84,12 +84,13 @@
       for (s = 0; s < S; s++) {
         for (i = 0; i < n; i++) {
           b = balls[i]; b.px = b.x; b.vy += GR * ds; b.x += b.vx * ds; b.y += b.vy * ds;
+          if (!b.inb && b.y > g.Wt + r && b.x > g.Bl + r && b.x < g.Br - r) b.inb = true;
           [g.Bl, g.Br].forEach(function (wx) { if (b.y > g.Wt && Math.abs(b.x - wx) < r) { var side = b.px >= wx ? 1 : -1; b.x = wx + side * r; b.vx = -b.vx * 0.3; if (side * b.vx < 0) b.vx = side * Math.abs(b.vx); } });
           if (b.x > g.Bl - r && b.x < g.Br + r && b.y > g.Ff - r && b.y < g.Ff + r * 2) { b.y = g.Ff - r; if (b.vy > 40) b.vy = -b.vy * 0.28; else b.vy = 0; b.vx *= Math.max(0, 1 - 5 * ds); }
           if (b.y > H + 60) b.a = 0;
         }
         for (var it = 0; it < 3; it++) for (i = 0; i < n; i++) for (j = i + 1; j < n; j++) {
-          b = balls[i]; o = balls[j]; var dx = o.x - b.x, dy = o.y - b.y, d2 = dx * dx + dy * dy, m = 2 * r;
+          b = balls[i]; o = balls[j]; if (!b.inb || !o.inb) continue; var dx = o.x - b.x, dy = o.y - b.y, d2 = dx * dx + dy * dy, m = 2 * r;
           if (d2 < m * m && d2 > 1e-6) {
             var d = Math.sqrt(d2), nx = dx / d, ny = dy / d, ov = (m - d) * 0.5;
             b.x -= nx * ov; b.y -= ny * ov; o.x += nx * ov; o.y += ny * ov;
@@ -98,6 +99,7 @@
             b.vx *= 0.9985; o.vx *= 0.9985;
           }
         }
+        for (i = 0; i < n; i++) { b = balls[i]; if (!b.inb) continue; if (b.x < g.Bl + r) { b.x = g.Bl + r; if (b.vx < 0) b.vx = 0; } if (b.x > g.Br - r) { b.x = g.Br - r; if (b.vx > 0) b.vx = 0; } if (b.y > g.Ff - r) { b.y = g.Ff - r; if (b.vy > 0) b.vy = 0; } }
       }
     }
     function startVac() {
