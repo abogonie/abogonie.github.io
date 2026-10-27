@@ -9,7 +9,7 @@
   function mk(pts) { var L = [0], i; for (i = 1; i < pts.length; i++) L.push(L[i-1] + Math.hypot(pts[i][0]-pts[i-1][0], pts[i][1]-pts[i-1][1])); return { p: pts, L: L, len: L[L.length-1] }; }
   function at(path, d) { var i = 1; while (i < path.L.length - 1 && path.L[i] < d) i++; var f = (d - path.L[i-1]) / ((path.L[i] - path.L[i-1]) || 1); return [path.p[i-1][0] + (path.p[i][0] - path.p[i-1][0]) * f, path.p[i-1][1] + (path.p[i][1] - path.p[i-1][1]) * f]; }
   var pa = bez([125, 54], [125, 84], [240, 74], [240, 108], 30).concat([[240, 126]]), pg = bez([355, 54], [355, 84], [240, 74], [240, 108], 30).concat([[240, 126]]);
-  var BX = [85, 188, 292, 395], W = [0.40, 0.30, 0.10, 0.20];
+  var BX = [85, 188, 292, 395], W = [0.30, 0.26, 0.20, 0.24];
   var E = { a0: [[240, 404]], l: bez([240, 404], [240, 428], [140, 426], [140, 452], 20), r: bez([240, 404], [240, 428], [340, 426], [340, 452], 20),
     ll: bez([140, 452], [140, 476], [85, 474], [85, 512], 20), lr: bez([140, 452], [140, 476], [188, 470], [188, 512], 20), rl: bez([340, 452], [340, 476], [292, 470], [292, 512], 20), rr: bez([340, 452], [340, 476], [395, 474], [395, 512], 20) };
   function route(k) { var side = k < 2 ? "l" : "r", sub = side + (k % 2 ? "r" : "l"), pts = [[240, 374], [240, 404]].concat(E[side].slice(1), E[sub].slice(1), [[BX[k], 524]]), p = mk(pts); p.h1 = 30; p.h2 = mk([[240, 374], [240, 404]].concat(E[side].slice(1))).len; return p; }
@@ -27,7 +27,7 @@
   function fate(b, dt) {
     var k = b.bin, t = b.t;
     if (k === 0) { if (t > 1.2 && !b.s1) { b.s1 = 1; b.e.setAttribute("fill", "#9b8cff"); } if (t > 16) fade(b); }
-    else if (k === 1) { if (t > 3.5 && !b.s1) { b.s1 = 1; atp(b); } if (t > 6.5) fade(b); }
+    else if (k === 1) { if (t > 0.15 && !b.s1) { b.s1 = 1; b.e.setAttribute("fill", C.atp); atp(b); } if (t > 3) fade(b); }
     else if (k === 2) { if (t > 1.5 && !b.s1) { b.s1 = 1; ring(b); } if (t > 3 && !b.s2) { b.s2 = 1; ring(b); } if (t > 4.5 && !b.s3) { b.s3 = 1; ring(b); } if (t > 5.4) fade(b); }
     else { if (t > 8 && !b.s1) { b.s1 = 1; b.e.setAttribute("fill", C.crn); fade(b); } }
   }
