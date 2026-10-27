@@ -101,7 +101,7 @@
     build();
     btn = document.createElement("button"); btn.type = "button"; btn.className = "btn"; btn.textContent = "Separate by ancestry"; btn.setAttribute("aria-pressed", "false");
     cv.parentNode.appendChild(btn); cv.parentNode.appendChild(key);
-    btn.addEventListener("click", function () { sepT = sepT ? 0 : 1; btn.textContent = sepT ? "Overlap everyone" : "Separate by ancestry"; btn.setAttribute("aria-pressed", String(!!sepT)); if (reduce) { sepC = sepT; draw(0); } else go(); });
+    btn.addEventListener("click", function () { sepT = sepT ? 0 : 1; btn.textContent = sepT ? "Overlap groups" : "Separate by ancestry"; btn.setAttribute("aria-pressed", String(!!sepT)); if (reduce) { sepC = sepT; draw(0); } else go(); });
     if (reduce) { started = true; t0 = -9999; draw(0); } else { draw(0); }
     vis(cv, function () { started = true; t0 = performance.now(); go(); });
     var rb = function () { if (cv.clientWidth !== W) { build(); if (reduce) draw(0); } };
