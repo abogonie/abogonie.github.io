@@ -1007,3 +1007,12 @@ h1, h2, h3 { font-weight: 700; letter-spacing: -0.03em; }
   .hero { grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); }
   .hero-mol svg { max-height: max(460px, calc(100vh - 250px)); }
 }
+
+/* v6: blunt tube ends, collar, co-product labels */
+.hx path { stroke-linecap: butt; }
+.hx-collar { fill: rgba(220,235,255,.35); stroke: rgba(220,235,255,.85); stroke-width: 1.4; }
+.fg-s2 { fill: var(--hero-mute); font: 500 11px var(--font-ui); }
+@media (min-width: 960px) {
+  .hero { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .hero-mol svg { max-height: none; }
+}
