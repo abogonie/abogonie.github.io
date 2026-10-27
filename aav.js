@@ -199,7 +199,7 @@
     var i = 0; STAGES.forEach(function (s, k) { if (tt >= s.a) i = k; });
     if (i === cur && story.dataset.ok) return; cur = i; story.dataset.ok = 1;
     chips.forEach(function (c, k) { c.classList.toggle("on", k === i); c.setAttribute("aria-current", k === i ? "step" : "false"); });
-    var s = STAGES[i], html = "<b>" + (i + 1) + ". " + s.s.split(". ")[0] + ".</b> " + s.s.split(". ").slice(1).join(". ") + " <em>In plain terms: " + s.l.charAt(0).toLowerCase() + s.l.slice(1) + "</em>";
+    var s = STAGES[i], html = "<b>" + (i + 1) + ". " + s.s.split(". ")[0] + ".</b> " + s.s.split(". ").slice(1).join(". ") + " <em>" + s.l + "</em>";
     story.innerHTML = html.replace(/\[([\d,]+)\]/g, function (m, n) { return "<sup>" + n.split(",").map(function (x) { return '<a href="#ref' + x + '">' + x + "</a>"; }).join(", ") + "</sup>"; });
   }
   var t = reduce ? 28.5 : 0, playing = !reduce, last = 0, raf = 0, visible = true;

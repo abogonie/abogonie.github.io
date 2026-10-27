@@ -911,3 +911,13 @@ section { padding-block: clamp(56px, 7vw, 120px) 0; }
 .sec-head { margin-bottom: clamp(28px, 3.2vw, 52px); column-gap: clamp(32px, 5vw, 96px); }
 footer { padding-block: 48px; }
 @media (max-width: 600px) { main p, main li { max-width: none; } body { line-height: 1.6; } }
+
+/* v4b: startup-style headings (bold sans) with the serif kept for the name mark */
+:root { --font-display: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; }
+h1, h2, h3 { font-weight: 700; letter-spacing: -0.03em; }
+.brand { font-family: "Source Serif 4", Georgia, serif; }
+.hero h1 em { font-family: "Source Serif 4", Georgia, serif; font-style: italic; font-weight: 600; }
+.uses { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 28px; padding: 22px 0; margin-top: 8px; border-bottom: 1px solid var(--line); }
+.uses-l { font: 600 .74rem/1 var(--font-ui); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.uses ul { display: flex; flex-wrap: wrap; gap: 8px 26px; list-style: none; margin: 0; padding: 0; }
+.uses li { font: 600 .95rem/1.3 var(--font-ui); color: var(--fg); max-width: none; }

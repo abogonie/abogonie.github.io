@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&display=swap">
-<link rel="stylesheet" href="style.css?v=20261027d">
+<link rel="stylesheet" href="style.css?v=20261027e">
 </head>
 <body><svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
   <defs>
@@ -69,7 +69,7 @@
     <div class="hero-main">
       <p class="hero-kicker">Aleksander Bogoniewski · UCLA</p>
       <h1>Modeling creatine deficiency in the developing <em>human</em> brain.</h1>
-      <p class="lede">Cerebral creatine deficiency syndromes (CCDS) are inborn errors of creatine synthesis (AGAT and GAMT) and transport (SLC6A8). They present with intellectual disability, epilepsy and developmental delay. In plain terms, the brain cannot make or take up the creatine it uses as an energy reserve, and children pay for it while they develop. I model these disorders in patient-derived and CRISPR-edited iPSCs, NGN2 cortical neurons and cerebral organoids, and pair the models with population genetics.</p>
+      <p class="lede">Cerebral creatine deficiency syndromes (CCDS) are inborn errors of creatine synthesis (AGAT and GAMT) and transport (SLC6A8). Patients present with intellectual disability, epilepsy and developmental delay because the brain cannot make or take up creatine, its energy reserve. I model these disorders in patient-derived and CRISPR-edited iPSCs, NGN2 cortical neurons and cerebral organoids, and pair the models with population genetics.</p>
       <div class="first">
         <ul>
           <li>To our knowledge, the first human iPSC-derived neuron model of GAMT deficiency.</li>
@@ -126,11 +126,16 @@
     </div>
   </div>
 
+  <div class="uses" aria-label="Platforms and data used">
+    <span class="uses-l">Platforms and data</span>
+    <ul><li>iPSC · NGN2 neurons</li><li>Cerebral organoids</li><li>CellXpress.ai</li><li>IN Carta</li><li>AAV vectors</li><li>All of Us</li><li>gnomAD v4</li><li>ClinVar</li></ul>
+  </div>
+
   <section id="projects" data-nav="Projects">
     <div class="sec-head rv">
       <p class="label">Projects</p>
       <h2>From a patient variant to a candidate therapy</h2>
-      <p>My neuroscience research follows one question from the genome to the dish: how does a missing metabolite change the developing human brain, and can it be corrected? Population genetics shows which variants matter, stem-cell neurons show what they do, and automation lets me test treatments at scale.</p>
+      <p>My research asks how a missing metabolite changes the developing human brain, and whether that can be corrected. Population genetics shows which variants matter, stem-cell neurons show what they do, and automation lets me test treatments at scale.</p>
     </div>
     <div class="chain five rv">
       <a class="node" href="#research"><span class="step">01</span><h3>Patient-derived iPSCs</h3><p>Lines from patients, plus CRISPR-edited lines that remove the gene.</p></a>
@@ -149,7 +154,7 @@
     <div class="sec-head rv">
       <p class="label">Research</p>
       <h2>Human models of GAMT deficiency</h2>
-      <p>Neurologic injury in GAMT deficiency is irreversible once symptoms begin, and current treatment with creatine, L-ornithine and sodium benzoate cannot reverse established damage. In plain terms, by the time a child shows symptoms the harm is done. These models test how creatine deficiency disrupts human neurodevelopment, and whether earlier intervention could prevent it.</p>
+      <p>Neurologic injury in GAMT deficiency is irreversible once symptoms begin, and current treatment with creatine, L-ornithine and sodium benzoate cannot reverse established damage. By the time a child has symptoms, the damage is already done. These models test how creatine deficiency disrupts human neurodevelopment, and whether earlier intervention could prevent it.</p>
     </div>
     <div class="grid">
       <div class="card rv">
@@ -260,7 +265,7 @@
     <div class="sec-head rv">
       <p class="label">Automation and screening</p>
       <h2>Robots feed the cells, software reads the images</h2>
-      <p>My cultures run on a CellXpress.ai automated cell culture system from Molecular Devices, and its images feed directly into IN Carta for analysis. Every plate receives the same handling on the same schedule, which removes operator variability from the measurements. In plain terms, robots do the feeding and photographing, so every dish is treated exactly alike.</p>
+      <p>My cultures run on a CellXpress.ai automated cell culture system from Molecular Devices, and its images feed directly into IN Carta for analysis. Every plate receives the same handling on the same schedule, which removes operator variability from the measurements. Robots do the feeding and imaging, so every plate is handled the same way.</p>
     </div>
     <div class="auto-grid rv">
       <figure class="cx" id="cx">
@@ -304,7 +309,7 @@
     <div class="sec-head rv">
       <p class="label">Gene delivery</p>
       <h2>How an AAV vector can restore GAMT in a neuron</h2>
-      <p>Adeno-associated virus (AAV) vectors are a leading platform for gene delivery [1], and AAV9 crosses the blood-brain barrier to transduce neurons in neonatal mice [7]. The schematic follows one capsid from the neuronal surface to a working GAMT enzyme. In plain terms, a harmless viral shell carries a working copy of the GAMT gene into the cell so the neuron can make its own creatine.</p>
+      <p>Adeno-associated virus (AAV) vectors are a leading platform for gene delivery [1], and AAV9 crosses the blood-brain barrier to transduce neurons in neonatal mice [7]. The schematic follows one capsid from the neuronal surface to a working GAMT enzyme. A viral shell with no viral genes carries a working copy of GAMT into the neuron so it can make its own creatine.</p>
     </div>
     <figure class="aav rv" id="aav">
       <div class="aav-bar"><div class="aav-chips" id="aavChips" role="group" aria-label="Delivery steps"></div><button class="btn" id="aavPlay" type="button">Pause</button></div>
@@ -319,7 +324,7 @@
     <div class="sec-head rv">
       <p class="label">Population genetics</p>
       <h2>How common are the cerebral creatine deficiency syndromes?</h2>
-      <p>Earlier estimates relied on known pathogenic variants in mostly European cohorts. We analyzed <span data-count="535662">535,662</span> All of Us genomes and 807,162 gnomAD v4 exomes and genomes for variants in <span class="gene">GATM</span> (AGAT), <span class="gene">GAMT</span> and <span class="gene">SLC6A8</span>, and sorted each variant into three groups, from the most certain to the least. Each group is added to the one before it. In plain terms, we counted how many people quietly carry one broken copy of these genes.</p>
+      <p>Earlier estimates relied on known pathogenic variants in mostly European cohorts. We analyzed <span data-count="535662">535,662</span> All of Us genomes and 807,162 gnomAD v4 exomes and genomes for variants in <span class="gene">GATM</span> (AGAT), <span class="gene">GAMT</span> and <span class="gene">SLC6A8</span>, and sorted each variant into three groups, from the most certain to the least. Each group is added to the one before it. We counted how many people carry one nonfunctional copy of these genes.</p>
     </div>
     <div class="rv" style="display:grid;gap:18px;margin-bottom:24px"><div class="notice rv" role="note"><span aria-hidden="true">●</span><span><b>Preliminary.</b> These results come from a manuscript in preparation. They have not been peer reviewed or published, and the numbers may change.</span></div></div>
     <div class="grid" style="margin-bottom:24px">
@@ -400,8 +405,8 @@
   <section id="contact" data-nav="Contact" style="padding-top:0">
     <div class="contact rv">
       <p class="label" style="color:inherit;opacity:.8">Contact</p>
-      <h2>Working on creatine disorders? Let’s talk.</h2>
-      <p>Questions, corrections, collaboration ideas and requests to visit the lab are all welcome.</p>
+      <h2>Contact</h2>
+      <p>For collaborations, corrections and lab visits.</p>
       <p class="addr" id="addr">abogonie@g.UCLA.edu</p>
       <button class="btn" id="copy" type="button">Copy address</button>
     </div>
@@ -412,11 +417,11 @@
   </section>
 </main>
 
-<script src="site.js?v=20261027d" defer></script>
-<script src="neuro.js?v=20261027d" defer></script>
-<script src="subnav.js?v=20261027d" defer></script>
-<script src="popgen.js?v=20261027d" defer></script>
-<script src="aav.js?v=20261027d" defer></script>
+<script src="site.js?v=20261027e" defer></script>
+<script src="neuro.js?v=20261027e" defer></script>
+<script src="subnav.js?v=20261027e" defer></script>
+<script src="popgen.js?v=20261027e" defer></script>
+<script src="aav.js?v=20261027e" defer></script>
 <script>
 (function () {
   var root = document.documentElement;

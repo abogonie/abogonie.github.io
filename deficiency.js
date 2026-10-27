@@ -4,11 +4,11 @@
   var css = function (n) { return getComputedStyle(document.documentElement).getPropertyValue(n).trim(); };
   var SCENES = {
     agat: { blocked: 1, pile: 0, cap: 150, lvl: { 2: "lo", 4: "lo", 6: "lo" },
-      def: "Without AGAT the pathway stops at its first step. Arginine and glycine “bounce” off the block (in reality they simply cannot bind the missing enzyme) and pile up, very little guanidinoacetate is made, and creatine is low." },
+      def: "Without AGAT the pathway stops at its first step. Arginine and glycine cannot bind the missing enzyme, drawn here as a “bounce”. They pile up, little guanidinoacetate is made, and creatine is low." },
     gamt: { blocked: 3, pile: 2, cap: 150, lvl: { 2: "hi", 4: "lo", 6: "lo" },
-      def: "Without GAMT, guanidinoacetate cannot be turned into creatine. It “bounces” off the block (in reality it simply does not bind the missing enzyme) and piles up while creatine runs low." },
+      def: "Without GAMT, guanidinoacetate cannot be converted to creatine. It does not bind the missing enzyme, drawn here as a “bounce”, and it accumulates while creatine falls." },
     slc: { blocked: 5, pile: 4, cap: 90, binW: 124, crn: true, lvl: { 4: "hi", 6: "lo" },
-      def: "Without the transporter, creatine is made but cannot enter neurons. It “bounces” off the transporter (in reality there is nothing to carry it across) and builds up outside the cell, and more of it is converted to creatinine. Guanidinoacetate stays normal." }
+      def: "Without the transporter, creatine is made but does not enter neurons. It is drawn here as a “bounce”, and it accumulates outside the cell, where more of it is converted to creatinine. Guanidinoacetate is normal." }
   };
   var HEALTHY = "In a healthy cell the pathway runs end to end: arginine and glycine become guanidinoacetate, then creatine, which neurons take up.";
   var LVL = { hi: "High", lo: "Low" };
