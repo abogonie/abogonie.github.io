@@ -921,3 +921,54 @@ h1, h2, h3 { font-weight: 700; letter-spacing: -0.03em; }
 .uses-l { font: 600 .74rem/1 var(--font-ui); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
 .uses ul { display: flex; flex-wrap: wrap; gap: 8px 26px; list-style: none; margin: 0; padding: 0; }
 .uses li { font: 600 .95rem/1.3 var(--font-ui); color: var(--fg); max-width: none; }
+
+/* v5: compact hero, pathway card, stats beside the text */
+.hero-mol { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.16); border-radius: 14px; padding: 18px 22px 14px; margin: 0; }
+.hero-mol figcaption { font: 600 .74rem/1 var(--font-ui); letter-spacing: .14em; text-transform: uppercase; color: var(--hero-acc); margin-bottom: 12px; }
+.pw { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
+.pw li { max-width: none; }
+.pw-n { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 12px; padding: 7px 12px; border-radius: 8px; background: rgba(255,255,255,.07); }
+.pw-n b { font: 700 .98rem/1.3 var(--font-ui); color: #fff; }
+.pw-n span { font: 400 .8rem/1.3 var(--font-ui); color: var(--hero-mute); }
+.pw-s { padding: 2px 0 2px 22px; border-left: 2px solid var(--hero-acc); margin-left: 18px; }
+.pw-s a { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 10px; padding: 5px 4px 5px 10px; color: #fff; text-decoration: none; font: 500 .9rem/1.3 var(--font-ui); border-radius: 6px; }
+.pw-s a::before { content: "\2193"; color: var(--hero-acc); margin-right: 2px; }
+.pw-s a i { font-style: normal; font-weight: 700; color: var(--hero-acc); }
+.pw-s a span { font-size: .78rem; color: var(--hero-mute); }
+.pw-s a:hover { background: rgba(255,255,255,.08); }
+.hero { padding-block: clamp(24px, 3vw, 44px) clamp(24px, 3vw, 40px); gap: clamp(16px, 2vw, 28px) clamp(28px, 5vw, 96px); }
+.hero-kicker { margin-bottom: 12px; }
+.hero .lede { margin-top: 14px; }
+@media (min-width: 960px) {
+  .hero > .hero-main { grid-column: 1; grid-row: 1 / span 2; }
+  .hero > .hero-mol { grid-column: 2; grid-row: 1; align-self: start; }
+  .hero > .glance { grid-column: 2; grid-row: 2; grid-template-columns: repeat(2, minmax(0, 1fr)); align-self: end; gap: 0 20px; margin-top: 0; }
+  .glance > div { padding: 12px 8px 6px 0; }
+  .glance b { font-size: clamp(1.5rem, 2vw, 2.1rem); }
+}
+@media (max-width: 959px) { .hero > .glance { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 960px) { .hero > .glance { align-self: start; margin-top: 8px; align-items: start; } .glance > div { align-self: start; } }
+
+/* v5b: pathway figure */
+.hero-mol { padding: 14px 16px 12px; }
+.hero-mol svg { width: 100%; height: auto; display: block; max-height: 62vh; }
+.hero-mol figcaption { margin: 8px 0 0; font: 400 .8rem/1.4 var(--font-ui); letter-spacing: 0; text-transform: none; color: var(--hero-mute); }
+.fg-l { stroke: rgba(255,255,255,.55); stroke-width: 2.4; fill: none; stroke-linecap: round; }
+.fg-n { fill: #fff; font: 700 15px var(--font-ui); }
+.fg-s { fill: rgba(255,255,255,.8); font: 400 11.5px var(--font-ui); }
+.fg-d { fill: var(--hero-mute); font: 500 12px var(--font-ui); }
+.fg-pill rect { fill: var(--hero-acc); transition: filter .2s; }
+.fg-pill text { fill: #0c2340; font: 700 13px var(--font-ui); }
+.fg-pill:hover rect { filter: brightness(1.12); }
+.fg-mem { stroke: var(--hero-acc); stroke-width: 3; stroke-dasharray: 2 7; stroke-linecap: round; fill: none; opacity: .8; }
+.fg-cell { fill: rgba(255,255,255,.07); stroke: rgba(255,255,255,.35); stroke-width: 1.6; }
+.pw-dot { fill: var(--hero-acc); }
+@media (prefers-reduced-motion: reduce) { .pw-dot { display: none; } }
+@media (min-width: 960px) {
+  .hero > .hero-main { align-self: start; }
+  .hero-mol svg { max-height: 44vh; margin-inline: auto; }
+}
+
+.uses li a { display: inline-block; padding: 7px 14px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); color: var(--fg); text-decoration: none; font: 600 .9rem/1.2 var(--font-ui); transition: border-color .2s, color .2s, transform .2s; }
+.uses li a:hover, .uses li a:focus-visible { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
+.uses ul { gap: 10px; }
