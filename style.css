@@ -972,3 +972,8 @@ h1, h2, h3 { font-weight: 700; letter-spacing: -0.03em; }
 .uses li a { display: inline-block; padding: 7px 14px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); color: var(--fg); text-decoration: none; font: 600 .9rem/1.2 var(--font-ui); transition: border-color .2s, color .2s, transform .2s; }
 .uses li a:hover, .uses li a:focus-visible { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
 .uses ul { gap: 10px; }
+
+.hf-key { display: block; margin-top: 6px; }
+.hf-key i { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin: 0 4px 0 10px; vertical-align: baseline; }
+.hf-key i:first-child { margin-left: 0; }
+.hero-mol svg text { font-feature-settings: normal; }
