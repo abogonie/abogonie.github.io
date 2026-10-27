@@ -14,15 +14,21 @@
   });
   nav.appendChild(wrap); header.insertAdjacentElement("afterend", nav);
   setH();
-  if (!("IntersectionObserver" in window)) return;
-  var cur = null;
-  var io = new IntersectionObserver(function (es) {
-    es.forEach(function (e) { if (e.isIntersecting) cur = e.target; });
-    if (!cur) return;
-    links.forEach(function (a, i) {
-      var on = secs[i] === cur; a.classList.toggle("active", on);
-      if (on && a.scrollIntoView && wrap.scrollWidth > wrap.clientWidth) wrap.scrollTo({ left: a.offsetLeft - 80, behavior: "smooth" });
+  var cur = -2, tick = 0;
+  function spy() {
+    tick = 0;
+    var line = window.innerHeight * 0.3, idx = 0, i;
+    for (i = 0; i < secs.length; i++) if (secs[i].getBoundingClientRect().top <= line) idx = i;
+    if (secs[0].getBoundingClientRect().top > line) idx = -1;
+    if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) idx = secs.length - 1;
+    if (idx === cur) return; cur = idx;
+    links.forEach(function (a, k) {
+      var on = k === idx; a.classList.toggle("active", on);
+      if (on && wrap.scrollWidth > wrap.clientWidth) wrap.scrollTo({ left: a.offsetLeft - 80, behavior: "smooth" });
     });
-  }, { rootMargin: "-30% 0px -60% 0px" });
-  secs.forEach(function (s) { io.observe(s); });
+  }
+  var req = function () { if (!tick) tick = requestAnimationFrame(spy); };
+  window.addEventListener("scroll", req, { passive: true }); window.addEventListener("resize", req); window.addEventListener("hashchange", req);
+  links.forEach(function (a, k) { a.addEventListener("click", function () { cur = k; links.forEach(function (b, j) { b.classList.toggle("active", j === k); }); }); });
+  spy();
 })();
