@@ -86,7 +86,7 @@
       });
       ctx.globalAlpha = 1; ctx.fillStyle = fg; ctx.font = "600 12px 'Open Sans', Arial, sans-serif"; ctx.textAlign = "center";
       G.forEach(function (gg, i) { ctx.globalAlpha = Math.max(0, e * 1.4 - .4); var C = geo[i]; ctx.fillText(gg.a.toUpperCase(), C[0], C[1] + C[2] + 18); });
-      ctx.globalAlpha = Math.max(0, 1 - e * 3) * 0.7; ctx.font = "400 12px 'Open Sans', Arial, sans-serif"; ctx.fillText("Drag to rotate · rings = people with PCOS", W / 2, H - 10); ctx.globalAlpha = 1;
+      ctx.globalAlpha = Math.max(0, 1 - e * 3) * 0.7; ctx.font = "400 12px 'Open Sans', Arial, sans-serif"; ctx.fillText("Drag to rotate · rings = women with PCOS", W / 2, H - 10); ctx.globalAlpha = 1;
     }
     function loop(now) { raf = 0; if (!visible || document.hidden) { lastNow = 0; return; } draw(now); raf = requestAnimationFrame(loop); }
     function go() { if (!reduce && !raf) raf = requestAnimationFrame(loop); }
@@ -97,7 +97,7 @@
     cv.addEventListener("keydown", function (ev) { if (ev.key === "ArrowLeft") { rotY -= 0.2; } else if (ev.key === "ArrowRight") { rotY += 0.2; } else if (ev.key === "ArrowUp") { rotX = Math.min(1.3, rotX + 0.2); } else if (ev.key === "ArrowDown") { rotX = Math.max(-1.3, rotX - 0.2); } else return; ev.preventDefault(); if (reduce) draw(0); });
     var key = document.createElement("ul"); key.className = "cohort-key";
     G.forEach(function (g, i) { var li = document.createElement("li"); li.innerHTML = '<i></i><span><b>' + g.n + ' (' + g.a + ')</b><br>' + f1(g.cases) + ' cases · ' + f1(g.ctrl) + ' controls · ' + (100 * g.cases / TC).toFixed(1) + '% of cases</span>'; li.firstChild.style.background = g.c.charAt(0) === "#" ? g.c : "var(" + g.c + ")"; key.appendChild(li); });
-    (function () { var li = document.createElement("li"); li.innerHTML = '<i class="ring"></i><span><b>Ringed dot = a person with PCOS</b><br>' + f1(TC) + ' cases in total, spread through every group above. The rest are controls.</span>'; key.appendChild(li); })();
+    (function () { var li = document.createElement("li"); li.innerHTML = '<i class="ring"></i><span><b>Ringed dot = a woman with PCOS</b><br>' + f1(TC) + ' cases in total, spread through every group above. The rest are controls.</span>'; key.appendChild(li); })();
     build();
     btn = document.createElement("button"); btn.type = "button"; btn.className = "btn"; btn.textContent = "Separate by ancestry"; btn.setAttribute("aria-pressed", "false");
     cv.parentNode.appendChild(btn); cv.parentNode.appendChild(key);
@@ -124,7 +124,7 @@
     var m1 = el("line", { y1: 28, y2: BASE, stroke: "var(--muted)", "stroke-dasharray": "4 4", opacity: 0.6 }), m2 = el("line", { y1: 28, y2: BASE, stroke: "var(--accent)", "stroke-dasharray": "4 4", opacity: 0.8 });
     var T = function (x, y, s, fill, anchor) { var t = el("text", { x: x, y: y, fill: fill, "font-size": 13, "font-weight": 600, "text-anchor": anchor || "middle", "font-family": "Open Sans, Arial, sans-serif" }); t.textContent = s; return t; };
     T(X0, 206, "Fewer risk variants", "var(--muted)", "start"); T(X1, 206, "More risk variants", "var(--muted)", "end"); T(W / 2, 224, "Polygenic score", "var(--muted)");
-    T(sx(-1.6), 52, "People without PCOS", "var(--muted)"); var lc = T(sx(1.9), 52, "People with PCOS", "var(--accent)");
+    T(sx(-1.6), 52, "Women without PCOS", "var(--muted)"); var lc = T(sx(1.9), 52, "Women with PCOS", "var(--accent)");
     function set(shift) {
       var base = curve(0), cas = curve(shift);
       cLine.setAttribute("d", base); cFill.setAttribute("d", base + "L" + sx(3.6) + " " + BASE + "L" + sx(-3.6) + " " + BASE + "Z");

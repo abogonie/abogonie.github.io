@@ -882,3 +882,32 @@ footer { padding-top: 24px; }
 .chain .node p { font-size: .92rem; }
 
 .cohort-key i.ring{background:transparent;border:2px solid var(--fg);box-shadow:inset 0 0 0 2px var(--muted)}
+
+/* ===== v4: roomier margins; type and rhythm drawn from science/tech sites =====
+   Serif display + clean sans body (Quanta / Our World in Data / Nature),
+   narrow reading measure, generous section spacing (Stripe / Linear docs). */
+:root {
+  --font-display: "Source Serif 4", "Source Serif Pro", Georgia, "Times New Roman", serif;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --font-text: var(--font-body); --font-ui: var(--font-body); --font-mono: var(--font-body);
+  --gutter: clamp(22px, 5.5vw, 96px);
+  --wrapw: 1360px;
+}
+html { font-size: 16px; }
+@media (min-width: 900px) { html { font-size: clamp(16.5px, 0.28vw + 13.4px, 19px); } }
+body { line-height: 1.65; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; font-feature-settings: "cv11", "ss03"; }
+h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; line-height: 1.15; }
+h1 { font-size: clamp(2.1rem, 4.2vw, 3.5rem); }
+h2 { font-size: clamp(1.65rem, 2.5vw, 2.35rem); }
+h3 { font-size: clamp(1.15rem, 1.4vw, 1.4rem); }
+main p, main li { max-width: 68ch; }
+main .glance p, main .glance li, main .cohort-key li, main .card p, main figure p { max-width: none; }
+section { padding-block: clamp(56px, 7vw, 120px) 0; }
+.nav .wrap, .subnav .wrap { padding-inline: 0; }
+.nav .wrap { padding-block: 16px; }
+.card, .model, .node, .glance > * { padding: clamp(20px, 2vw, 32px); }
+.hero .wrap, .page-hero .wrap { padding-block: clamp(20px, 3vw, 48px); }
+.hero-main, .hero-mol, .glance { gap: clamp(20px, 2.4vw, 40px); }
+.sec-head { margin-bottom: clamp(28px, 3.2vw, 52px); column-gap: clamp(32px, 5vw, 96px); }
+footer { padding-block: 48px; }
+@media (max-width: 600px) { main p, main li { max-width: none; } body { line-height: 1.6; } }
