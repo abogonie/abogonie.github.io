@@ -977,3 +977,18 @@ h1, h2, h3 { font-weight: 700; letter-spacing: -0.03em; }
 .hf-key i { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin: 0 4px 0 10px; vertical-align: baseline; }
 .hf-key i:first-child { margin-left: 0; }
 .hero-mol svg text { font-feature-settings: normal; }
+
+/* clear marble track */
+.fg-tube path { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.fg-t1 { stroke: rgba(200,225,255,.55); stroke-width: 16; }
+.fg-t2 { stroke: #1b4170; stroke-width: 12.4; }
+.fg-ramp { fill: none; stroke: rgba(200,225,255,.7); stroke-width: 4; stroke-linecap: round; }
+
+.hx path { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.hx-o { stroke: rgba(220,235,255,.75); stroke-width: 11; }
+.hx-i { stroke-width: 8; opacity: .62; }
+
+.hx-hub { fill: rgba(220,235,255,.25); stroke: rgba(220,235,255,.7); stroke-width: 1.5; }
+.hx-gate { stroke: #fff; stroke-width: 3; stroke-linecap: round; transition: transform .25s; transform-box: view-box; }
+.hx-bin { fill: rgba(255,255,255,.05); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.fg-b { font: 700 11.5px var(--font-ui); }
