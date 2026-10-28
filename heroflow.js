@@ -8,7 +8,8 @@
   function bez(p0, p1, p2, p3, n) { var o = [], i, t, u; for (i = 0; i <= n; i++) { t = i / n; u = 1 - t; o.push([u*u*u*p0[0] + 3*u*u*t*p1[0] + 3*u*t*t*p2[0] + t*t*t*p3[0], u*u*u*p0[1] + 3*u*u*t*p1[1] + 3*u*t*t*p2[1] + t*t*t*p3[1]]); } return o; }
   function mk(pts) { var L = [0], i; for (i = 1; i < pts.length; i++) L.push(L[i-1] + Math.hypot(pts[i][0]-pts[i-1][0], pts[i][1]-pts[i-1][1])); return { p: pts, L: L, len: L[L.length-1] }; }
   function at(path, d) { var i = 1; while (i < path.L.length - 1 && path.L[i] < d) i++; var f = (d - path.L[i-1]) / ((path.L[i] - path.L[i-1]) || 1); return [path.p[i-1][0] + (path.p[i][0] - path.p[i-1][0]) * f, path.p[i-1][1] + (path.p[i][1] - path.p[i-1][1]) * f]; }
-  var PA = mk(bez([125, 54], [125, 104], [240, 86], [240, Y_AGAT], 40)), PG = mk(bez([355, 54], [355, 104], [240, 86], [240, Y_AGAT], 40));
+  var PA = mk(bez([125, 40], [125, 104], [240, 86], [240, 138], 60)), PG = mk(bez([355, 40], [355, 104], [240, 86], [240, 138], 60));
+  [PA, PG].forEach(function (p) { var i = 0; while (p.p[i][1] < 54) i++; p.off = p.L[i]; });
   var ROUTES = [bez([240, Y_HUB], [240, 468], [95, 470], [95, 546], 24), [[240, Y_HUB], [240, 546]], bez([240, Y_HUB], [240, 468], [385, 470], [385, 546], 24)].map(function (r) { return mk([[240, Y_SLC + 14], [240, Y_HUB]].concat(r.slice(1))); });
   var balls = [], sparks = [], clock = 0, nextPair = 0, last = 0, raf = 0, running = false;
   function el(tag, a) { var e = document.createElementNS(NS, tag); for (var k in a) e.setAttribute(k, a[k]); layer.appendChild(e); return e; }
@@ -30,7 +31,7 @@
   function step(dt) {
     var i, j, b, o, dx, dy, dd, ov;
     clock += dt;
-    if (clock >= nextPair) { nextPair = clock + PAIR_EVERY; var a = ball("arg", 125, 54), g = ball("gly", 355, 54); a.path = PA; g.path = PG; a.pair = g; g.pair = a; }
+    if (clock >= nextPair) { nextPair = clock + PAIR_EVERY; var a = ball("arg", 125, 54), g = ball("gly", 355, 54); a.path = PA; g.path = PG; a.d = PA.off; g.d = PG.off; a.pair = g; g.pair = a; }
     for (i = 0; i < balls.length; i++) {
       b = balls[i]; if (b.dead) continue;
       if (b.side) {

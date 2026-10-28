@@ -1024,3 +1024,8 @@ h1, h2, h3 { font-weight: 700; letter-spacing: -0.03em; }
 .hf-key i { margin-left: 0; }
 .hx-o { stroke: #8fa6c6; }
 .hx-i.clr { opacity: 1; }
+
+/* v7: no sideways scrolling. The full-bleed hero band is exactly one viewport wide, centered, so it adds no overflow. */
+html { overflow-x: hidden; }
+.hero::before, .page-hero::before { inset: 0 auto 0 50%; width: 100vw; margin-left: -50vw; }
+img, svg, video, canvas { max-width: 100%; }
