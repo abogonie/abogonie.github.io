@@ -1029,3 +1029,9 @@ h1, h2, h3 { font-weight: 700; letter-spacing: -0.03em; }
 html { overflow-x: hidden; }
 .hero::before, .page-hero::before { inset: 0 auto 0 50%; width: 100vw; margin-left: -50vw; }
 img, svg, video, canvas { max-width: 100%; }
+
+/* v8: keep the theme toggle full size on phones; it sits on the name row so the page links fit */
+.theme { flex: none; }
+@media (max-width: 640px) { .nav .wrap { position: relative; } .links .theme { position: absolute; top: 8px; right: 0; margin: 0; } }
+@media (max-width: 400px) { .links { gap: 6px; } }
+.addr a { color: inherit; }
