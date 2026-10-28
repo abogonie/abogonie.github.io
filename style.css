@@ -1016,3 +1016,9 @@ h1, h2, h3 { font-weight: 700; letter-spacing: -0.03em; }
   .hero { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
   .hero-mol svg { max-height: none; }
 }
+.hx-i.clr { stroke: #1b4170; opacity: 1; }
+.hx-i.clr { stroke: #1b4170; opacity: 1; }
+.hero-mol figcaption { text-align: center; }
+.hf-key { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 12px; margin-top: 10px; }
+.hf-key .k + .k { margin-left: 0; }
+.hf-key i { margin-left: 0; }
