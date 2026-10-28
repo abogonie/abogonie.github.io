@@ -10,14 +10,14 @@
   var CELLS = ["Neuron", "Astro", "Oligo", "Endo"];
   var CELL_FULL = ["Neuron", "Astrocyte", "Oligodendrocyte", "Endothelial"];
   var FP = [
-    { g: "GATM", sub: "AGAT, step 1", max: 120, ticks: [0, 30, 60, 90, 120], h: [6.7, 74, 37.5, 2.9], m: [10.3, 42, 112, 61.3] },
-    { g: "GAMT", sub: "step 2", max: 300, ticks: [0, 100, 200, 300], h: [0.15, 0.3, 0.3, 0.6], m: [4.3, 8.5, 265, 8.3] },
-    { g: "SLC6A8", sub: "creatine transporter", max: 50, ticks: [0, 10, 20, 30, 40, 50], h: [1.25, 3.8, 3.1, 0.85], m: [17, 14, 44.5, 6.6] }
+    { g: "GATM", sub: "AGAT, step 1", max: 120, ticks: [0, 30, 60, 90, 120], h: [6.8, 74.1, 37.4, 2.93], m: [10.4, 42, 112, 61.3] },
+    { g: "GAMT", sub: "step 2", max: 300, ticks: [0, 100, 200, 300], h: [0.147, 0.323, 0.301, 0.412], m: [4.23, 9.0, 264, 8.39] },
+    { g: "SLC6A8", sub: "creatine transporter", max: 50, ticks: [0, 10, 20, 30, 40, 50], h: [1.26, 3.85, 3.12, 0.845], m: [17.0, 14.0, 44.3, 6.61] }
   ];
   var FD = [
-    { g: "GATM", d: "AGAT, step 1", v: [1.5, 0.57, 3.0] },
-    { g: "GAMT", d: "step 2", v: [28, 27.5, 870] },
-    { g: "SLC6A8", d: "transporter", v: [13.5, 3.6, 14.3] }
+    { g: "GATM", d: "AGAT, step 1", v: [1.53, 0.57, 2.99] },
+    { g: "GAMT", d: "step 2", v: [28.7, 27.8, 878] },
+    { g: "SLC6A8", d: "transporter", v: [13.5, 3.64, 14.2] }
   ];
   function mk(tag, attrs, parent, text) {
     var e = document.createElementNS(NS, tag);

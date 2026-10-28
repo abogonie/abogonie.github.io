@@ -51,15 +51,15 @@
   <div class="defic rv" data-scene="agat"><div class="strip" role="group" aria-label="Creatine pathway with this page highlighted"><span class="met">Arginine + glycine</span><i class="flow" style="--d:0s" aria-hidden="true"></i><a class="enz on" href="agat.html">AGAT<small>GATM</small></a><i class="flow" style="--d:0.5s" aria-hidden="true"></i><span class="met">Guanidinoacetate<small>GAA</small></span><i class="flow" style="--d:1s" aria-hidden="true"></i><a class="enz" href="gamt.html">GAMT<small>GAMT</small></a><i class="flow" style="--d:1.5s" aria-hidden="true"></i><span class="met">Creatine</span><i class="flow" style="--d:2s" aria-hidden="true"></i><a class="enz" href="slc6a8.html">SLC6A8<small>transporter</small></a><i class="flow" style="--d:2.5s" aria-hidden="true"></i><span class="met">Neuron</span></div></div>
 
   <section>
-    <div class="rv" style="display:grid;gap:18px"><div class="notice rv" role="note"><span aria-hidden="true">●</span><span><b>Preliminary.</b> These results come from a manuscript in preparation. They have not been peer reviewed or published, and the numbers may change.</span></div></div>
+    <div class="rv" style="display:grid;gap:18px"><div class="notice rv" role="note"><span aria-hidden="true">●</span><span><b>Preliminary.</b> These results come from a submitted manuscript. They have not been peer reviewed or published, and the numbers may change.</span></div></div>
     <div style="height:24px"></div>
     <div class="tierbox rv">
       <h2 class="tb-title">How variants are grouped on this page</h2>
       <p class="tb-lede">Every number below counts variants in three groups, from most certain to least. Each step adds to the one before.</p>
       <div class="grid">
-        <div class="card"><span class="label">Step 1</span><h3>Confirmed pathogenic</h3><p>Listed as pathogenic or likely pathogenic in ClinVar, or reported in patients with the disease.</p></div>
-        <div class="card"><span class="label">Step 2 · adds to step 1</span><h3>Likely pathogenic</h3><p>Variants that should stop the gene working (a premature stop, frameshift, splice-site or start-loss change) but have not been reported in patients.</p></div>
-        <div class="card"><span class="label">Step 3 · adds to steps 1 and 2</span><h3>In silico pathogenic</h3><p>Missense or splice changes that computer tools (REVEL and SpliceAI) predict to be damaging, with no clinical classification yet.</p></div>
+        <div class="card"><span class="label">Step 1</span><h3>Established pathogenic</h3><p>Listed as pathogenic or likely pathogenic in ClinVar, or reported in patients with the disease.</p></div>
+        <div class="card"><span class="label">Step 2 · adds to step 1</span><h3>Predicted loss-of-function</h3><p>Variants that should stop the gene working (a premature stop, frameshift, splice-site or start-loss change) but are not in step 1.</p></div>
+        <div class="card"><span class="label">Step 3 · adds to steps 1 and 2</span><h3>Predicted damaging</h3><p>Missense or splice changes that computer tools (REVEL and SpliceAI) predict to be damaging, and that are not classified as pathogenic in ClinVar (uncertain, conflicting or not listed).</p></div>
       </div>
     </div>
 
@@ -83,7 +83,7 @@
     </div>
     <div class="panel rv">
       <h3>Carriers by variant tier</h3>
-      <p class="sub">Each step adds a looser class of variant: confirmed pathogenic, then likely pathogenic, then in silico pathogenic.</p>
+      <p class="sub">Each step adds a looser class of variant: established pathogenic, then predicted loss-of-function, then predicted damaging.</p>
       <div data-chart="agat-tiers"></div>
     </div>
     <p class="fine rv" style="margin-top:14px">All of Us and gnomAD v4 agree closely at every tier (p ≥ 0.68), and no single GATM variant was carried by 20 or more All of Us participants.</p>
@@ -133,7 +133,7 @@
 </main>
 <script src="site.js?v=20261028e" defer></script>
 <script src="subnav.js?v=20261028e" defer></script>
-<script src="popgen.js?v=20261028e" defer></script>
+<script src="popgen.js?v=20261028g" defer></script>
 <script src="deficiency.js?v=20261028f" defer></script>
 <script data-goatcounter="https://abogonie.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

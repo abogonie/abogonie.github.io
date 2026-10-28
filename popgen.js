@@ -21,38 +21,38 @@
   ];
   /* GAMT carrier frequency by genetic ancestry (1 in N), All of Us, Table 3 */
   var ANC = {
-    "Confirmed": { note: "Confirmed pathogenic variants only: carrier frequency is highest in European-ancestry participants and lower in every other group.",
+    "Established": { note: "Established pathogenic variants only: carrier frequency is highest in European-ancestry participants and lower in every other group.",
       rows: [["All participants", 722, "672–776", 742, 1], ["European", 555, "509–605", 513], ["African", 937, "771–1,138", 101], ["Admixed American", 1083, "881–1,331", 90], ["Other groups combined", 1549, "1,129–2,126", 38]] },
-    "+ Likely": { note: "Adding likely pathogenic variants raises the count of qualifying alleles by 7% in European and by 9% to 24% in the other groups.",
+    "+ Predicted LoF": { note: "Adding predicted loss-of-function variants raises the count of qualifying alleles by 7% in European and by 9% to 24% in the other groups.",
       rows: [["All participants", 663, "619–710", 808, 1], ["European", 521, "479–566", 547], ["African", 816, "680–978", 116], ["Admixed American", 994, "816–1,212", 98], ["Other groups combined", 1253, "942–1,665", 47]] },
-    "+ In silico": { note: "Adding in silico pathogenic variants raises alleles by 41% in European participants and by 67% to 119% in the others, narrowing the gap between groups.",
+    "+ Predicted damaging": { note: "Adding predicted damaging variants raises alleles by 41% in European participants and by 67% to 119% in the others, narrowing the gap between groups.",
       rows: [["All participants", 430, "407–455", 1245, 1], ["European", 369, "344–395", 773], ["African", 462, "403–529", 205], ["Admixed American", 594, "510–692", 164], ["Other groups combined", 572, "472–693", 103]] }
   };
   /* Carrier frequency (1 in N) by cohort; value plotted as carriers per 100,000 */
   var AGAT = {
-    "Confirmed": { note: "Confirmed pathogenic variants. In All of Us this predicts one affected US birth about every 470 years.", rows: [["All of Us", 20601, "14,060–30,187", 26], ["gnomAD v4", 23735, "16,986–33,165", 34], ["Combined", 22377, "17,386–28,800", 60, 1]] },
-    "+ Likely": { note: "Adding likely pathogenic variants (predicted loss of function). In All of Us this predicts one affected US birth about every 73 years.", rows: [["All of Us", 8116, "6,380–10,324", 66], ["gnomAD v4", 8151, "6,696–9,922", 99], ["Combined", 8137, "6,986–9,477", 165, 1]] },
-    "+ In silico": { note: "Adding in silico pathogenic variants (predicted damaging by computer tools). In All of Us this predicts one affected US birth about every 35 years.", rows: [["All of Us", 5638, "4,613–6,892", 95], ["gnomAD v4", 5933, "5,017–7,018", 136], ["Combined", 5812, "5,109–6,611", 231, 1]] }
+    "Established": { note: "Established pathogenic variants. In All of Us this predicts one affected US birth about every 470 years.", rows: [["All of Us", 20601, "14,060–30,187", 26], ["gnomAD v4", 23735, "16,986–33,165", 34], ["Combined", 22377, "17,386–28,800", 60, 1]] },
+    "+ Predicted LoF": { note: "Adding predicted loss-of-function variants. In All of Us this predicts one affected US birth about every 73 years.", rows: [["All of Us", 8116, "6,380–10,324", 66], ["gnomAD v4", 8151, "6,696–9,922", 99], ["Combined", 8137, "6,986–9,477", 165, 1]] },
+    "+ Predicted damaging": { note: "Adding predicted damaging variants (flagged by REVEL or SpliceAI). In All of Us this predicts one affected US birth about every 35 years.", rows: [["All of Us", 5638, "4,613–6,892", 95], ["gnomAD v4", 5933, "5,017–7,018", 136], ["Combined", 5812, "5,109–6,611", 231, 1]] }
   };
   var SLC = {
-    "Confirmed": { note: "Fewer than 20 heterozygous females in All of Us carried a confirmed pathogenic variant, so the exact count and frequency cannot be reported. The combined estimate is a range.",
+    "Established": { note: "Fewer than 20 heterozygous females in All of Us carried an established pathogenic variant, so the exact count and frequency cannot be reported. The combined estimate is a range.",
       rows: [["All of Us", null, "fewer than 20 carriers", null], ["gnomAD v4", 66780, "35,134–126,929", 9], ["Combined (range)", [92577, 33063], "masked count 1–19", "10–28", 1]] },
-    "+ Likely": { note: "Adding likely pathogenic variants (predicted loss of function). 22 heterozygous females in All of Us.",
+    "+ Predicted LoF": { note: "Adding predicted loss-of-function variants. 22 heterozygous females in All of Us.",
       rows: [["All of Us", 14761, "9,749–22,351", 22], ["gnomAD v4", 13393, "9,978–17,978", 44], ["Combined", 13849, "10,887–17,617", 66, 1]] },
-    "+ In silico": { note: "Adding in silico pathogenic variants (predicted damaging by computer tools). 51 heterozygous females in All of Us.",
+    "+ Predicted damaging": { note: "Adding predicted damaging variants (flagged by REVEL or SpliceAI). 51 heterozygous females in All of Us.",
       rows: [["All of Us", 6368, "4,844–8,371", 51], ["gnomAD v4", 8712, "6,885–11,025", 69], ["Combined", 7716, "6,453–9,225", 120, 1]] }
   };
   /* Predicted affected US births per year, combined cohorts (Table 1, 2; Figure 3) */
   var BIRTHS = {
-    "Confirmed": { g: [3.2, 3.0, 3.4], c: [10, null, null, 27], ratio: "3 to 8.5 : 1", note: "Confirmed pathogenic variants: roughly 3 to 8.5 times as many boys with creatine transporter deficiency as children with GAMT deficiency." },
-    "+ Likely": { g: [3.5, 3.3, 3.8], c: [65, 51, 83], ratio: "18 : 1", note: "With likely pathogenic variants added: about 18 affected male births for every GAMT birth." },
-    "+ In silico": { g: [6.4, 6.0, 6.9], c: [117, 97, 139], ratio: "18 : 1", note: "With in silico pathogenic variants added as well: still about 18 to 1." }
+    "Established": { g: [3.2, 3.0, 3.4], c: [10, null, null, 27], ratio: "3 to 8.5 : 1", note: "Established pathogenic variants: roughly 3 to 8.5 times as many boys with creatine transporter deficiency as children with GAMT deficiency." },
+    "+ Predicted LoF": { g: [3.5, 3.3, 3.8], c: [65, 51, 83], ratio: "18 : 1", note: "With predicted loss-of-function variants added: about 18 affected male births for every GAMT birth." },
+    "+ Predicted damaging": { g: [6.4, 6.0, 6.9], c: [117, 97, 139], ratio: "18 : 1", note: "With predicted damaging variants added as well: still about 18 to 1." }
   };
   /* Serum creatinine, % difference vs non-carriers (Table 5) */
   var CREAT = [
-    { g: "GATM (AGAT)", rows: [["+ Likely", 34, -9.6, -15.6, -3.2, "0.004"], ["+ In silico", 47, -7.2, -12.2, -1.9, "0.008"]] },
-    { g: "GAMT", rows: [["Confirmed", 382, 0.6, -1.2, 2.4, "0.52"], ["+ Likely", 419, 0.7, -1.0, 2.5, "0.40"], ["+ In silico", 634, 0.3, -1.1, 1.8, "0.68"]] },
-    { g: "SLC6A8, females", rows: [["+ In silico", 28, -4.1, -11.1, 3.4, "0.27"]] }
+    { g: "GATM (AGAT)", rows: [["+ Predicted LoF", 34, -9.6, -15.6, -3.2, "0.004"], ["+ Predicted damaging", 47, -7.2, -12.2, -1.9, "0.008"]] },
+    { g: "GAMT", rows: [["Established", 382, 0.6, -1.2, 2.4, "0.52"], ["+ Predicted LoF", 419, 0.7, -1.0, 2.5, "0.40"], ["+ Predicted damaging", 634, 0.3, -1.1, 1.8, "0.68"]] },
+    { g: "SLC6A8, females", rows: [["+ Predicted damaging", 28, -4.1, -11.1, 3.4, "0.27"]] }
   ];
 
   /* ---------- helpers ---------- */
