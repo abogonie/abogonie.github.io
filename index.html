@@ -298,14 +298,14 @@
     <div class="sec-head rv">
       <p class="label">Gene delivery</p>
       <h2>How an AAV vector can restore GAMT in a neuron</h2>
-      <p>Adeno-associated virus (AAV) vectors are a leading platform for gene delivery [1], and AAV9 crosses the blood-brain barrier to transduce neurons in neonatal mice [7]. The schematic follows one capsid from the neuronal surface to a working GAMT enzyme. A viral shell with no viral genes carries a working copy of GAMT into the neuron so it can make its own creatine.</p>
+      <p>Adeno-associated virus (AAV) vectors are a leading platform for gene delivery [1], and AAV9 crosses the blood-brain barrier to transduce neurons in neonatal mice [7]. The schematic follows one capsid from the neuronal surface to a working GAMT enzyme, showing a neuron-targeted approach. Published work so far has restored brain creatine through liver-directed AAV [8].</p>
     </div>
     <figure class="aav rv" id="aav">
       <div class="aav-bar"><div class="aav-chips" id="aavChips" role="group" aria-label="Delivery steps"></div><button class="btn" id="aavPlay" type="button">Pause</button></div>
       <div class="aav-svg" id="aavSvg"></div>
       <div class="aav-meters" aria-hidden="true"><div><span>GAMT enzyme</span><i><b id="aavM0" style="background:#7a5af8"></b></i></div><div><span>Creatine</span><i><b id="aavM1" style="background:var(--accent)"></b></i></div><div><span>GAA (toxic)</span><i><b id="aavM2" style="background:var(--warn)"></b></i></div></div>
       <p class="aav-story" id="aavStory" aria-live="polite"></p>
-      <figcaption>Schematic of the generic AAV life cycle, not to scale and not experimental data. The vector cassette is illustrative, and step numbers refer to the references below.</figcaption>
+      <figcaption>Schematic of the generic AAV life cycle, not to scale and not experimental data. The vector cassette is illustrative, and bracketed numbers refer to the references below.</figcaption>
     </figure>
   </section>
 
@@ -388,6 +388,9 @@
       <li id="ref6">Ferrari FK, Samulski T, Shenk T, Samulski RJ. Second-strand synthesis is a rate-limiting step for efficient transduction by recombinant adeno-associated virus vectors. <i>J Virol</i> 1996;70:3227-3234. <a href="https://doi.org/10.1128/JVI.70.5.3227-3234.1996" target="_blank" rel="noopener">doi:10.1128/JVI.70.5.3227-3234.1996</a></li>
       <li id="ref7">Foust KD, Nurre E, Montgomery CL, et al. Intravascular AAV9 preferentially targets neonatal neurons and adult astrocytes. <i>Nat Biotechnol</i> 2009;27:59-65. <a href="https://doi.org/10.1038/nbt.1515" target="_blank" rel="noopener">doi:10.1038/nbt.1515</a></li>
       <li id="ref8">Khoja S, Lambert J, Nitzahn M, et al. Gene therapy for guanidinoacetate methyltransferase deficiency restores cerebral and myocardial creatine while resolving behavioral abnormalities. <i>Mol Ther Methods Clin Dev</i> 2022;25:278-296. <a href="https://doi.org/10.1016/j.omtm.2022.03.015" target="_blank" rel="noopener">doi:10.1016/j.omtm.2022.03.015</a></li>
+      <li id="ref9">Nonnenmacher M, Weber T. Adeno-associated virus 2 infection requires endocytosis through the CLIC/GEEC pathway. <i>Cell Host Microbe</i> 2011;10:563-576. <a href="https://doi.org/10.1016/j.chom.2011.10.014" target="_blank" rel="noopener">doi:10.1016/j.chom.2011.10.014</a></li>
+      <li id="ref10">Xiao PJ, Samulski RJ. Cytoplasmic trafficking, endosomal escape, and perinuclear accumulation of adeno-associated virus type 2 particles are facilitated by microtubule network. <i>J Virol</i> 2012;86:10462-10473. <a href="https://doi.org/10.1128/JVI.00935-12" target="_blank" rel="noopener">doi:10.1128/JVI.00935-12</a></li>
+      <li id="ref11">Kronenberg S, Böttcher B, von der Lieth CW, Bleker S, Kleinschmidt JA. A conformational change in the adeno-associated virus type 2 capsid leads to the exposure of hidden VP1 N termini. <i>J Virol</i> 2005;79:5296-5303. <a href="https://doi.org/10.1128/JVI.79.9.5296-5303.2005" target="_blank" rel="noopener">doi:10.1128/JVI.79.9.5296-5303.2005</a></li>
     </ol>
   </section>
 
@@ -410,7 +413,7 @@
 <script src="neuro.js?v=20261028e" defer></script>
 <script src="subnav.js?v=20261028e" defer></script>
 <script src="popgen.js?v=20261028e" defer></script>
-<script src="aav.js?v=20261028e" defer></script>
+<script src="aav.js?v=20261028f" defer></script>
 <script>
 (function () {
   var root = document.documentElement;
